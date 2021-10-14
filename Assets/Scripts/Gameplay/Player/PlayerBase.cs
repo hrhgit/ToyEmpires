@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Gameplay.GameUnit;
-using Gameplay.GameUnit.Worker;
+using Gameplay.GameUnit.SoldierUnit;
+using Gameplay.GameUnit.SoldierUnit.Worker;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -18,13 +19,13 @@ namespace Gameplay.Player
 
         #region 坐标
 
-        public Transform home;
-        public Transform foodWorkPos;
-        public Transform goldWorkPos;
-        public Transform woodWorkPos;
-        public Transform topPos;
-        public Transform midPos;
-        public Transform botPos;
+        public PlayerHomeUnit homeUnit;
+        public Transform      foodWorkPos;
+        public Transform      goldWorkPos;
+        public Transform      woodWorkPos;
+        public Transform      topPos;
+        public Transform      midPos;
+        public Transform      botPos;
 
         #endregion
 
@@ -72,13 +73,39 @@ namespace Gameplay.Player
 
         public bool CanAfford(int food, int wood, int gold) => this.Food >= food && this.Wood >= wood && this.Gold >= gold;
 
+        /// <summary>
+        /// 是否能承担count个单位的成本
+        /// 0 =》 不能
+        /// 1 =》 用黄金
+        /// 2 =》 用食物木材
+        /// 3 =》 黄金/食物木材 都可以
+        /// </summary>
+        /// <param name="u">单位</param>
+        /// <param name="count">数量</param>
+        /// <returns></returns>
+        public int CanAfford(IProduceable u,int count)
+        {
+            uint r = 00;
+            
+            if (this.CanAfford(0, 0, u.CostGold * count))
+            {
+                r |= 01;
+            }
+            if (this.CanAfford(u.CostFood * count, u.CostWood * count, 0))
+            {
+                r |= 010;
+            }
+
+            return (int)r;
+        }
+
         #endregion
 
         #region 工人
         //Workers
         public int          maxWorkerCount;
         public int          initWorkerCount;
-        public GameUnitBase workerPrefab;
+        public SoldierUnitBase workerPrefab;
         public UnityEvent   onWorkerProduce = new UnityEvent();
         
         public readonly  int[]      ResourceWorkerCount        = new int[]{0, 0, 0};
@@ -118,7 +145,7 @@ namespace Gameplay.Player
 
         private void AddWorker(ResourceType resourceType)
         {
-            GameUnitBase workerUnit = Instantiate(this.workerPrefab, resourceType switch
+            SoldierUnitBase workerUnit = Instantiate(this.workerPrefab, resourceType switch
                                                                      {
                                                                          ResourceType.Food => topPos,
                                                                          ResourceType.Gold => midPos,
@@ -178,7 +205,7 @@ namespace Gameplay.Player
         #region 生产
 
         public int                 maxBattleUnitCount;
-        public List<GameUnitBase>  unitPrefabList = new List<GameUnitBase>();
+        public List<SoldierUnitBase>  unitPrefabList = new List<SoldierUnitBase>();
         public event GameUnitEvent onUnitProduce;
 
         public List<UnitStatus> UnitStatusList { get; private set; } = new List<UnitStatus>();
@@ -193,7 +220,7 @@ namespace Gameplay.Player
             }
         }
 
-        public virtual void InvokeUnitProduce(GameUnitBase gameunitbase, PlayerBase playerbase, UnitStatus status)
+        public virtual void InvokeUnitProduce(SoldierUnitBase gameunitbase, PlayerBase playerbase, UnitStatus status)
         {
             onUnitProduce?.Invoke(gameunitbase, playerbase, status);
         }
@@ -214,7 +241,7 @@ namespace Gameplay.Player
 
         private static float _dispatchOffset = .05f;
 
-        public void DispatchUnits(GameUnitBase unit, int count, Road road,UnitStatus status)
+        public void DispatchUnits(SoldierUnitBase unit, int count, Road road,UnitStatus status)
         {
             Transform parent = road switch
                                {
@@ -228,7 +255,7 @@ namespace Gameplay.Player
                 float   angle    = Random.Range(0f, 2 *Mathf.PI);
                 float   r        = _dispatchOffset * Random.Range(0f, 1f);
                 Vector3 exactPos = parent.position + new Vector3(r * Mathf.Cos(angle), 0, r * Mathf.Sin(angle));
-                GameUnitBase unitInstance = Instantiate(unit, exactPos, Quaternion.Euler(0, 0, 0), parent);
+                SoldierUnitBase unitInstance = Instantiate(unit, exactPos, Quaternion.Euler(0, 0, 0), parent);
                 unitInstance.UnitTeam = this.playerTeam;
                 unitInstance.UnitRoad = road;
                 status.curUnitCount++;

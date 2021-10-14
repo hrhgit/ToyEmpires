@@ -5,10 +5,10 @@ using Pathfinding;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameAIUnitPath : AIPath
+public class GameAIUnitPath : RichAI
 {
-    public UnityEvent OnTargetReachedEvent = new UnityEvent();
-    public override void OnTargetReached()
+    public             UnityEvent OnTargetReachedEvent = new UnityEvent();
+    protected override void  OnTargetReached()
     {
         base.OnTargetReached();
         OnTargetReachedEvent.Invoke();

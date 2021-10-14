@@ -1,4 +1,5 @@
 ﻿using System;
+using Gameplay.GameUnit.SoldierUnit;
 using Pathfinding;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -10,12 +11,12 @@ namespace Rendering
     /// </summary>
     public class SpriteRendererPlus : MonoBehaviour
     {
-        private AIPath _aiPath;
+        private GameAIUnitPath _aiPath;
         [ExecuteAlways]
         private void Start()
         {
             GetComponent<SpriteRenderer>().shadowCastingMode = ShadowCastingMode.On;
-            _aiPath                                          = this.transform.parent.GetComponent<AIPath>();
+            _aiPath                                          = this.transform.parent.GetComponent<GameAIUnitPath>();
         }
 
         private void Update()
