@@ -80,7 +80,6 @@ GameObject:
   - component: {fileID: 5169091242243108876}
   - component: {fileID: 5169091242243108875}
   - component: {fileID: 5169091242243108873}
-  - component: {fileID: 5169091242243108877}
   - component: {fileID: 5169091242243108874}
   - component: {fileID: -1881621187418125474}
   - component: {fileID: 3316040148240636102}
@@ -151,21 +150,6 @@ MonoBehaviour:
   targetReachedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &5169091242243108877
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5169091242243108872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77f586f285b3847808d79083bd19ef1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 1
-  unwrap: 1
-  splitAtEveryPortal: 0
 --- !u!114 &5169091242243108874
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +165,7 @@ MonoBehaviour:
   version: 1
   radius: 0.01
   height: 0.1
-  repathRate: 0.5
+  repathRate: 1
   canSearch: 1
   canMove: 1
   maxSpeed: 1
@@ -195,8 +179,8 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   acceleration: 5
   rotationSpeed: 360
-  slowdownTime: 0.5
-  endReachedDistance: 0.03
+  slowdownTime: 0.1
+  endReachedDistance: 0.02
   wallForce: 3
   wallDist: 0.1
   funnelSimplification: 1
@@ -259,7 +243,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 84
   m_CollisionDetection: 0
 --- !u!1 &5169091243970511671
 GameObject:

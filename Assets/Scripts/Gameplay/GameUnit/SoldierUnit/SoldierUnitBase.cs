@@ -2,6 +2,7 @@ using System;
 using Gameplay.GameUnit.SoldierUnit.CombatUnit;
 using Gameplay.Player;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Gameplay.GameUnit.SoldierUnit
 {
@@ -50,12 +51,29 @@ namespace Gameplay.GameUnit.SoldierUnit
 
         [SerializeField] protected int defence;
         [SerializeField] private   int _maxHp;
+        private                    int _curHp;
 
 
         public int MaxHp => _maxHp;
 
-        public int CurHp   { get; private set; }
+        public int CurHp
+        {
+            get => _curHp;
+            private set
+            {
+                _curHp = value;
+                if (_curHp <= 0)
+                {
+                    _curHp = 0;
+                    DeathEvent.Invoke(this);
+                }
+            }
+        }
+
         public int Defence => defence;
+        
+        public UnityEvent<IAttackable> DeathEvent { get; }
+
 
         public event AttackEventHandler BeAttackedEvent;
         public virtual void BeAttacked(ICombatable attacker)
@@ -63,6 +81,7 @@ namespace Gameplay.GameUnit.SoldierUnit
             this.CurHp -= attacker.Attack - this.Defence;
             BeAttackedEvent?.Invoke(attacker, this);
         }
+
 
         #endregion
 

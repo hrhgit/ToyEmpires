@@ -295,5 +295,15 @@ namespace Gameplay.Player
 
         #endregion
 
+        #region 杂项
+
+        private void ChangeUnitMaterialColor(GameObject unitObj)
+        {
+            Renderer renderer = unitObj.GetComponent<Renderer>();
+            Material material = renderer.material;
+        }
+
+        #endregion
+
     }
 }
