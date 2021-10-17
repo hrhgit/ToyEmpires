@@ -1,12 +1,15 @@
 using Gameplay.GameUnit.SoldierUnit.CombatUnit;
+using Gameplay.Player;
+using UnityEngine;
 using UnityEngine.Events;
 
 namespace Gameplay.GameUnit
 {
-    public class PlayerHomeUnit : GameUnitBase,IAttackable
+    public class PlayerHomeUnit : GameUnitBase,IDefenable
     {
-        private int _curHp;
-        public  int MaxHp { get; }
+        public  PlayerBase playerBase;
+        private int        _curHp;
+        public  int        MaxHp { get; private set; }
 
         public int CurHp
         {
@@ -16,19 +19,31 @@ namespace Gameplay.GameUnit
                 _curHp = value;
                 if (_curHp <= 0)
                 {
-                    _curHp = 0;
+                    IsDeath = true;
+                    Destroy(this.gameObject);
                     DeathEvent.Invoke(this);
                 }
             }
         }
 
-        public           int            Defence { get; }
+        public bool IsDeath { get; private set; } = false;
+
+        public int                      Defence { get; private set; }
         public event AttackEventHandler BeAttackedEvent;
-        public void                     BeAttacked(ICombatable attacker)
+        public void                     BeAttacked(IAttackable attacker)
         {
-            throw new System.NotImplementedException();
+            this.CurHp -= Mathf.Max(attacker.Attack - this.Defence,1) ;
+            BeAttackedEvent?.Invoke(attacker, this);
         }
 
-        public UnityEvent<IAttackable> DeathEvent { get; }
+        public UnityEvent<IDefenable> DeathEvent { get; }
+
+        protected override void Start()
+        {
+            base.Start();
+            this.CurHp   = playerBase.maxHp;
+            this.MaxHp   = playerBase.maxHp;
+            this.Defence = playerBase.defence;
+        }
     }
 }

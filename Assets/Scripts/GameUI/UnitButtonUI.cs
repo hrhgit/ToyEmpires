@@ -18,17 +18,20 @@ namespace GameUI
         public  GameObject            selectedUI;
         public  Text                  selectedTextUI;
         public  Image                 unitProduceBarUI;
+        
         private UnitDispatchManagerUI _unitDispatchManagerUI;
         private PlayerBase            _player;
+        private UnitStatus            _status;
 
         private void Start()
         {
             _unitDispatchManagerUI = this.transform.parent.GetComponent<UnitDispatchManagerUI>();
             _player               = BattleGameManager.BattleGameManagerInstance.userPlayer;
-            _player.onUnitProduce += (unit, player,status) =>
-                                     {
-                                         unitProduceBarUI.fillAmount = status.unitProduceProcess;
-                                     };
+            _player.onUnitProduceEventList[unitIndex].AddListener((unit, player, status) =>
+                                                         {
+                                                             this.unitProduceBarUI.fillAmount = status.unitProduceProcess;
+                                                         });
+            _status                     = _player.UnitStatusList[unitIndex];
             unitFoodWoodCostTextUI.text = ((IProduceable)_player.unitPrefabList[unitIndex]).CostFood + "食+" + ((IProduceable)_player.unitPrefabList[unitIndex]).CostWood + "木";
                 unitGoldCostTextUI.text = ((IProduceable)_player.unitPrefabList[unitIndex]).CostGold + "金";
         }
@@ -52,17 +55,17 @@ namespace GameUI
 
         public void BuyUnit(bool useGold)
         {
-            if(_player.UnitStatusList[unitIndex].freeUnitCount <=0 || _player.CurUnitCount + this.GoldBuyCount + this.FoodWoodBuyCount >= _player.maxBattleUnitCount)
+            IProduceable unitProduceable = (IProduceable)_player.unitPrefabList[unitIndex];
+
+            if(_status.freeUnitCount <=0 || _player.CurUnitPopulation + (this.GoldBuyCount + this.FoodWoodBuyCount) *unitProduceable.CostPopulation >= _player.maxBattleUnitCount)
                 return;
-            IProduceable unit   = (IProduceable)_player.unitPrefabList[unitIndex];
-            UnitStatus   status = _player.UnitStatusList[unitIndex];
             if (useGold)
             {
-                if (_player.CanAfford(0, 0, unit.CostGold))
+                if (_player.CanAfford(0, 0, unitProduceable.CostGold))
                 {
-                    _player.AddResource(ResourceType.Gold, -unit.CostGold );
+                    _player.AddResource(ResourceType.Gold, -unitProduceable.CostGold );
                     GoldBuyCount++;
-                    status.freeUnitCount--;
+                    _status.freeUnitCount--;
                     _unitDispatchManagerUI.ShowBtn(true);
                     selectedUI.SetActive(true);
                     selectedTextUI.text = (this.GoldBuyCount + this.FoodWoodBuyCount).ToString();
@@ -71,12 +74,12 @@ namespace GameUI
             }
             else
             {
-                if (_player.CanAfford(unit.CostFood , unit.CostWood , 0))
+                if (_player.CanAfford(unitProduceable.CostFood , unitProduceable.CostWood , 0))
                 {
-                    _player.AddResource(ResourceType.Wood, -unit.CostWood );
-                    _player.AddResource(ResourceType.Food, -unit.CostFood );
+                    _player.AddResource(ResourceType.Wood, -unitProduceable.CostWood );
+                    _player.AddResource(ResourceType.Food, -unitProduceable.CostFood );
                     FoodWoodBuyCount++;
-                    status.freeUnitCount--;
+                    _status.freeUnitCount--;
                     _unitDispatchManagerUI.ShowBtn(true);
                     selectedUI.SetActive(true);
                     selectedTextUI.text = (this.GoldBuyCount + this.FoodWoodBuyCount).ToString();

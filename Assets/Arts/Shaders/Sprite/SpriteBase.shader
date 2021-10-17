@@ -41,6 +41,8 @@ Shader "Sprite/Base"
         _S("S", Range(-1.0, 1.0)) = 0
         _V("V", Range(-1.0, 1.0)) = 0
         
+        _HP("HP", Range(-10, 10)) = 0
+        
         _LightIntensity("Light Intensity", Range(0, 1.0)) = 1
 
         // Blending state
@@ -183,14 +185,15 @@ Shader "Sprite/Base"
                 float2 uvLM                     : TEXCOORD1;
                 float4 positionWSAndFogFactor   : TEXCOORD2; // xyz: positionWS, w: vertex fog factor
                 half3  normalWS                 : TEXCOORD3;
+                half3  positionOS               : TEXCOORD4;
 
 #if _NORMALMAP
-                half3 tangentWS                 : TEXCOORD4;
-                half3 bitangentWS               : TEXCOORD5;
+                half3 tangentWS                 : TEXCOORD5;
+                half3 bitangentWS               : TEXCOORD6;
 #endif
 
 #ifdef _MAIN_LIGHT_SHADOWS
-                float4 shadowCoord              : TEXCOORD6; // compute shadow coord per-vertex for the main light
+                float4 shadowCoord              : TEXCOORD7; // compute shadow coord per-vertex for the main light
 #endif
                 float4 positionCS               : SV_POSITION;
             };
@@ -213,6 +216,7 @@ Shader "Sprite/Base"
 
                 // TRANSFORM_TEX is the same as the old shader library.
                 output.uv = TRANSFORM_TEX(input.uv, _MainTex);
+                output.positionOS = input.positionOS.xyz;
                 output.uvLM = input.uvLM.xy * unity_LightmapST.xy + unity_LightmapST.zw;
 
                 output.positionWSAndFogFactor = float4(vertexInput.positionWS, fogFactor);
@@ -348,6 +352,10 @@ Shader "Sprite/Base"
                 half outlineAlpha8 = SampleAlbedoAlpha(input.uv+half2(-_OutlineWidth,-_OutlineWidth), TEXTURE2D_ARGS(_MainTex, sampler_MainTex)).a;
                 half outlineAlpha = saturate(outlineAlpha0*outlineAlpha1*outlineAlpha2*outlineAlpha3*outlineAlpha4*outlineAlpha5*outlineAlpha6*outlineAlpha7*outlineAlpha8);
                 color = lerp(_OutlineColor,color,outlineAlpha);
+
+                //HP
+                // half3 hpCol = input.positionOS.y < _HP ? half3(1,1,1) : half3(0.75,0.75,0.75);
+                // color *= hpCol;
                 
 
                 float fogFactor = input.positionWSAndFogFactor.w;

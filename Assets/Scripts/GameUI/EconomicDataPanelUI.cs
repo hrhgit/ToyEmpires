@@ -24,7 +24,7 @@ namespace GameUI
             foodUI.content       = _player.Food.ToString();
             woodUI.content       = _player.Wood.ToString();
             goldUI.content       = _player.Gold.ToString();
-            populationUI.content = _player.CurUnitCount + "/" + _player.maxBattleUnitCount;
+            populationUI.content = _player.CurUnitPopulation + "/" + _player.maxBattleUnitCount;
         }
     }
 }

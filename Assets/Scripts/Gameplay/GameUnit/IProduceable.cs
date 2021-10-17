@@ -10,6 +10,7 @@ namespace Gameplay.GameUnit
         public int CostFood        { get; }
         public int CostWood        { get; }
         public int CostGold        { get; }
+        public int CostPopulation  { get; }
         public int MaxReserveCount { get; }
     }
 }

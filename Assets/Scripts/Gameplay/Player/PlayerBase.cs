@@ -108,8 +108,8 @@ namespace Gameplay.Player
         public SoldierUnitBase workerPrefab;
         public UnityEvent   onWorkerProduce = new UnityEvent();
         
-        public readonly  int[]      ResourceWorkerCount        = new int[]{0, 0, 0};
-        public           UnitStatus workerStatus               = new UnitStatus();
+        public readonly  int[]      ResourceWorkerCount = new int[]{0, 0, 0};
+        public           UnitStatus workerStatus;
         private readonly int[]      _activeResourceWorkerCount = new int[]{0, 0, 0};
 
         public void DispatchWorker(ResourceType resourceType, bool isAdd)
@@ -121,11 +121,13 @@ namespace Gameplay.Player
                 {
                     workerStatus.freeUnitCount--;
                     ResourceWorkerCount[(int) resourceType]++;
+                    roadUnitsCount[(int) resourceType]++;
                     workerStatus.curUnitCount++;
                     AddWorker(resourceType);
                 }else if (workerStatus.curUnitCount < _activeResourceWorkerCount.Sum())
                 {
                     ResourceWorkerCount[(int) resourceType]++;
+                    roadUnitsCount[(int) resourceType]++;
                     workerStatus.curUnitCount++;
                 }
             }
@@ -133,7 +135,8 @@ namespace Gameplay.Player
             {
                 if (ResourceWorkerCount[(int)resourceType] > 0)
                 {
-                    ResourceWorkerCount[(int)resourceType] = ResourceWorkerCount[(int)resourceType] - 1;
+                    ResourceWorkerCount[(int)resourceType] --;
+                    roadUnitsCount[(int)resourceType]--;
                     workerStatus.curUnitCount--;
                 }else
                 {
@@ -161,6 +164,14 @@ namespace Gameplay.Player
                                       _                 => throw new ArgumentOutOfRangeException(nameof(resourceType), resourceType, null)
                                   };
             ((Worker) workerUnit).WorkerLoadDoneFunc += WorkerLoadDone;
+            workerUnit.DeathEvent.AddListener((u =>
+                                               {
+                                                   _activeResourceWorkerCount[(int)resourceType]--;
+                                                   ResourceWorkerCount[(int)resourceType]--;
+                                                   roadUnitsCount[(int)resourceType]--;
+                                                   workerStatus.curUnitCount--;
+                                                   workerStatus.totalUnitCount--;
+                                               }));
             
             _activeResourceWorkerCount[(int) resourceType]++;
         }
@@ -204,34 +215,39 @@ namespace Gameplay.Player
 
         #region 生产
 
-        public int                 maxBattleUnitCount;
-        public List<SoldierUnitBase>  unitPrefabList = new List<SoldierUnitBase>();
-        public event GameUnitEvent onUnitProduce;
+        public int                                                       maxBattleUnitCount;
+        public List<SoldierUnitBase>                                     unitPrefabList         = new List<SoldierUnitBase>();
+        public List<UnityEvent<SoldierUnitBase, PlayerBase, UnitStatus>> onUnitProduceEventList = new List<UnityEvent<SoldierUnitBase, PlayerBase, UnitStatus>>();
 
         public List<UnitStatus> UnitStatusList { get; private set; } = new List<UnitStatus>();
 
-        public int CurUnitCount { get; private set; } = 0;
+        public int CurUnitPopulation { get; private set; } = 0;
 
         private void InitUnitList()
         {
             for (int i = 0; i < unitPrefabList.Count; i++)
             {
-                UnitStatusList.Add(new UnitStatus());
+                UnitStatusList.Add(new UnitStatus()
+                                   {
+                                       unitID = unitPrefabList[i].unitID
+                                   });
+                onUnitProduceEventList.Add((new UnityEvent<SoldierUnitBase, PlayerBase, UnitStatus>()));
             }
         }
 
-        public virtual void InvokeUnitProduce(SoldierUnitBase gameunitbase, PlayerBase playerbase, UnitStatus status)
+        public virtual void InvokeUnitProduce(SoldierUnitBase gameunitbase,PlayerBase playerbase, UnitStatus status)
         {
-            onUnitProduce?.Invoke(gameunitbase, playerbase, status);
+            int index = unitPrefabList.IndexOf(gameunitbase);
+            onUnitProduceEventList[index].Invoke(gameunitbase, playerbase, status);
         }
 
         private void ProduceUnit()  
         {
-            if (CurUnitCount >= maxBattleUnitCount)
+            if (CurUnitPopulation >= maxBattleUnitCount)
                 return;
             for (var i = 0; i < unitPrefabList.Count; i++)
             {
-                ((IProduceable)unitPrefabList[i]).Produce(unitPrefabList[i], this, UnitStatusList[i]);
+                ((IProduceable)unitPrefabList[i]).Produce(unitPrefabList[i],  this, UnitStatusList[i]);
             }
         }
 
@@ -239,7 +255,8 @@ namespace Gameplay.Player
 
         #region 派遣
 
-        private static float _dispatchOffset = .05f;
+        private static  float _dispatchOffset = .05f;
+        public readonly int[] roadUnitsCount        = new int[3];
 
         public void DispatchUnits(SoldierUnitBase unit, int count, Road road,UnitStatus status)
         {
@@ -258,10 +275,28 @@ namespace Gameplay.Player
                 SoldierUnitBase unitInstance = Instantiate(unit, exactPos, Quaternion.Euler(0, 0, 0), parent);
                 unitInstance.UnitTeam = this.playerTeam;
                 unitInstance.UnitRoad = road;
+                try
+                {
+                    IDefenable defenable = (IDefenable)unitInstance;
+                    defenable.DeathEvent.AddListener((u =>
+                                                       {
+                                                           this.CurUnitPopulation -= ((IProduceable)unit).CostPopulation;
+                                                           UnitStatus s =UnitStatusList.Find((s => s.unitID == unitInstance.unitID));
+                                                           s.curUnitCount--;
+                                                           s.totalUnitCount--;
+                                                           this.roadUnitsCount[(int)road]++;
+                                                       }));
+                }
+                catch (Exception e)
+                {
+                    // ignored
+                }
+
                 status.curUnitCount++;
                 // status.freeUnitCount--;
                 // status.totalUnitCount++;
-                this.CurUnitCount++;
+                this.CurUnitPopulation += ((IProduceable)unit).CostPopulation;
+                roadUnitsCount[(int)road]++;
             }
         }
         
@@ -278,8 +313,13 @@ namespace Gameplay.Player
 
         private void Awake()
         {
+            workerStatus = new UnitStatus()
+                           {
+                               unitID = workerPrefab.unitID
+                           };
             InitWorker();
             InitUnitList();
+
         }
 
         private void Start()
@@ -297,11 +337,6 @@ namespace Gameplay.Player
 
         #region 杂项
 
-        private void ChangeUnitMaterialColor(GameObject unitObj)
-        {
-            Renderer renderer = unitObj.GetComponent<Renderer>();
-            Material material = renderer.material;
-        }
 
         #endregion
 

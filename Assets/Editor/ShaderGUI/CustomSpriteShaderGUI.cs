@@ -10,13 +10,14 @@ public class CustomSpriteShaderGUI : BaseShaderGUI
         private LitDetailGUI.LitProperties litDetailProperties;
         private SavedBool m_DetailInputsFoldout;
         
-        private bool             m_AddtionalFoldout  = true;
-        private MaterialProperty sssColorProp        = null;
-        private MaterialProperty outlineColorProp    = null;
-        private MaterialProperty outlineWidthProp    = null;
-        private MaterialProperty hProp               = null;
-        private MaterialProperty sProp               = null;
-        private MaterialProperty vProp               = null;
+        private bool             m_AddtionalFoldout = true;
+        private MaterialProperty sssColorProp       = null;
+        private MaterialProperty outlineColorProp   = null;
+        private MaterialProperty outlineWidthProp   = null;
+        private MaterialProperty hProp              = null;
+        private MaterialProperty sProp              = null;
+        private MaterialProperty vProp              = null;
+        private MaterialProperty hpProp             = null;
         private MaterialProperty lightIntensityProp = null;
 
         public override void OnOpenGUI(Material material, MaterialEditor materialEditor)
@@ -44,10 +45,11 @@ public class CustomSpriteShaderGUI : BaseShaderGUI
             {
                 materialEditor.ColorProperty(sssColorProp,     "SSS Color");
                 materialEditor.ColorProperty(outlineColorProp, "Outline Color");
-                materialEditor.RangeProperty(outlineWidthProp, "Outline Width");
-                materialEditor.RangeProperty(hProp, "H");
-                materialEditor.RangeProperty(sProp, "S");
-                materialEditor.RangeProperty(vProp, "V");
+                materialEditor.RangeProperty(outlineWidthProp,   "Outline Width");
+                materialEditor.RangeProperty(hProp,              "H");
+                materialEditor.RangeProperty(sProp,              "S");
+                materialEditor.RangeProperty(vProp,              "V");
+                materialEditor.RangeProperty(hpProp,             "HP");
                 materialEditor.RangeProperty(lightIntensityProp, "Light Intensity");
 
                 // materialEditor.TextureProperty(customTextureValueProp, "Custom Texture Value");
@@ -68,14 +70,15 @@ public class CustomSpriteShaderGUI : BaseShaderGUI
         public override void FindProperties(MaterialProperty[] properties)
         {
             base.FindProperties(properties);
-            baseMapProp         = FindProperty("_MainTex",  properties, false);
-            sssColorProp        = FindProperty("_SSSColor", properties);
-            outlineWidthProp    = FindProperty("_OutlineWidth", properties);
-            outlineColorProp    = FindProperty("_OutlineColor", properties);
-            hProp    = FindProperty("_H", properties);
-            sProp    = FindProperty("_S", properties);
-            vProp    = FindProperty("_V", properties);
-            lightIntensityProp   = FindProperty("_LightIntensity", properties);
+            baseMapProp         = FindProperty("_MainTex",        properties, false);
+            sssColorProp        = FindProperty("_SSSColor",       properties);
+            outlineWidthProp    = FindProperty("_OutlineWidth",   properties);
+            outlineColorProp    = FindProperty("_OutlineColor",   properties);
+            hProp               = FindProperty("_H",              properties);
+            sProp               = FindProperty("_S",              properties);
+            vProp               = FindProperty("_V",              properties);
+            hpProp              = FindProperty("_HP",             properties);
+            lightIntensityProp  = FindProperty("_LightIntensity", properties);
             litProperties       = new LitGUI.LitProperties(properties);
             litDetailProperties = new LitDetailGUI.LitProperties(properties);
         }

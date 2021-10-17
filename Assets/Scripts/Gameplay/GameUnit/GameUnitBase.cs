@@ -6,9 +6,11 @@ namespace Gameplay.GameUnit
 {
     public abstract class GameUnitBase : MonoBehaviour
     {
+        public int unitID;
         // 基本能力值
-        [SerializeField] private Team _unitTeam;
-        [SerializeField] private Road _unitRoad;
+        [SerializeField] private Team  _unitTeam;
+        [SerializeField] private Road  _unitRoad;
+        protected                  float _unitValue = float.MinValue;
 
         protected PlayerBase UnitSide  { get; private set; }
         protected PlayerBase EnemySide { get; private set; }
@@ -23,6 +25,18 @@ namespace Gameplay.GameUnit
         {
             get => _unitRoad;
             internal set => _unitRoad = value;
+        }
+
+        public virtual float UnitValue
+        {
+            get
+            {
+                if (_unitValue <= 0)
+                {
+                    _unitValue = 1;
+                }
+                return _unitValue;
+            }
         }
 
         protected void BaseInit()

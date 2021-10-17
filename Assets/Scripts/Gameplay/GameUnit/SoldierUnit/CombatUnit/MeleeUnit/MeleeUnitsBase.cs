@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
 {
-    public class MeleeUnitsBase : SoldierUnitBase, IProduceable, ICombatable 
+    public class MeleeUnitsBase : SoldierUnitBase, IProduceable, IAttackable 
     {
         #region 生产
 
@@ -13,6 +13,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
         [SerializeField] private int _costFood;
         [SerializeField] private int _costWood;
         [SerializeField] private int _costGold;
+        [SerializeField] private int _costPopulation = 1;
         [SerializeField] private int _maxReserveCount;
 
         public int CostTime => _costTime;
@@ -21,7 +22,8 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
 
         public int CostWood => _costWood;
 
-        public int CostGold => _costGold;
+        public int CostGold       => _costGold;
+        public int CostPopulation => _costPopulation;
 
         public int MaxReserveCount => _maxReserveCount;
 
@@ -58,41 +60,122 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
         public float FindEnemyRange => findEnemyRange;
 
         public event AttackEventHandler AttackEvent;
-        public event AttackEventHandler BeAttackedEvent;
-        
+
         private static int               _maxEnemyFound        = 10;
-        private        List<IAttackable> _visualFieldEnemyList = new List<IAttackable>();
-        private        IAttackable       _curEnemy             = null;
+        private        List<IDefenable> _visualFieldEnemyList = new List<IDefenable>();
+        private        IDefenable       _curEnemy             = null;
         private        UnitVisualField   _unitVisualField;
         private        bool              _attackEnemyBase = true;
+        private        float             _attackTimer     = 0f;
         
 
-        public override void BeAttacked(ICombatable attacker)
+        public override void BeAttacked(IAttackable attacker)
         {
             base.BeAttacked(attacker);
+            try
+            {
+                IDefenable defenableUnit = (IDefenable)attacker;
+                if (defenableUnit.CurHp < this._curEnemy.CurHp)
+                {
+                    this._curEnemy = defenableUnit;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
         }
 
-        public void DoAttack(IAttackable attackTarget)
+        public bool DoAttack(IDefenable attackTarget)
         {
-            throw new NotImplementedException();
+            GameUnitBase u = (GameUnitBase)attackTarget;
+            if(Vector3.Distance(u.transform.position,this.transform.position) < attackRange)
+            {
+                this.UnitMover.EnableMove = false;
+                attackTarget.BeAttacked(this);
+                if(attackTarget.IsDeath)
+                {
+                    SearchEnemy();
+                }
+
+                try
+                {
+                    this.AtEnemyHome = ((PlayerHomeUnit)attackTarget) != null;
+                }
+                catch (Exception e)
+                {
+                    // ignored
+                }
+
+                AttackEvent?.Invoke(this, attackTarget);
+                return true;
+            }
+            else
+            {
+                this.UnitMover.EnableMove = true;
+                this.UnitMover.Target     = u.transform;
+                return false;
+            }
         }
 
-        public IAttackable FindEnemy()
+        public virtual IDefenable FindAEnemy()
         {
             // int          enemyFoundCount = Physics.OverlapSphereNonAlloc(this.transform.position, AttackRange, _enemyFoundArr, 1 <<LayerMask.NameToLayer("Unit"));
             float       minDist     = float.MaxValue;
-            IAttackable closestEnemy = null;
+            IDefenable closestEnemy = null;
             for (int i = 0; i < _visualFieldEnemyList.Count; i++)
             {
-                IAttackable a = _visualFieldEnemyList[i];
-                if(((GameUnitBase)a).UnitTeam == this.UnitTeam || ((GameUnitBase)a).UnitRoad != this.UnitRoad)
-                    continue;
+                IDefenable a = _visualFieldEnemyList[i];
+                try
+                {
+                    if((a.IsDeath) || (!(((SoldierUnitBase)a).AtEnemyHome) && (((GameUnitBase)a).UnitTeam == this.UnitTeam || ((GameUnitBase)a).UnitRoad != this.UnitRoad)))
+                        continue;
+                }
+                catch (Exception e)
+                {
+                    //  is home
+                    if((a.IsDeath) || ((GameUnitBase)a).UnitTeam == this.UnitTeam)
+                        continue;
+                }
                 float d = Vector3.Distance(this.transform.position, ((GameUnitBase)a).transform.position);
                 minDist     = d < minDist ? d : minDist;
                 closestEnemy = a;
             }
             return closestEnemy;
         }
+
+        private void EnemyListGC()
+        {
+            for (int i = 0; i < _visualFieldEnemyList.Count; i++)
+            {
+                if (_visualFieldEnemyList[i] == null)
+                {
+                    _visualFieldEnemyList.RemoveAt(i);
+                    i--;
+                }
+            }
+        }
+        
+        private void SearchEnemy()
+        {
+            EnemyListGC();
+            //当前进攻对象为敌人基地，且有预备敌人
+            if ((_attackEnemyBase && _visualFieldEnemyList.Count >= 0) || (!_attackEnemyBase && !_visualFieldEnemyList.Contains(_curEnemy)) || (_curEnemy.IsDeath) || (_curEnemy == null))
+            {
+                _curEnemy = FindAEnemy();
+                if (_curEnemy == null || _curEnemy.IsDeath)
+                {
+                    _attackEnemyBase = true;
+                    _curEnemy        = this.EnemySide.homeUnit as IDefenable;
+                }
+                else
+                {
+                    _attackEnemyBase      = false;
+                    this.UnitMover.Target = ((GameUnitBase)_curEnemy).transform;
+                }
+            }
+        }
+
 
         private void FindEnemyInit()
         {
@@ -103,8 +186,8 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
                                                     }));
             _unitVisualField.colliderHitEvent.AddListener((v, c) =>
                                                           {
-                                                              IAttackable u = null;
-                                                              if (c.gameObject.TryGetComponent<IAttackable>(out u))
+                                                              IDefenable u = null;
+                                                              if (c.gameObject.TryGetComponent<IDefenable>(out u))
                                                               {
                                                                   Debug.Log("Enemy In!");
                                                                   _visualFieldEnemyList.Add(u);
@@ -112,8 +195,8 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
                                                           });
             _unitVisualField.colliderExitEvent.AddListener((v, c) =>
                                                            {
-                                                               IAttackable u = null;
-                                                               if (c.gameObject.TryGetComponent<IAttackable>(out u))
+                                                               IDefenable u = null;
+                                                               if (c.gameObject.TryGetComponent<IDefenable>(out u))
                                                                {
                                                                    Debug.Log("Enemy Lose!");
                                                                    _visualFieldEnemyList.Remove(u);
@@ -139,23 +222,16 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
 
         private void FixedUpdate()
         {
-            //当前进攻对象为敌人基地，且有预备敌人
-            if ((_attackEnemyBase && _visualFieldEnemyList.Count >= 0) || (!_attackEnemyBase && !_visualFieldEnemyList.Contains(_curEnemy)))
+            SearchEnemy();
+            Debug.Log(((GameUnitBase)_curEnemy).name);
+
+            _attackTimer += Time.fixedDeltaTime;
+            if (_curEnemy != null && !_curEnemy.IsDeath && _attackTimer > AttackInterval)
             {
-                _curEnemy = FindEnemy();
-                if (_curEnemy == null)
-                {
-                    _attackEnemyBase      = true;
-                    _curEnemy             = this.EnemySide.homeUnit as IAttackable;
-                    
-                }
-                else
-                {
-                    _attackEnemyBase      = false;
-                    this.UnitMover.Target = ((GameUnitBase)_curEnemy).transform.position;
-                }
+                _attackTimer = this.DoAttack(_curEnemy) ? 0 : _attackTimer;
             }
-            Debug.Log(this.gameObject.name + ":" + ((GameUnitBase)_curEnemy).gameObject.name);
+            
+            
         }
 
     }

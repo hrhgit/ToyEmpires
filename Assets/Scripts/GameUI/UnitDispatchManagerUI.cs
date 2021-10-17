@@ -35,7 +35,7 @@ namespace GameUI
             foreach (UnitButtonUI unitButtonUI in unitButtonUiList)
             {
                 if (unitButtonUI.FoodWoodBuyCount + unitButtonUI.GoldBuyCount == 0)
-                    return;
+                    continue;
                 _player.DispatchUnits(unitButtonUI.unitIndex,unitButtonUI.GoldBuyCount + unitButtonUI.FoodWoodBuyCount,(Road)road);
                 unitButtonUI.Reset();
             }

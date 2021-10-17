@@ -92,6 +92,7 @@ half _OutlineWidth;
 half _H;
 half _S;
 half _V;
+half _HP;
 half _LightIntensity;
 CBUFFER_END
 

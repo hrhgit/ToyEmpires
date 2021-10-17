@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Gameplay.Player;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Gameplay.GameUnit.SoldierUnit.Worker
 {
@@ -9,9 +10,9 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
     public class Worker : SoldierUnitBase,IProduceable
     {
         // 基本能力值
-        public  int          maxLoad;
-        public  float        workCostTime;
-        public  float        unloadCostTime;
+        public int[]   maxLoad        = new int[3];
+        public float[] workCostTime   = new float[3];
+        public float[] unloadCostTime = new float[3];
         
         public event WorkerFunc WorkerLoadDoneFunc;
         public event WorkerFunc WorkerBackHomeFunc;
@@ -24,8 +25,8 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
 
         [HideInInspector] public ResourceType workResourceType;
         private                  PlayerBase   _player;
-        private                  Vector3      _homePos;
-        private                  Vector3      _workPos;
+        private                  Transform      _homePos;
+        private                  Transform      _workPos;
         private                  int          _curLoad;
         private                  bool         _isReturning = false;
         private                  bool         _isWorking   = false;
@@ -35,6 +36,7 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
         [SerializeField] private int _costFood;
         [SerializeField] private int _costWood;
         [SerializeField] private int _costGold;
+        [SerializeField] private int _costPopulation = 1;
         [SerializeField] private int _maxReserveCount;
 
         public int CostTime => _costTime;
@@ -43,7 +45,8 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
 
         public int CostWood => _costWood;
 
-        public int CostGold        => _costGold;
+        public int CostGold       => _costGold;
+        public int CostPopulation => _costPopulation;
 
         public int MaxReserveCount => _maxReserveCount;
 
@@ -56,6 +59,7 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
         protected override void Start()
         {
             BaseInit();
+            InitHP();
             this._player = UnitTeam switch
                            {
                                Team.Blue => BattleGameManager.BattleGameManagerInstance.bluePlayer,
@@ -72,22 +76,25 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
             switch (workResourceType)
             {
                 case ResourceType.Food:
-                    this._workPos = _player.foodWorkPos.position;
-                    this._homePos = _player.topPos.position;
+                    this._workPos = _player.foodWorkPos;
+                    this._homePos = _player.topPos;
                     break;
                 case ResourceType.Gold:
-                    this._workPos = _player.goldWorkPos.position;
-                    this._homePos = _player.midPos.position;
+                    this._workPos = _player.goldWorkPos;
+                    this._homePos = _player.midPos;
                     break;
                 case ResourceType.Wood:
-                    this._workPos = _player.woodWorkPos.position;
-                    this._homePos = _player.botPos.position;
+                    this._workPos = _player.woodWorkPos;
+                    this._homePos = _player.botPos;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            
+            this.ChangeUnitMaterialColor();
             this.UnitMover.targetReachedEvent.AddListener(WorkerReachTarget);
             this.ToWork();
+            
         }
 
         private void WorkerReachTarget()
@@ -110,7 +117,7 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
 
         private IEnumerator OnUnloadDone()
         {
-            yield return new WaitForSeconds(unloadCostTime);
+            yield return new WaitForSeconds(unloadCostTime[(int)this.workResourceType]);
             this._player.AddResource(this.workResourceType,this._curLoad);
             this._curLoad         = 0;
             this._isLoading       = false;
@@ -121,8 +128,8 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
 
         private IEnumerator OnWorkDone()
         {
-            yield return new WaitForSeconds(workCostTime);
-            this._curLoad         = this.maxLoad;
+            yield return new WaitForSeconds(workCostTime[(int)this.workResourceType]);
+            this._curLoad         = this.maxLoad[(int)this.workResourceType];
             this._isWorking       = false;
             this._isReturning     = true;
             this.UnitMover.Target = _homePos;

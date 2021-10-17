@@ -10,12 +10,14 @@ namespace Gameplay.GameUnit.SoldierUnit
       
       public  UnityEvent     targetReachedEvent = new UnityEvent();
       
-      private GameAIUnitPath _pathFinder;
-      private Seeker         _seeker;
-      private float          _maxSpeed;
-      private SoldierUnitBase   _unitBase;
-      private Vector3        _target;
-      public Vector3 Target
+      private GameAIUnitPath  _pathFinder;
+      private Seeker          _seeker;
+      private float           _maxSpeed;
+      private SoldierUnitBase _unitBase;
+      private Transform       _target;
+      private bool            _enableMove;
+
+      public Transform Target
       {
          get => _target;
          set
@@ -24,12 +26,16 @@ namespace Gameplay.GameUnit.SoldierUnit
             this.Goto(_target);
          }
       }
-
+      
       private void Awake()
       {
-         this._pathFinder          = this.GetComponent<GameAIUnitPath>();
-         this._unitBase            = this.GetComponent<SoldierUnitBase>();
-         this._seeker              = this.GetComponent<Seeker>();
+         this._pathFinder = this.GetComponent<GameAIUnitPath>();
+         this._unitBase   = this.GetComponent<SoldierUnitBase>();
+         this._seeker     = this.GetComponent<Seeker>();
+      }
+
+      private void Start()
+      {
          this._maxSpeed            = this._unitBase.MaxSpeed;
          this._pathFinder.maxSpeed = _maxSpeed;
          this._pathFinder.OnTargetReachedEvent.AddListener(ReachTarget);
@@ -46,12 +52,23 @@ namespace Gameplay.GameUnit.SoldierUnit
                throw new ArgumentOutOfRangeException();
          }
       }
-      
-      
+
+
+      private void FixedUpdate()
+      {
+         if(Target != null)
+            this.Goto(Target);
+      }
+
 
       private void Goto(Vector3 target)
       {
          this._pathFinder.destination = target;
+      }
+      
+      private void Goto(Transform target)
+      {
+         this.Goto(target.position);
       }
 
       private void ReachTarget()
@@ -59,5 +76,14 @@ namespace Gameplay.GameUnit.SoldierUnit
          targetReachedEvent.Invoke();
       }
 
+      public bool EnableMove
+      {
+         get => _enableMove;
+         set
+         {
+            _enableMove               = value;
+            this._pathFinder.maxSpeed = _enableMove ? _maxSpeed : 0;
+         }
+      }
    }
 }
