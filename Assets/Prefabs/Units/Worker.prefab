@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7910375944266663585}
   - component: {fileID: 1789439038670446349}
   - component: {fileID: 3720961674479390347}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Worker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,23 +136,24 @@ MonoBehaviour:
   unitID: 1000
   _unitTeam: 0
   _unitRoad: 0
-  maxSpeed: 1
+  maxSpeed: 0.1
   defence: 2
   _maxHp: 100
-  maxLoad: 020000000300000002000000
+  maxLoad: 020000000400000002000000
   workCostTime:
+  - 1
   - 2
-  - 3
-  - 2
+  - 1
   unloadCostTime:
   - 1
   - 1
   - 1
   workResourceType: 0
-  _costTime: 5
+  _costTime: 8
   _costFood: 0
   _costWood: 0
   _costGold: 0
+  _costPopulation: 0
   _maxReserveCount: 0
 --- !u!136 &1789439038670446349
 CapsuleCollider:
@@ -176,8 +177,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7910375944266663591}
   serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 100
+  m_Drag: 100
   m_AngularDrag: 0.05
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -195,7 +196,7 @@ GameObject:
   - component: {fileID: 7910375945188750725}
   - component: {fileID: 7910375945188750726}
   - component: {fileID: 7910375945188750727}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +291,7 @@ GameObject:
   - component: {fileID: 657045002054211945}
   - component: {fileID: 6372216254089190129}
   - component: {fileID: 848462092809420679}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: VisualField
   m_TagString: Untagged
   m_Icon: {fileID: 0}

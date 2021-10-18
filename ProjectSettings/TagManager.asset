@@ -11,17 +11,17 @@ TagManager:
   - 
   - Water
   - UI
-  - Unit
+  - 
   - Obstacles
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - NeutralUnit
+  - BlueUnit
+  - RedUnit
+  - NeutralMisc
+  - BlueMisc
+  - RedMisc
   - 
   - 
   - 

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8450071945666149020}
   - component: {fileID: 7068303040643804365}
   - component: {fileID: 4797812589120945999}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Archer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2088564397948932690}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 100
   m_Drag: 100
   m_AngularDrag: 0.05
   m_UseGravity: 0
@@ -170,20 +170,22 @@ MonoBehaviour:
   maxSpeed: 0.08
   defence: 2
   _maxHp: 60
-  _costTime: 8
-  _costFood: 5
+  _costTime: 1
+  _costFood: 3
   _costWood: 5
   _costGold: 3
+  _costPopulation: 1
   _maxReserveCount: 3
-  throwingObject: {fileID: 1082835817101889602, guid: e505efef995c8e244888a0976cb8a681, type: 3}
   throwingPoint: {fileID: 3244296224039238681}
   throwingSpeed: 1
   throwingCount: 1
   throwingInterval: 0.1
+  _accuracy: 0.5
+  _throwingObject: {fileID: 1082835817101889602, guid: e505efef995c8e244888a0976cb8a681, type: 3}
   attack: 10
-  attackRange: 0.4
-  attackInterval: 1
-  findEnemyRange: 0.4
+  attackRange: 0.2
+  attackInterval: 2
+  findEnemyRange: 0.2
 --- !u!1 &2088564399442518381
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +197,7 @@ GameObject:
   - component: {fileID: 2088564399442518384}
   - component: {fileID: 2088564399442518387}
   - component: {fileID: 2088564399442518386}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +263,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.3, y: 9.65}
+  m_Size: {x: 6.5, y: 9.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -288,7 +290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3244296224039238681}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: ThrowingPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +305,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3326586113250115280}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1856, z: 0.0493}
+  m_LocalPosition: {x: 0, y: 0.1856, z: 0.033}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2088564397948932694}
@@ -320,7 +322,7 @@ GameObject:
   - component: {fileID: 7226860917227163471}
   - component: {fileID: 5493516157789930899}
   - component: {fileID: 477204391192119428}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: VisualField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -385,6 +387,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2088564397948932694}
     m_Modifications:
+    - target: {fileID: 367044291364674446, guid: 3ca08c3cc6606c24b9bcf61f9cbe9833, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 1277813522066133203, guid: 3ca08c3cc6606c24b9bcf61f9cbe9833, type: 3}
       propertyPath: m_Name
       value: UnitHPBar
@@ -481,6 +487,10 @@ PrefabInstance:
       propertyPath: unit
       value: 
       objectReference: {fileID: 4797812589120945999}
+    - target: {fileID: 5477843828792272131, guid: 3ca08c3cc6606c24b9bcf61f9cbe9833, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ca08c3cc6606c24b9bcf61f9cbe9833, type: 3}
 --- !u!224 &9080931206992518121 stripped

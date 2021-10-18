@@ -13,26 +13,31 @@ namespace Gameplay.Player.AI
         public PlayerBase aiPlayer;
         public PlayerBase enemyPlayer;
         public float      aiRestTime;
+        public float      aiWorkerRestTime;
 
-        private float _timer = 0f;
+        private float _unitTimer = 0f;
+        private float _workerTimer = 0f;
 
     
         private void FixedUpdate()
         {
-            _timer += Time.fixedDeltaTime;
-            if (_timer > aiRestTime)
-            {
+            if(_workerTimer > aiWorkerRestTime * (1 + Random.value))
                 AiDispatchWorker();
+            if (_unitTimer > aiRestTime)
+            {
                 AiDispatchUnit();
-                _timer = 0f;
+                _unitTimer = 0f;
             }
+            _unitTimer   += Time.fixedDeltaTime;
+            _workerTimer += Time.fixedDeltaTime;
         }
 
         private void AiDispatchWorker()
         {
             if (aiPlayer.workerStatus.freeUnitCount > 0)
             {
-                ResourceType r = (ResourceType)Array.IndexOf(aiPlayer.ResourceWorkerCount, aiPlayer.ResourceWorkerCount.Min());
+                bool         isRand = Random.value > .4f;
+                ResourceType r      = (ResourceType)(isRand ? Random.Range(0, 3) : Array.IndexOf(aiPlayer.ResourceWorkerCount, aiPlayer.ResourceWorkerCount.Min()));
                 aiPlayer.DispatchWorker(r, true);
             }
         }
@@ -40,6 +45,7 @@ namespace Gameplay.Player.AI
     
         private void AiDispatchUnit()
         {
+            // Debug.Log("Dispatch");
             // var freeUnits     = aiPlayer.UnitStatusList.Where(status => status.freeUnitCount > 0).Select((status, index) => index).ToArray();
             // var freeStatusArr = (freeUnits.Select(freeIndex => aiPlayer.UnitStatusList[freeIndex])).ToArray();
             // // 0维表示食物木材派遣、1维表示黄金派遣
@@ -84,9 +90,9 @@ namespace Gameplay.Player.AI
             //     }
             //     aiPlayer.DispatchUnits(freeUnits[i], dispatchCount, (Road)sortEnemyRoad[2].idx);
             //}
-            if (Random.value < ((float)enemyPlayer.CurUnitPopulation / (this.aiPlayer.CurUnitPopulation + enemyPlayer.CurUnitPopulation) + .1))
-                return;
             if (aiPlayer.Gold == 0 && (aiPlayer.Food == 0 || aiPlayer.Wood == 0) )
+                return;
+            if (Random.value > ((float)enemyPlayer.CurUnitPopulation / (this.aiPlayer.CurUnitPopulation + enemyPlayer.CurUnitPopulation) -.2f))
                 return;
             UnitTmpData[]      selectableUnits;
             DispatchPlanDict[] plans           = SelectUnits(out selectableUnits);
@@ -105,7 +111,7 @@ namespace Gameplay.Player.AI
                 int          amount = plan.count;
                 
                 // 分配资源使用
-                if (Random.Range(0, 2) == 0) //优先使用食物判定
+                if (Random.value > .5) //优先使用食物判定
                 {
                     int n = Mathf.Min(amount, selectableUnits[i].foodwoodMax);
                     aiPlayer.AddResource(ResourceType.Food, -selectableUnits[i].produceable.CostFood * n);
@@ -122,7 +128,7 @@ namespace Gameplay.Player.AI
                 
                 //分配路
                 int m = amount;
-                if (Random.Range(0, 2) == 0) //随机换路
+                if (Random.value > .5) //随机换路
                 {
                     sortEnemyRoad = sortEnemyRoad.Reverse().ToArray();
                 } 

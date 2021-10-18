@@ -37,6 +37,17 @@ namespace Gameplay.GameUnit.ThrowingObject
             _rigidbody = this.GetComponent<Rigidbody>();
         }
 
+        protected override void Start()
+        {
+            BaseInit();
+            this.gameObject.layer = UnitTeam switch
+                                    {
+                                        Team.Blue => LayerMask.NameToLayer("BlueMisc"),
+                                        Team.Red  => LayerMask.NameToLayer("RedMisc"),
+                                        _         => throw new ArgumentOutOfRangeException()
+                                    };
+        }
+
         private void Update()
         {
             if(!IsUsed)

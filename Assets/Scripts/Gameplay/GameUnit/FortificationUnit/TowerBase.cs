@@ -1,70 +1,28 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Gameplay.GameUnit.SoldierUnit.CombatUnit;
+using Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit;
 using Gameplay.GameUnit.ThrowingObject;
-using Gameplay.Player;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
+namespace Gameplay.GameUnit.FortificationUnit
 {
-    public class RangedAttackUnitBase : SoldierUnitBase, IProduceable, IRangeAttackable
+    public class TowerBase : FortificationUnitBase, IRangeAttackable
     {
-
-
-        #region 生产
-
-        [SerializeField] private int _costTime;
-        [SerializeField] private int _costFood;
-        [SerializeField] private int _costWood;
-        [SerializeField] private int _costGold;
-        [SerializeField] private int _costPopulation = 1;
-        [SerializeField] private int _maxReserveCount;
-
-        public int CostTime => _costTime;
-
-        public int CostFood => _costFood;
-
-        public int CostWood => _costWood;
-
-        public int CostGold       => _costGold;
-
-        public int CostPopulation => _costPopulation;
-
-        public int MaxReserveCount => _maxReserveCount;
-
-        public void Produce(SoldierUnitBase unit, PlayerBase player, UnitStatus status)
-        {
-            if (status.freeUnitCount >= MaxReserveCount)
-                return;
-            if (status.unitProduceProcess < 1)
-            {
-                status.unitProduceProcess += Time.fixedDeltaTime / (((IProduceable)unit).CostTime);
-                player.InvokeUnitProduce(unit, player, status);
-            }
-            else
-            {
-                status.unitProduceProcess = 0;
-                status.totalUnitCount++;
-                status.freeUnitCount++;
-            }
-
-        }
-
-        #endregion
-        
         #region 战斗
 
         #region 射击相关
-        public Transform          throwingPoint;
+
+        public   Transform          throwingPoint;
         
         [SerializeField] private float              throwingSpeed;
         [SerializeField] private int                throwingCount;
         [SerializeField] private float              throwingInterval;
         [SerializeField] private float              _accuracy;
         [SerializeField] private ThrowingObjectBase _throwingObject;
-
 
         public float ThrowingSpeed
         {
@@ -89,8 +47,8 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
             get => throwingInterval;
             private set => throwingInterval = value;
         }
-        public ThrowingObjectBase ThrowingObject => _throwingObject;
 
+        public ThrowingObjectBase ThrowingObject => _throwingObject;
 
         public UnityEvent<IRangeAttackable, IDefenable> ThrowingEvent { get; set; } = new UnityEvent<IRangeAttackable, IDefenable>();
 
@@ -113,8 +71,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
         private        List<IDefenable> _visualFieldEnemyList = new List<IDefenable>();
         private        IDefenable       _curEnemy             = null;
         private        UnitVisualField  _unitVisualField;
-        private        bool             _attackEnemyBase = true;
-        private        float            _attackTimer     = 0f;
+        private        float            _attackTimer = 0f;
         private        Transform        _miscParent;
 
 
@@ -141,16 +98,12 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
             GameUnitBase u = (GameUnitBase)attackTarget;
             if(Vector3.Distance(u.transform.position,this.transform.position) < attackRange)
             {
-                this.UnitMover.EnableMove = false;
                 StartCoroutine(this.ThrowObjects(attackTarget));
-
                 AttackEvent?.Invoke(this, attackTarget);
                 return true;
             }
             else
             {
-                this.UnitMover.EnableMove = true;
-                this.UnitMover.Target     = u.transform;
                 return false;
             }
         }
@@ -173,22 +126,10 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
             {
                 SearchEnemy();
             }
-
-            try
-            {
-                this.AtEnemyHome = ((PlayerHomeUnit)attackTarget) != null;
-            }
-            catch (Exception e)
-            {
-                // ignored
-            }
-
         }
         
         private void ThrowSingleObject(Transform target,IDefenable targetUnit = null)
         {
-            this.transform.LookAt(target);
-            this.transform.localEulerAngles = new Vector3(0, this.transform.localEulerAngles.y, 0);
             throwingPoint.transform.LookAt(target);
             float angle = GetShootAngle(target.position, Accuracy);
             throwingPoint.transform.Rotate(-angle,0,0);
@@ -257,19 +198,9 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
         {
             EnemyListGC();
             //当前进攻对象为敌人基地，且有预备敌人
-            if ((_attackEnemyBase && _visualFieldEnemyList.Count >= 0) || (!_attackEnemyBase && !_visualFieldEnemyList.Contains(_curEnemy)) || (_curEnemy.IsDeath) || (_curEnemy == null))
+            if ((_visualFieldEnemyList.Count >= 0) || (!_visualFieldEnemyList.Contains(_curEnemy)) || (_curEnemy.IsDeath) || (_curEnemy == null))
             {
                 _curEnemy = FindAEnemy();
-                if (_curEnemy == null || _curEnemy.IsDeath)
-                {
-                    _attackEnemyBase = true;
-                    _curEnemy        = this.EnemySide.homeUnit as IDefenable;
-                }
-                else
-                {
-                    _attackEnemyBase      = false;
-                    this.UnitMover.Target = ((GameUnitBase)_curEnemy).transform;
-                }
             }
         }
 
@@ -305,7 +236,6 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
 
         protected override void Awake()
         {
-            base.Awake();
             FindEnemyInit();
         }
 
@@ -320,14 +250,12 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
         private void FixedUpdate()
         {
             SearchEnemy();
-
             _attackTimer += Time.fixedDeltaTime;
             if (_curEnemy != null && !_curEnemy.IsDeath && _attackTimer > AttackInterval)
             {
                 _attackTimer = this.DoAttack(_curEnemy) ? 0 : _attackTimer;
             }
-            
-            
+
         }
     }
 }

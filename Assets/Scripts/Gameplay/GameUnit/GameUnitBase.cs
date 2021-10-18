@@ -44,17 +44,19 @@ namespace Gameplay.GameUnit
             switch (UnitTeam)
             {
                 case Team.Blue:
-                    this.UnitSide  = BattleGameManager.BattleGameManagerInstance.bluePlayer;
-                    this.EnemySide = BattleGameManager.BattleGameManagerInstance.redPlayer;
+                    this.UnitSide         = BattleGameManager.BattleGameManagerInstance.bluePlayer;
+                    this.EnemySide        = BattleGameManager.BattleGameManagerInstance.redPlayer;
+                    this.gameObject.layer = LayerMask.NameToLayer("BlueUnit");
                     break;
                 case Team.Red:
-                    this.EnemySide = BattleGameManager.BattleGameManagerInstance.bluePlayer;
-                    this.UnitSide  = BattleGameManager.BattleGameManagerInstance.redPlayer;
-
+                    this.EnemySide        = BattleGameManager.BattleGameManagerInstance.bluePlayer;
+                    this.UnitSide         = BattleGameManager.BattleGameManagerInstance.redPlayer;
+                    this.gameObject.layer = LayerMask.NameToLayer("RedUnit");
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+            
 
         }
         
