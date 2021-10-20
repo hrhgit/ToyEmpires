@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using Gameplay.Buff;
+using Gameplay.GameUnit.FortificationUnit;
+using Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit;
 using Gameplay.Player;
 using UnityEngine;
 
@@ -9,14 +12,14 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
     {
         #region 生产
 
-        [SerializeField] private int _costTime;
-        [SerializeField] private int _costFood;
-        [SerializeField] private int _costWood;
-        [SerializeField] private int _costGold;
-        [SerializeField] private int _costPopulation = 1;
-        [SerializeField] private int _maxReserveCount;
+        [SerializeField] private FloatBuffableValue _costTime        = new FloatBuffableValue();
+        [SerializeField] private IntBuffableValue   _costFood        = new IntBuffableValue();
+        [SerializeField] private IntBuffableValue   _costWood        = new IntBuffableValue();
+        [SerializeField] private IntBuffableValue   _costGold        = new IntBuffableValue();
+        [SerializeField] private IntBuffableValue   _costPopulation  = new IntBuffableValue(1);
+        [SerializeField] private IntBuffableValue   _maxReserveCount = new IntBuffableValue();
 
-        public int CostTime => _costTime;
+        public float CostTime => _costTime;
 
         public int CostFood => _costFood;
 
@@ -48,10 +51,10 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
         #endregion
         
         #region 战斗
-        [SerializeField] private int   attack;
-        [SerializeField] private float attackRange;
-        [SerializeField] private float attackInterval;
-        [SerializeField] private float findEnemyRange;
+        [SerializeField] private IntBuffableValue   attack         = new IntBuffableValue();
+        [SerializeField] private FloatBuffableValue attackRange    = new FloatBuffableValue();
+        [SerializeField] private FloatBuffableValue attackInterval = new FloatBuffableValue();
+        [SerializeField] private FloatBuffableValue findEnemyRange = new FloatBuffableValue();
 
         public int   Attack         => attack;
         public float AttackRange    => attackRange;
@@ -74,8 +77,11 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
             base.BeAttacked(attacker);
             try
             {
-                IDefenable defenableUnit = (IDefenable)attacker;
-                if (defenableUnit.CurHp < this._curEnemy.CurHp)
+
+                bool       isFortification = (_curEnemy as FortificationUnitBase) != null;
+                bool       isRangeAttacker = (attacker as IRangeAttackable)       != null;
+                IDefenable defenableUnit   = attacker as IDefenable;
+                if (!isRangeAttacker && defenableUnit.CurHp < this._curEnemy.CurHp)
                 {
                     this._curEnemy = defenableUnit;
                 }
@@ -100,7 +106,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
 
                 try
                 {
-                    this.AtEnemyHome = ((PlayerHomeUnit)attackTarget) != null;
+                    this.AtEnemyHome = (u as PlayerHomeUnit) != null || (u as TowerBase) != null;
                 }
                 catch (Exception e)
                 {
@@ -126,17 +132,35 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
             for (int i = 0; i < _visualFieldEnemyList.Count; i++)
             {
                 IDefenable a = _visualFieldEnemyList[i];
-                try
+                if(a.IsDeath || ((GameUnitBase)a).UnitTeam == this.UnitTeam)
+                    continue;
+
+                bool isSoldier       = (((GameUnitBase)a) as SoldierUnitBase) != null;
+                bool isFortification = (((GameUnitBase)a) as FortificationUnitBase) != null;
+                bool isHome = (((GameUnitBase)a) as PlayerHomeUnit) != null;
+
+                if (isSoldier)
                 {
-                    if((a.IsDeath) || (!(((SoldierUnitBase)a).AtEnemyHome) && (((GameUnitBase)a).UnitTeam == this.UnitTeam || ((GameUnitBase)a).UnitRoad != this.UnitRoad)))
+                    if ( !((SoldierUnitBase)a).AtEnemyHome && ((GameUnitBase)a).UnitRoad != this.UnitRoad)
                         continue;
                 }
-                catch (Exception e)
+
+                if (isFortification)
                 {
-                    //  is home
-                    if((a.IsDeath) || ((GameUnitBase)a).UnitTeam == this.UnitTeam)
+                    bool isTower = (((GameUnitBase)a) as TowerBase) != null;
+                    if (!isTower && ((GameUnitBase)a).UnitRoad != this.UnitRoad)
+                    {
+                        continue;
+                    }
+                }
+
+                if (isHome)
+                {
+                    if(_visualFieldEnemyList.Count > 1)
                         continue;
                 }
+
+
                 float d = Vector3.Distance(this.transform.position, ((GameUnitBase)a).transform.position);
                 minDist     = d < minDist ? d : minDist;
                 closestEnemy = a;

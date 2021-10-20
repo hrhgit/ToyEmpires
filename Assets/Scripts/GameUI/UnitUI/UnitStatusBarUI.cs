@@ -1,4 +1,5 @@
 using System;
+using Gameplay;
 using Gameplay.GameUnit;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +20,12 @@ namespace GameUI.UnitUI
             _unitDefenable     = (IDefenable)unit;
             _canvas             = this.GetComponent<Canvas>();
             _camera             = Camera.main;
-            _canvas.worldCamera = _camera;
+            
+        }
+
+        private void Start()
+        {
+            _canvas.worldCamera = BattleGameManager.BattleGameManagerInstance.uiCamera;
         }
 
         private void Update()

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Gameplay.Buff;
 using Gameplay.GameUnit;
 using Gameplay.GameUnit.SoldierUnit;
 using Gameplay.GameUnit.SoldierUnit.Worker;
@@ -14,8 +15,6 @@ namespace Gameplay.Player
     public class PlayerBase : MonoBehaviour
     {
         public Team playerTeam;
-        public int  maxHp;
-        public int  defence;
 
         #region 坐标
 
@@ -32,27 +31,29 @@ namespace Gameplay.Player
         #region 经济
 
         //Economics
-        private int _food;
-        private int _gold;
-        private int _wood;
+        private IntBuffableValue _food = new IntBuffableValue();
+        private IntBuffableValue _gold = new IntBuffableValue();
+        private IntBuffableValue _wood = new IntBuffableValue();
         public int Food
         {
-            get => _food;
-            private set => _food = value;
+            get => _food.Value;
+            private set => _food.Value = value;
         }
 
         public int Gold
         {
-            get => _gold;
-            private set => _gold = value;
+            get => _gold.Value;
+            private set => _gold.Value = value;
         }
 
         public int Wood
         {
-            get => _wood;
-            private set => _wood = value;
+            get => _wood.Value;
+            private set => _wood.Value = value;
         }
         
+        public int Productivity => this.workerStatus.freeUnitCount * workerPrefab.Productivity + this.UnitStatusList.Select(((status, i) => new {status,i})).Sum((s => s.status.freeUnitCount * unitPrefabList[s.i].Productivity));
+
         public void AddResource(ResourceType resourceType, int count)
         {
             switch (resourceType)
@@ -108,9 +109,10 @@ namespace Gameplay.Player
         public SoldierUnitBase workerPrefab;
         public UnityEvent   onWorkerProduce = new UnityEvent();
         
-        public readonly  int[]      ResourceWorkerCount = new int[]{0, 0, 0};
-        public           UnitStatus workerStatus;
-        private readonly int[]      _activeResourceWorkerCount = new int[]{0, 0, 0};
+        public readonly  int[]        ResourceWorkerCount = new int[]{0, 0, 0};
+        public           UnitStatus   workerStatus;
+        private readonly int[]        _activeResourceWorkerCount = new int[]{0, 0, 0};
+        private readonly List<Worker> _instanceWorkersList       = new List<Worker>();
 
         public void DispatchWorker(ResourceType resourceType, bool isAdd)
         {
@@ -164,6 +166,7 @@ namespace Gameplay.Player
                                       _                 => throw new ArgumentOutOfRangeException(nameof(resourceType), resourceType, null)
                                   };
             ((Worker) workerUnit).WorkerLoadDoneFunc += WorkerLoadDone;
+            _instanceWorkersList.Add( ((Worker) workerUnit));
             workerUnit.DeathEvent.AddListener((u =>
                                                {
                                                    _activeResourceWorkerCount[(int)resourceType]--;
@@ -171,6 +174,7 @@ namespace Gameplay.Player
                                                    roadUnitsCount[(int)resourceType]--;
                                                    workerStatus.curUnitCount--;
                                                    workerStatus.totalUnitCount--;
+                                                   _instanceWorkersList.Remove( ((Worker) u));
                                                }));
             
             _activeResourceWorkerCount[(int) resourceType]++;
@@ -219,9 +223,12 @@ namespace Gameplay.Player
         public List<SoldierUnitBase>                                     unitPrefabList         = new List<SoldierUnitBase>();
         public List<UnityEvent<SoldierUnitBase, PlayerBase, UnitStatus>> onUnitProduceEventList = new List<UnityEvent<SoldierUnitBase, PlayerBase, UnitStatus>>();
 
+        private readonly List<GameUnitBase> _instanceUnitsList = new List<GameUnitBase>();
+
         public List<UnitStatus> UnitStatusList { get; private set; } = new List<UnitStatus>();
 
         public int CurUnitPopulation { get; private set; } = 0;
+
 
         private void InitUnitList()
         {
@@ -255,7 +262,7 @@ namespace Gameplay.Player
 
         #region 派遣
 
-        private static  float _dispatchOffset = .05f;
+        private static  float _dispatchOffset = .02f;
         public readonly int[] roadUnitsCount        = new int[3];
 
         public void DispatchUnits(SoldierUnitBase unit, int count, Road road,UnitStatus status)
@@ -275,6 +282,7 @@ namespace Gameplay.Player
                 SoldierUnitBase unitInstance = Instantiate(unit, exactPos, Quaternion.Euler(0, 0, 0), parent);
                 unitInstance.UnitTeam = this.playerTeam;
                 unitInstance.UnitRoad = road;
+                _instanceUnitsList.Add(unitInstance);
                 try
                 {
                     IDefenable defenable = (IDefenable)unitInstance;
@@ -285,6 +293,7 @@ namespace Gameplay.Player
                                                            s.curUnitCount--;
                                                            s.totalUnitCount--;
                                                            this.roadUnitsCount[(int)road]++;
+                                                           this._instanceUnitsList.Remove(u as GameUnitBase);
                                                        }));
                 }
                 catch (Exception e)

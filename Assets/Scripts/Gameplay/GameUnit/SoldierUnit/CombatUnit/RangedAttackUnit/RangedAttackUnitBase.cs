@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Gameplay.Buff;
+using Gameplay.GameUnit.FortificationUnit;
 using Gameplay.GameUnit.ThrowingObject;
 using Gameplay.Player;
 using UnityEngine;
@@ -15,14 +17,14 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
 
         #region 生产
 
-        [SerializeField] private int _costTime;
-        [SerializeField] private int _costFood;
-        [SerializeField] private int _costWood;
-        [SerializeField] private int _costGold;
-        [SerializeField] private int _costPopulation = 1;
-        [SerializeField] private int _maxReserveCount;
+        [SerializeField] private FloatBuffableValue _costTime = new FloatBuffableValue();
+        [SerializeField] private IntBuffableValue   _costFood = new IntBuffableValue();
+        [SerializeField] private IntBuffableValue   _costWood = new IntBuffableValue();
+        [SerializeField] private IntBuffableValue   _costGold = new IntBuffableValue();
+        [SerializeField] private IntBuffableValue   _costPopulation = new IntBuffableValue(1);
+        [SerializeField] private IntBuffableValue   _maxReserveCount = new IntBuffableValue();
 
-        public int CostTime => _costTime;
+        public float CostTime => _costTime;
 
         public int CostFood => _costFood;
 
@@ -59,35 +61,35 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
         #region 射击相关
         public Transform          throwingPoint;
         
-        [SerializeField] private float              throwingSpeed;
-        [SerializeField] private int                throwingCount;
-        [SerializeField] private float              throwingInterval;
-        [SerializeField] private float              _accuracy;
+        [SerializeField] private FloatBuffableValue              throwingSpeed = new FloatBuffableValue();
+        [SerializeField] private IntBuffableValue                throwingCount = new IntBuffableValue();
+        [SerializeField] private FloatBuffableValue              throwingInterval = new FloatBuffableValue();
+        [SerializeField] private FloatBuffableValue              _accuracy = new FloatBuffableValue();
         [SerializeField] private ThrowingObjectBase _throwingObject;
 
 
         public float ThrowingSpeed
         {
             get => throwingSpeed;
-            private set => throwingSpeed = value;
+            private set => throwingSpeed.Value = value;
         }
 
         public float Accuracy
         {
             get => _accuracy;
-            private set => _accuracy = value;
+            private set => _accuracy.Value = value;
         }
 
         public int   ThrowingCount
         {
             get => throwingCount;
-            private set => throwingCount = value;
+            private set => throwingCount.Value = value;
         }
 
         public float ThrowingInterval
         {
             get => throwingInterval;
-            private set => throwingInterval = value;
+            private set => throwingInterval.Value = value;
         }
         public ThrowingObjectBase ThrowingObject => _throwingObject;
 
@@ -97,10 +99,10 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
 
         #endregion
 
-        [SerializeField] private int   attack;
-        [SerializeField] private float attackRange;
-        [SerializeField] private float attackInterval;
-        [SerializeField] private float findEnemyRange;
+        [SerializeField] private IntBuffableValue   attack         = new IntBuffableValue();
+        [SerializeField] private FloatBuffableValue attackRange    = new FloatBuffableValue();
+        [SerializeField] private FloatBuffableValue attackInterval = new FloatBuffableValue();
+        [SerializeField] private FloatBuffableValue findEnemyRange = new FloatBuffableValue();
 
         public int   Attack         => attack;
         public float AttackRange    => attackRange;
@@ -158,6 +160,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
         
         public IEnumerator ThrowObjects(IDefenable attackTarget)
         {
+            GameUnitBase   u               = (GameUnitBase)attackTarget;
             Transform      targetTransform = ((GameUnitBase)attackTarget).transform;
             WaitForSeconds wfs             = new WaitForSeconds(ThrowingInterval);
             for (int i = 0; i < ThrowingCount - 1; i++)
@@ -176,7 +179,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
 
             try
             {
-                this.AtEnemyHome = ((PlayerHomeUnit)attackTarget) != null;
+                this.AtEnemyHome = (u as PlayerHomeUnit) != null || (u as TowerBase) != null;
             }
             catch (Exception e)
             {
@@ -188,10 +191,10 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
         private void ThrowSingleObject(Transform target,IDefenable targetUnit = null)
         {
             this.transform.LookAt(target);
-            this.transform.localEulerAngles = new Vector3(0, this.transform.localEulerAngles.y, 0);
-            throwingPoint.transform.LookAt(target);
-            float angle = GetShootAngle(target.position, Accuracy);
-            throwingPoint.transform.Rotate(-angle,0,0);
+            this.transform.localEulerAngles          = new Vector3(0, this.transform.localEulerAngles.y, 0);
+            throwingPoint.transform.localEulerAngles = new Vector3(0, 0, 0);
+            float angle = GetShootAngle(target.position, Accuracy,.01f);
+            throwingPoint.transform.Rotate(angle,0,0);
             ThrowingObjectBase throwingObjectInstance = Instantiate(ThrowingObject, throwingPoint.position, throwingPoint.rotation, _miscParent);
             GameObject         throwingGameObject     = throwingObjectInstance.gameObject;
             Rigidbody          rigidbody              = throwingGameObject.GetComponent<Rigidbody>();
@@ -203,26 +206,31 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
                                                          {
                                                              hitter.BeAttacked(this);
                                                          };
-            rigidbody.velocity = throwingObjectInstance.transform.forward * (this.ThrowingSpeed  + Random.Range(Accuracy-1,1-Accuracy) * .5f);
+            rigidbody.velocity = throwingObjectInstance.transform.forward * (this.ThrowingSpeed  + Random.Range(Accuracy-1,1-Accuracy) * .1f);
         }
 
 
         protected float GetShootAngle(Vector3 targetPos)
         {
             float v0 = this.ThrowingSpeed;
-            // float h  = Mathf.Abs(this.throwingPoint.position.y - targetPos.y);
-            float h  = 0;
+            float h  = Mathf.Abs(this.throwingPoint.position.y - targetPos.y);
+            // float h  = 0;
             float ud = Mathf.Sqrt(v0 * v0 + 2 * Physics.gravity.magnitude * h);
             return Mathf.Atan(v0 / ud) * Mathf.Rad2Deg;
+        }
+
+        protected float GetShootAngle(Vector3 targetPos, float accuracy, float heightOffset)
+        {
+            float v0 = this.ThrowingSpeed;
+            float h  = (this.throwingPoint.position.y + heightOffset) - targetPos.y;
+            // float h  = 0;
+            float ud = Mathf.Sqrt(v0 * v0 + 2 * Physics.gravity.magnitude * h);
+            return Mathf.Atan(v0 / ud) * Mathf.Rad2Deg + Random.Range(accuracy -1, 1 -accuracy) * 30;
         }
         
         protected float GetShootAngle(Vector3 targetPos, float accuracy)
         {
-            float v0       = this.ThrowingSpeed;
-            float h  = Mathf.Abs(this.throwingPoint.position.y - targetPos.y);
-            // float h  = 0;
-            float ud = Mathf.Sqrt(v0 * v0 + 2 * Physics.gravity.magnitude * h);
-            return Mathf.Atan(v0 / ud) * Mathf.Rad2Deg + Random.Range(accuracy-1,1-accuracy) * 30;
+            return GetShootAngle(targetPos, accuracy, 0);
         }
 
         public virtual IDefenable FindAEnemy()
@@ -233,6 +241,8 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
             {
                 IDefenable a = _visualFieldEnemyList[i];
                 if((a.IsDeath) || ((GameUnitBase)a).UnitTeam == this.UnitTeam)
+                    continue;
+                if(a as PlayerHomeUnit != null && _visualFieldEnemyList.Count > 1)
                     continue;
                 float d = Vector3.Distance(this.transform.position, ((GameUnitBase)a).transform.position);
                 minDist     = d < minDist ? d : minDist;

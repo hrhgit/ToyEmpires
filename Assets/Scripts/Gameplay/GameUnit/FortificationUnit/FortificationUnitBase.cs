@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using Gameplay.Buff;
 using Gameplay.GameUnit.SoldierUnit.CombatUnit;
 using Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit;
 using Rendering;
@@ -9,19 +11,35 @@ namespace Gameplay.GameUnit.FortificationUnit
 {
     public class FortificationUnitBase : GameUnitBase, IDefenable
     {
-        [SerializeField] private int  _maxHp;
-        [SerializeField] private int  _defence;
-        private                  bool _isDeath;
-        private                  int  _curHp;
+        [SerializeField] private IntBuffableValue _maxHp = new IntBuffableValue();
+        [SerializeField] private IntBuffableValue _defence = new IntBuffableValue();
+        private                  bool             _isDeath;
+        private                  IntBuffableValue _curHp = new IntBuffableValue();
 
-        public int  MaxHp   => _maxHp;
-        public int  CurHp
+        public int  MaxHp   => _maxHp.Value;
+        public int CurHp
         {
-            get => _curHp;
-            private set => _curHp = value;
+            get => _curHp.Value;
+            private set
+            {
+                _curHp.Value = value;
+                if (_curHp.Value <= 0)
+                {
+                    // _curHp = 0;
+                    IsDeath = true;
+                    Destroy(this.gameObject);
+                    DeathEvent.Invoke(this);
+                    
+                }
+            }
         }
 
-        public bool IsDeath => _isDeath;
+        public bool IsDeath
+        {
+            get => _isDeath;
+            private set => _isDeath = value;
+        }
+
         public int  Defence => _defence;
 
         public event AttackEventHandler BeAttackedEvent;
@@ -29,7 +47,8 @@ namespace Gameplay.GameUnit.FortificationUnit
 
         public virtual void BeAttacked(IAttackable attacker)
         {
-            
+            this.CurHp -= attacker.Attack - this.Defence;
+            BeAttackedEvent?.Invoke(attacker, this);
         }
 
 
@@ -55,7 +74,21 @@ namespace Gameplay.GameUnit.FortificationUnit
 
         protected override void Start()
         {
-            base.Start();
+            switch (UnitTeam)
+            {
+                case Team.Blue:
+                    this.UnitSide         = BattleGameManager.BattleGameManagerInstance.bluePlayer;
+                    this.EnemySide        = BattleGameManager.BattleGameManagerInstance.redPlayer;
+                    this.gameObject.layer = LayerMask.NameToLayer("BlueFortification");
+                    break;
+                case Team.Red:
+                    this.EnemySide        = BattleGameManager.BattleGameManagerInstance.bluePlayer;
+                    this.UnitSide         = BattleGameManager.BattleGameManagerInstance.redPlayer;
+                    this.gameObject.layer = LayerMask.NameToLayer("RedFortification");
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
             InitHP();
             // ChangeUnitMaterialColor();
 

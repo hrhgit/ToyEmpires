@@ -43,7 +43,7 @@ Shader "Sprite/Base"
         
         _HP("HP", Range(-10, 10)) = 0
         
-        _LightIntensity("Light Intensity", Range(0, 1.0)) = 1
+        _LightIntensity("Light Intensity", Range(0, 2.0)) = 1
 
         // Blending state
         [HideInInspector] _Surface("__surface", Float) = 0.0

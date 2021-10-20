@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 7910375944266663585}
   - component: {fileID: 1789439038670446349}
   - component: {fileID: 3720961674479390347}
+  - component: {fileID: 1154588354561145708}
+  - component: {fileID: 5552848379286929172}
   m_Layer: 11
   m_Name: Worker
   m_TagString: Untagged
@@ -53,17 +55,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   drawGizmos: 1
-  detailedGizmos: 0
+  detailedGizmos: 1
   startEndModifier:
     addPoints: 1
-    exactStartPoint: 3
+    exactStartPoint: 1
     exactEndPoint: 3
-    useRaycasting: 0
+    useRaycasting: 1
     mask:
       serializedVersion: 2
       m_Bits: 4294967295
-    useGraphRaycasting: 0
-  traversableTags: -1
+    useGraphRaycasting: 1
+  traversableTags: 0
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
@@ -94,10 +96,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef601d48275a268418b5d5f8bf9bed7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  version: 1
-  radius: 0.02
+  version: 2
+  radius: 0.01
   height: 0.1
-  repathRate: 1
+  repathRate: 0.5
   canSearch: 1
   canMove: 1
   maxSpeed: 1
@@ -109,15 +111,15 @@ MonoBehaviour:
   orientation: 0
   enableRotation: 1
   targetCompatibility: {fileID: 0}
-  acceleration: 5
+  maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownTime: 0.1
-  endReachedDistance: 0.02
-  wallForce: 3
-  wallDist: 0.1
-  funnelSimplification: 1
+  slowdownDistance: 0.02
+  pickNextWaypointDist: 0.03
+  endReachedDistance: 0.03
+  alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
-  animCompatibility: {fileID: 0}
+  whenCloseToDestination: 0
+  constrainInsideGraph: 0
   OnTargetReachedEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -136,25 +138,39 @@ MonoBehaviour:
   unitID: 1000
   _unitTeam: 0
   _unitRoad: 0
-  maxSpeed: 0.1
-  defence: 2
-  _maxHp: 100
-  maxLoad: 020000000400000002000000
+  maxSpeed:
+    _value: 0.05
+  productivity:
+    _value: 2
+  defence:
+    _value: 5
+  _maxHp:
+    _value: 50
+  maxLoad:
+  - _value: 1
+  - _value: 2
+  - _value: 1
   workCostTime:
-  - 1
-  - 2
-  - 1
+  - _value: 1
+  - _value: 2
+  - _value: 1
   unloadCostTime:
-  - 1
-  - 1
-  - 1
+  - _value: 1
+  - _value: 1
+  - _value: 1
   workResourceType: 0
-  _costTime: 8
-  _costFood: 0
-  _costWood: 0
-  _costGold: 0
-  _costPopulation: 0
-  _maxReserveCount: 0
+  _costTime:
+    _value: 5
+  _costFood:
+    _value: 0
+  _costWood:
+    _value: 0
+  _costGold:
+    _value: 0
+  _costPopulation:
+    _value: 0
+  _maxReserveCount:
+    _value: 15
 --- !u!136 &1789439038670446349
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -185,6 +201,42 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 84
   m_CollisionDetection: 0
+--- !u!114 &1154588354561145708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7910375944266663591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6a34d769a1e4ac7b0b30e433aa443c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 1
+  smoothType: 1
+  subdivisions: 2
+  iterations: 2
+  strength: 0.5
+  uniformLength: 1
+  maxSegmentLength: 2
+  bezierTangentLength: 0.1
+  offset: 0.2
+  factor: 0.1
+--- !u!114 &5552848379286929172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7910375944266663591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aa9da4e054586643aa7e98476a9c7c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffList: []
+  unit: {fileID: 7910375944266663585}
 --- !u!1 &7910375945188750744
 GameObject:
   m_ObjectHideFlags: 0
@@ -210,13 +262,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7910375945188750744}
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0.088, z: 0}
   m_LocalScale: {x: 0.013374016, y: 0.02666121, z: 0.013374016}
   m_Children: []
   m_Father: {fileID: 7910375944266663587}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!212 &7910375945188750726
 SpriteRenderer:
   m_ObjectHideFlags: 0

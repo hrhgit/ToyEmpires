@@ -1,4 +1,5 @@
-﻿using Gameplay.GameUnit.SoldierUnit.CombatUnit;
+﻿using Gameplay.Buff;
+using Gameplay.GameUnit.SoldierUnit.CombatUnit;
 using UnityEngine.Events;
 
 namespace Gameplay.GameUnit

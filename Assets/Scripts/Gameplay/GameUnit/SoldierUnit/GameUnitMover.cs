@@ -43,10 +43,10 @@ namespace Gameplay.GameUnit.SoldierUnit
          switch (_unitBase.UnitTeam)
          {
             case Team.Blue:
-               this._seeker.traversableTags = ~((1 << 1) | (1 << 2) | (1 << 6));
+               this._seeker.traversableTags = ~((1 << 1) | (1 << 2) | (1 << 6) /*| (1 << 7)*/);
                break;
             case Team.Red:
-               this._seeker.traversableTags = ~((1 << 3) | (1 << 4) | (1 << 5));
+               this._seeker.traversableTags = ~((1 << 3) | (1 << 4) | (1 << 5) /*| (1 << 7)*/);
                break;
             default:
                throw new ArgumentOutOfRangeException();

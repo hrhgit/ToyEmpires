@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Gameplay.Buff;
 using Gameplay.GameUnit.SoldierUnit.CombatUnit;
 using Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit;
 using Gameplay.GameUnit.ThrowingObject;
@@ -18,34 +19,34 @@ namespace Gameplay.GameUnit.FortificationUnit
 
         public   Transform          throwingPoint;
         
-        [SerializeField] private float              throwingSpeed;
-        [SerializeField] private int                throwingCount;
-        [SerializeField] private float              throwingInterval;
-        [SerializeField] private float              _accuracy;
+        [SerializeField] private FloatBuffableValue              throwingSpeed = new FloatBuffableValue();
+        [SerializeField] private IntBuffableValue                throwingCount = new IntBuffableValue();
+        [SerializeField] private FloatBuffableValue               throwingInterval = new FloatBuffableValue();
+        [SerializeField] private FloatBuffableValue               _accuracy = new FloatBuffableValue();
         [SerializeField] private ThrowingObjectBase _throwingObject;
 
         public float ThrowingSpeed
         {
             get => throwingSpeed;
-            private set => throwingSpeed = value;
+            private set => throwingSpeed.Value = value;
         }
 
         public float Accuracy
         {
             get => _accuracy;
-            private set => _accuracy = value;
+            private set => _accuracy.Value = value;
         }
 
         public int   ThrowingCount
         {
             get => throwingCount;
-            private set => throwingCount = value;
+            private set => throwingCount.Value = value;
         }
 
         public float ThrowingInterval
         {
             get => throwingInterval;
-            private set => throwingInterval = value;
+            private set => throwingInterval.Value = value;
         }
 
         public ThrowingObjectBase ThrowingObject => _throwingObject;
@@ -55,10 +56,10 @@ namespace Gameplay.GameUnit.FortificationUnit
 
         #endregion
 
-        [SerializeField] private int   attack;
-        [SerializeField] private float attackRange;
-        [SerializeField] private float attackInterval;
-        [SerializeField] private float findEnemyRange;
+        [SerializeField] private IntBuffableValue   attack = new IntBuffableValue();
+        [SerializeField] private FloatBuffableValue attackRange = new FloatBuffableValue();
+        [SerializeField] private FloatBuffableValue attackInterval = new FloatBuffableValue();
+        [SerializeField] private FloatBuffableValue findEnemyRange= new FloatBuffableValue();
 
         public int   Attack         => attack;
         public float AttackRange    => attackRange;
@@ -244,6 +245,10 @@ namespace Gameplay.GameUnit.FortificationUnit
         {
             base.Start();
             _miscParent = BattleGameManager.BattleGameManagerInstance.miscParent;
+            DeathEvent.AddListener((a =>
+                                    {
+                                        BattleGameManager.BattleGameManagerInstance.customPathFinding.Refresh();
+                                    }));
         }
 
 

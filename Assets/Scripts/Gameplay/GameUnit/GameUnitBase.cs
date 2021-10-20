@@ -12,8 +12,8 @@ namespace Gameplay.GameUnit
         [SerializeField] private Road  _unitRoad;
         protected                  float _unitValue = float.MinValue;
 
-        protected PlayerBase UnitSide  { get; private set; }
-        protected PlayerBase EnemySide { get; private set; }
+        protected PlayerBase UnitSide  { get; private protected set; }
+        protected PlayerBase EnemySide { get; private protected set; }
 
         public Team UnitTeam
         {

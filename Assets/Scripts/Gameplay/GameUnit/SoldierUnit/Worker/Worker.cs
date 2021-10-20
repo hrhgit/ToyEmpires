@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using Gameplay.Buff;
 using Gameplay.Player;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,9 +11,9 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
     public class Worker : SoldierUnitBase,IProduceable
     {
         // 基本能力值
-        public int[]   maxLoad        = new int[3];
-        public float[] workCostTime   = new float[3];
-        public float[] unloadCostTime = new float[3];
+        public IntBuffableValue[]   maxLoad        = new IntBuffableValue[3]{new IntBuffableValue(),new IntBuffableValue(),new IntBuffableValue()};
+        public FloatBuffableValue[] workCostTime   = new FloatBuffableValue[3]{new FloatBuffableValue(),new FloatBuffableValue(),new FloatBuffableValue()};
+        public FloatBuffableValue[] unloadCostTime = new FloatBuffableValue[3]{new FloatBuffableValue(),new FloatBuffableValue(),new FloatBuffableValue()};
         
         public event WorkerFunc WorkerLoadDoneFunc;
         public event WorkerFunc WorkerBackHomeFunc;
@@ -32,14 +33,14 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
         private                  bool         _isWorking   = false;
         private                  bool         _isLoading   = false;
         
-        [SerializeField] private int _costTime;
-        [SerializeField] private int _costFood;
-        [SerializeField] private int _costWood;
-        [SerializeField] private int _costGold;
-        [SerializeField] private int _costPopulation = 1;
-        [SerializeField] private int _maxReserveCount;
+        [SerializeField] private FloatBuffableValue _costTime        = new FloatBuffableValue();
+        [SerializeField] private IntBuffableValue   _costFood        = new IntBuffableValue();
+        [SerializeField] private IntBuffableValue   _costWood        = new IntBuffableValue();
+        [SerializeField] private IntBuffableValue   _costGold        = new IntBuffableValue();
+        [SerializeField] private IntBuffableValue   _costPopulation  = new IntBuffableValue(1);
+        [SerializeField] private IntBuffableValue   _maxReserveCount = new IntBuffableValue();
 
-        public int CostTime => _costTime;
+        public float CostTime => _costTime;
 
         public int CostFood => _costFood;
 

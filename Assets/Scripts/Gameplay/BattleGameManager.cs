@@ -1,5 +1,6 @@
 using System;
 using Gameplay.Player;
+using PathFindingPlus;
 using UnityEngine;
 
 namespace Gameplay
@@ -9,12 +10,15 @@ namespace Gameplay
         public static BattleGameManager BattleGameManagerInstance { get; private set; }
 
         // Players
-        public PlayerBase bluePlayer;
-        public PlayerBase redPlayer;
-        public Team       userSide;
-        public PlayerBase userPlayer;
-        public PlayerBase userEnemyPlayer;
-        public Transform  miscParent;
+        public PlayerBase        bluePlayer;
+        public PlayerBase        redPlayer;
+        public Team              userSide;
+        public PlayerBase        userPlayer;
+        public PlayerBase        userEnemyPlayer;
+        public Transform         miscParent;
+        public CustomPathFinding customPathFinding;
+
+        public Camera uiCamera;
 
 
         private void Awake()

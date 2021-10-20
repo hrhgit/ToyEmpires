@@ -1,8 +1,9 @@
 using System;
+using Gameplay.Buff;
 using Gameplay.GameUnit.SoldierUnit.CombatUnit;
 using Gameplay.Player;
 using Rendering;
-using UnityEngine;
+using UnityEngine; 
 using UnityEngine.Events;
 
 namespace Gameplay.GameUnit.SoldierUnit
@@ -25,6 +26,7 @@ namespace Gameplay.GameUnit.SoldierUnit
         protected virtual void Awake()
         {
             this.UnitMover = this.GetComponent<GameUnitMover>();
+            this._curHp    = new IntBuffableValue(0);
         }
 
         protected override void Start()
@@ -55,35 +57,43 @@ namespace Gameplay.GameUnit.SoldierUnit
 
         #region 移动
 
-        public                   GameUnitMover UnitMover { get; private set; }
-        [SerializeField] private float         maxSpeed;
-        public                   float         MaxSpeed    => maxSpeed;
-        public                   bool          AtEnemyHome { get; protected set; } = false;
+        public                   GameUnitMover      UnitMover { get; private set; }
+        [SerializeField] private FloatBuffableValue maxSpeed = new FloatBuffableValue();
+        public                   float              MaxSpeed    => maxSpeed;
+        public                   bool               AtEnemyHome { get; protected set; } = false;
 
         #endregion
 
         #region 生产
-
+        [SerializeField] private IntBuffableValue productivity = new IntBuffableValue();
+        public                   int Productivity
+        {
+            get => productivity;
+            private set => productivity.Value = value;
+        }
 
         #endregion
 
         #region 受击
 
-        [SerializeField] protected int                    defence;
-        [SerializeField] private   int                    _maxHp;
-        private                    int                    _curHp;
+        [SerializeField] protected IntBuffableValue       defence = new IntBuffableValue();
+        [SerializeField] private   IntBuffableValue       _maxHp = new IntBuffableValue();
+        private                    IntBuffableValue       _curHp = new IntBuffableValue();
         private                    UnityEvent<IDefenable> _deathEvent;
 
 
-        public int MaxHp => _maxHp;
+        public int MaxHp => _maxHp.Value;
 
         public int CurHp
         {
-            get => _curHp;
+            get
+            {
+                return _curHp.Value;
+            }
             private set
             {
-                _curHp = value;
-                if (_curHp <= 0)
+                _curHp.Value =   value;
+                if (_curHp.Value <= 0)
                 {
                     // _curHp = 0;
                     IsDeath = true;
@@ -96,7 +106,7 @@ namespace Gameplay.GameUnit.SoldierUnit
 
         public bool IsDeath { get; private set; } = false;
 
-        public int Defence => defence;
+        public int Defence => defence.Value;
 
         public UnityEvent<IDefenable> DeathEvent
         {

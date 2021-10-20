@@ -1,3 +1,4 @@
+using Gameplay.Buff;
 using Gameplay.GameUnit.SoldierUnit.CombatUnit;
 using Gameplay.Player;
 using UnityEngine;
@@ -7,17 +8,20 @@ namespace Gameplay.GameUnit
 {
     public class PlayerHomeUnit : GameUnitBase,IDefenable
     {
-        public  PlayerBase playerBase;
-        private int        _curHp;
-        public  int        MaxHp { get; private set; }
+        public                   PlayerBase       playerBase;
+        private                  IntBuffableValue _curHp   = new IntBuffableValue();
+        [SerializeField] private IntBuffableValue _maxHp   = new IntBuffableValue();
+        [SerializeField] private IntBuffableValue _defence = new IntBuffableValue();
+
+        public int MaxHp => _maxHp.Value;
 
         public int CurHp
         {
-            get => _curHp;
+            get => _curHp.Value;
             private set
             {
-                _curHp = value;
-                if (_curHp <= 0)
+                _curHp.Value = value;
+                if (_curHp.Value <= 0)
                 {
                     IsDeath = true;
                     Destroy(this.gameObject);
@@ -28,7 +32,8 @@ namespace Gameplay.GameUnit
 
         public bool IsDeath { get; private set; } = false;
 
-        public int                      Defence { get; private set; }
+        public int Defence => _defence.Value;
+
         public event AttackEventHandler BeAttackedEvent;
         public void                     BeAttacked(IAttackable attacker)
         {
@@ -41,9 +46,7 @@ namespace Gameplay.GameUnit
         protected override void Start()
         {
             base.Start();
-            this.CurHp   = playerBase.maxHp;
-            this.MaxHp   = playerBase.maxHp;
-            this.Defence = playerBase.defence;
+            this.CurHp   = this.MaxHp;
         }
     }
 }

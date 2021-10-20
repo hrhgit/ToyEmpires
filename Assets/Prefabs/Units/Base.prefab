@@ -46,9 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db7dc458ed9745b49a3447b197b87418, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  unitID: 0
   _unitTeam: 0
   _unitRoad: 1
   playerBase: {fileID: 0}
+  _maxHp:
+    _value: 1000
+  _defence:
+    _value: 0
 --- !u!54 &2844178842317086526
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -175,7 +180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4121117100874780649, guid: 3ca08c3cc6606c24b9bcf61f9cbe9833, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.412
+      value: 0.475
       objectReference: {fileID: 0}
     - target: {fileID: 4121117100874780649, guid: 3ca08c3cc6606c24b9bcf61f9cbe9833, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
