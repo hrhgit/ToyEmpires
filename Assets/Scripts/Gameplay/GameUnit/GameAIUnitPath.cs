@@ -1,17 +1,16 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Pathfinding;
-using UnityEngine;
 using UnityEngine.Events;
 
-public class GameAIUnitPath : AIPath
+namespace Gameplay.GameUnit
 {
-    public             UnityEvent OnTargetReachedEvent = new UnityEvent();
-
-    public override void  OnTargetReached()
+    public class GameAIUnitPath : AIPath
     {
-        base.OnTargetReached();
-        OnTargetReachedEvent.Invoke();
+        public             UnityEvent OnTargetReachedEvent = new UnityEvent();
+
+        public override void  OnTargetReached()
+        {
+            base.OnTargetReached();
+            OnTargetReachedEvent.Invoke();
+        }
     }
 }

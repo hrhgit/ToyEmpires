@@ -78,8 +78,8 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
             try
             {
 
-                bool       isFortification = (_curEnemy as FortificationUnitBase) != null;
-                bool       isRangeAttacker = (attacker as IRangeAttackable)       != null;
+                bool       isFortification = _curEnemy is FortificationUnitBase;
+                bool       isRangeAttacker = attacker is IRangeAttackable;
                 IDefenable defenableUnit   = attacker as IDefenable;
                 if (!isRangeAttacker && defenableUnit.CurHp < this._curEnemy.CurHp)
                 {
@@ -106,7 +106,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
 
                 try
                 {
-                    this.AtEnemyHome = (u as PlayerHomeUnit) != null || (u as TowerBase) != null;
+                    this.AtEnemyHome = (u is PlayerHomeUnit) || (u is TowerBase);
                 }
                 catch (Exception e)
                 {
@@ -135,9 +135,9 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
                 if(a.IsDeath || ((GameUnitBase)a).UnitTeam == this.UnitTeam)
                     continue;
 
-                bool isSoldier       = (((GameUnitBase)a) as SoldierUnitBase) != null;
-                bool isFortification = (((GameUnitBase)a) as FortificationUnitBase) != null;
-                bool isHome = (((GameUnitBase)a) as PlayerHomeUnit) != null;
+                bool isSoldier       = a is SoldierUnitBase;
+                bool isFortification = a is FortificationUnitBase;
+                bool isHome = a is PlayerHomeUnit;
 
                 if (isSoldier)
                 {
@@ -147,7 +147,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
 
                 if (isFortification)
                 {
-                    bool isTower = (((GameUnitBase)a) as TowerBase) != null;
+                    bool isTower = a is TowerBase;
                     if (!isTower && ((GameUnitBase)a).UnitRoad != this.UnitRoad)
                     {
                         continue;

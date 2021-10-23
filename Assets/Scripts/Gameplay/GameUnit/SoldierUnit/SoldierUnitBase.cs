@@ -9,7 +9,7 @@ using UnityEngine.Events;
 namespace Gameplay.GameUnit.SoldierUnit
 {
     public delegate void GameUnitEvent(SoldierUnitBase soldierUnitBase, PlayerBase playerBase,UnitStatus status);
-    public abstract class  SoldierUnitBase : GameUnitBase, IDefenable, IMovable
+    public abstract class  SoldierUnitBase : GameUnitBase, IDefenable, IMovable, IBuffable<UnitBuffContainer>
     {
         public override float UnitValue
         {
@@ -122,6 +122,7 @@ namespace Gameplay.GameUnit.SoldierUnit
         }
 
 
+
         public event AttackEventHandler BeAttackedEvent;
         public virtual void BeAttacked(IAttackable attacker)
         {
@@ -129,6 +130,17 @@ namespace Gameplay.GameUnit.SoldierUnit
             BeAttackedEvent?.Invoke(attacker, this);
         }
 
+
+        #endregion
+
+        #region Buff
+
+        [SerializeField] private UnitBuffContainer _buffContainer;
+        public UnitBuffContainer BuffContainer
+        {
+            get => _buffContainer;
+            set => _buffContainer = value;
+        }
 
         #endregion
 

@@ -179,7 +179,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
 
             try
             {
-                this.AtEnemyHome = (u as PlayerHomeUnit) != null || (u as TowerBase) != null;
+                this.AtEnemyHome = (u is PlayerHomeUnit) || (u is TowerBase);
             }
             catch (Exception e)
             {
@@ -242,7 +242,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
                 IDefenable a = _visualFieldEnemyList[i];
                 if((a.IsDeath) || ((GameUnitBase)a).UnitTeam == this.UnitTeam)
                     continue;
-                if(a as PlayerHomeUnit != null && _visualFieldEnemyList.Count > 1)
+                if(a is PlayerHomeUnit && _visualFieldEnemyList.Count > 1)
                     continue;
                 float d = Vector3.Distance(this.transform.position, ((GameUnitBase)a).transform.position);
                 minDist     = d < minDist ? d : minDist;

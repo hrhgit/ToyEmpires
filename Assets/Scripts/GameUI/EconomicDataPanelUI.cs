@@ -10,6 +10,7 @@ namespace GameUI
         public DataLineUI foodUI;
         public DataLineUI woodUI;
         public DataLineUI goldUI;
+        public DataLineUI productivityUI;
         public DataLineUI populationUI;
 
         private PlayerBase _player;
@@ -21,10 +22,11 @@ namespace GameUI
 
         private void FixedUpdate()
         {
-            foodUI.content       = _player.Food.ToString();
-            woodUI.content       = _player.Wood.ToString();
-            goldUI.content       = _player.Gold.ToString();
-            populationUI.content = _player.CurUnitPopulation + "/" + _player.maxBattleUnitCount;
+            foodUI.content         = _player.Food.ToString();
+            woodUI.content         = _player.Wood.ToString();
+            goldUI.content         = _player.Gold.ToString();
+            productivityUI.content = _player.Productivity.ToString();
+            populationUI.content   = _player.CurUnitPopulation + "/" + _player.maxBattleUnitCount;
         }
     }
 }

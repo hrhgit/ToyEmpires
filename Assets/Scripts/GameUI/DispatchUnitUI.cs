@@ -1,18 +1,18 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Gameplay;
 using Gameplay.Player;
 using UnityEngine;
 
-public class DispatchUnitUI : MonoBehaviour
+namespace GameUI
 {
-    public int[,] unitIndexCountArr;
-
-    private PlayerBase _player;
-
-    private void Start()
+    public class DispatchUnitUI : MonoBehaviour
     {
-        _player = BattleGameManager.BattleGameManagerInstance.userPlayer;
+        public int[,] unitIndexCountArr;
+
+        private PlayerBase _player;
+
+        private void Start()
+        {
+            _player = BattleGameManager.BattleGameManagerInstance.userPlayer;
+        }
     }
 }

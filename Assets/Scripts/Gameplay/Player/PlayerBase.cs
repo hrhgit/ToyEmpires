@@ -4,18 +4,21 @@ using System.Collections.Generic;
 using System.Linq;
 using Gameplay.Buff;
 using Gameplay.GameUnit;
+using Gameplay.GameUnit.FortificationUnit;
 using Gameplay.GameUnit.SoldierUnit;
 using Gameplay.GameUnit.SoldierUnit.Worker;
+using Gameplay.Policy;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 namespace Gameplay.Player
 {
-    public class PlayerBase : MonoBehaviour
+    public class PlayerBase : MonoBehaviour, IBuffable<PlayerBuffContainer>
     {
         public Team playerTeam;
 
+        [Header("特殊点")]
         #region 坐标
 
         public PlayerHomeUnit homeUnit;
@@ -28,6 +31,7 @@ namespace Gameplay.Player
 
         #endregion
 
+        [Header("经济")]
         #region 经济
 
         //Economics
@@ -102,12 +106,17 @@ namespace Gameplay.Player
 
         #endregion
 
+        #region 单位
+        
+        private readonly List<FortificationUnitBase> _instanceFortificationList = new List<FortificationUnitBase>();
+
+        [Header("工人")]
         #region 工人
         //Workers
-        public int          maxWorkerCount;
-        public int          initWorkerCount;
+        public int maxWorkerCount;
+        public int             initWorkerCount;
         public SoldierUnitBase workerPrefab;
-        public UnityEvent   onWorkerProduce = new UnityEvent();
+        public UnityEvent      onWorkerProduce = new UnityEvent();
         
         public readonly  int[]        ResourceWorkerCount = new int[]{0, 0, 0};
         public           UnitStatus   workerStatus;
@@ -119,7 +128,7 @@ namespace Gameplay.Player
             if(isAdd)
             {
                 // 有空闲工人
-                if(workerStatus.freeUnitCount> 0)
+                if(workerStatus.freeUnitCount > 0)
                 {
                     workerStatus.freeUnitCount--;
                     ResourceWorkerCount[(int) resourceType]++;
@@ -151,12 +160,12 @@ namespace Gameplay.Player
         private void AddWorker(ResourceType resourceType)
         {
             SoldierUnitBase workerUnit = Instantiate(this.workerPrefab, resourceType switch
-                                                                     {
-                                                                         ResourceType.Food => topPos,
-                                                                         ResourceType.Gold => midPos,
-                                                                         ResourceType.Wood => botPos,
-                                                                         _                 => throw new ArgumentOutOfRangeException(nameof(resourceType), resourceType, null)
-                                                                     });
+                                                                        {
+                                                                            ResourceType.Food => topPos,
+                                                                            ResourceType.Gold => midPos,
+                                                                            ResourceType.Wood => botPos,
+                                                                            _                 => throw new ArgumentOutOfRangeException(nameof(resourceType), resourceType, null)
+                                                                        });
             workerUnit.UnitTeam = this.playerTeam;
             workerUnit.UnitRoad = resourceType switch
                                   {
@@ -203,31 +212,33 @@ namespace Gameplay.Player
 
         private void ProduceWorker()
         {
-            ((IProduceable)workerPrefab).Produce(workerPrefab,this,workerStatus);
+            ((IProduceable)workerPrefab).Produce(workerPrefab, this, workerStatus);
         }
 
         private void InitWorker()
         {
-            workerStatus.freeUnitCount    = this.initWorkerCount;
-            workerStatus.totalUnitCount   = this.initWorkerCount;
+            workerStatus.freeUnitCount  = this.initWorkerCount;
+            workerStatus.totalUnitCount = this.initWorkerCount;
         }
         
 
         #endregion
 
+        [Header("战斗")]
         #region 战斗单位
 
         #region 生产
 
-        public int                                                       maxBattleUnitCount;
+        public int maxBattleUnitCount;
         public List<SoldierUnitBase>                                     unitPrefabList         = new List<SoldierUnitBase>();
         public List<UnityEvent<SoldierUnitBase, PlayerBase, UnitStatus>> onUnitProduceEventList = new List<UnityEvent<SoldierUnitBase, PlayerBase, UnitStatus>>();
 
-        private readonly List<GameUnitBase> _instanceUnitsList = new List<GameUnitBase>();
+        private readonly List<SoldierUnitBase> _instanceUnitsList = new List<SoldierUnitBase>();
 
         public List<UnitStatus> UnitStatusList { get; private set; } = new List<UnitStatus>();
 
         public int CurUnitPopulation { get; private set; } = 0;
+
 
 
         private void InitUnitList()
@@ -242,7 +253,7 @@ namespace Gameplay.Player
             }
         }
 
-        public virtual void InvokeUnitProduce(SoldierUnitBase gameunitbase,PlayerBase playerbase, UnitStatus status)
+        public virtual void InvokeUnitProduce(SoldierUnitBase gameunitbase, PlayerBase playerbase, UnitStatus status)
         {
             int index = unitPrefabList.IndexOf(gameunitbase);
             onUnitProduceEventList[index].Invoke(gameunitbase, playerbase, status);
@@ -254,7 +265,7 @@ namespace Gameplay.Player
                 return;
             for (var i = 0; i < unitPrefabList.Count; i++)
             {
-                ((IProduceable)unitPrefabList[i]).Produce(unitPrefabList[i],  this, UnitStatusList[i]);
+                ((IProduceable)unitPrefabList[i]).Produce(unitPrefabList[i], this, UnitStatusList[i]);
             }
         }
 
@@ -263,22 +274,22 @@ namespace Gameplay.Player
         #region 派遣
 
         private static  float _dispatchOffset = .02f;
-        public readonly int[] roadUnitsCount        = new int[3];
+        public readonly int[] roadUnitsCount  = new int[3];
 
-        public void DispatchUnits(SoldierUnitBase unit, int count, Road road,UnitStatus status)
+        public void DispatchUnits(SoldierUnitBase unit, int count, Road road, UnitStatus status)
         {
             Transform parent = road switch
                                {
-                                   Road.Top     => this.topPos,
+                                   Road.Top    => this.topPos,
                                    Road.Mid    => this.midPos,
                                    Road.Bottom => this.botPos,
                                    _           => throw new ArgumentOutOfRangeException(nameof(road), road, null)
                                };
             for (int i = 0; i < count; i++)
             {
-                float   angle    = Random.Range(0f, 2 *Mathf.PI);
-                float   r        = _dispatchOffset * Random.Range(0f, 1f);
-                Vector3 exactPos = parent.position + new Vector3(r * Mathf.Cos(angle), 0, r * Mathf.Sin(angle));
+                float           angle        = Random.Range(0f, 2 *Mathf.PI);
+                float           r            = _dispatchOffset * Random.Range(0f, 1f);
+                Vector3         exactPos     = parent.position + new Vector3(r * Mathf.Cos(angle), 0, r * Mathf.Sin(angle));
                 SoldierUnitBase unitInstance = Instantiate(unit, exactPos, Quaternion.Euler(0, 0, 0), parent);
                 unitInstance.UnitTeam = this.playerTeam;
                 unitInstance.UnitRoad = road;
@@ -287,14 +298,14 @@ namespace Gameplay.Player
                 {
                     IDefenable defenable = (IDefenable)unitInstance;
                     defenable.DeathEvent.AddListener((u =>
-                                                       {
-                                                           this.CurUnitPopulation -= ((IProduceable)unit).CostPopulation;
-                                                           UnitStatus s =UnitStatusList.Find((s => s.unitID == unitInstance.unitID));
-                                                           s.curUnitCount--;
-                                                           s.totalUnitCount--;
-                                                           this.roadUnitsCount[(int)road]++;
-                                                           this._instanceUnitsList.Remove(u as GameUnitBase);
-                                                       }));
+                                                      {
+                                                          this.CurUnitPopulation -= ((IProduceable)unit).CostPopulation;
+                                                          UnitStatus s =UnitStatusList.Find((s => s.unitID == unitInstance.unitID));
+                                                          s.curUnitCount--;
+                                                          s.totalUnitCount--;
+                                                          this.roadUnitsCount[(int)road]++;
+                                                          this._instanceUnitsList.Remove((SoldierUnitBase)u);
+                                                      }));
                 }
                 catch (Exception e)
                 {
@@ -309,12 +320,78 @@ namespace Gameplay.Player
             }
         }
         
-        public void DispatchUnits(int index, int count,Road road)
+        public void DispatchUnits(int index, int count, Road road)
         {
-            DispatchUnits(unitPrefabList[index],count,road,UnitStatusList[index]);
+            DispatchUnits(unitPrefabList[index], count, road, UnitStatusList[index]);
         }
 
         #endregion
+
+        #endregion
+
+        #endregion
+
+        [Header("Buff")]
+        #region Buff
+
+        private PlayerBuffContainer _buffContainer;
+        public PlayerBuffContainer BuffContainer
+        {
+            get => _buffContainer;
+            set => _buffContainer = value;
+        }
+
+        #endregion
+        
+        [Header("政策")]
+        #region 政策
+
+        public                   PolicyManager    playerPolicyManager;
+        [SerializeField] private int              economyPolicyCapacity;
+        [SerializeField] private int              militaryPolicyCapacity;
+        [SerializeField] private int              specialPolicyCapacity;
+
+        private List<PolicyBase> _activatedPolicies = new List<PolicyBase>();
+        public int EconomyPolicyCapacity
+        {
+            get => economyPolicyCapacity;
+            set => economyPolicyCapacity = value;
+        }
+
+        public int MilitaryPolicyCapacity
+        {
+            get => militaryPolicyCapacity;
+            set => militaryPolicyCapacity = value;
+        }
+
+        public int SpecialPolicyCapacity
+        {
+            get => specialPolicyCapacity;
+            set => specialPolicyCapacity = value;
+        }
+
+
+        public void ActivatePolicy(PolicyBase policyBase)
+        {
+            if (!_activatedPolicies.Contains(policyBase))
+            {
+                _activatedPolicies.Add(policyBase);
+                policyBase.playerBuffs.ForEach((buff =>
+                                                {
+                                                    BuffContainer.AddBuff(buff);
+                                                }));
+                policyBase.unitBuffs.ForEach((buff =>
+                                              {
+                                                  this._instanceWorkersList.ForEach((worker => worker.BuffContainer.AddBuff(buff)));
+                                                  this._instanceUnitsList.ForEach((unit => unit.BuffContainer.AddBuff(buff)));
+                                              }));
+            }
+        }
+
+        public void DeactivatePolicy(PolicyBase policyBase)
+        {
+            
+        }
 
         #endregion
 
