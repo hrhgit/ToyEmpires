@@ -146,6 +146,7 @@ MonoBehaviour:
     _value: 5
   _maxHp:
     _value: 50
+  _buffContainer: {fileID: 5552848379286929172}
   maxLoad:
   - _value: 1
   - _value: 2
@@ -237,6 +238,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffList: []
   unit: {fileID: 7910375944266663585}
+  isUnitLimited: 0
+  availableUnitID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &7910375945188750744
 GameObject:
   m_ObjectHideFlags: 0

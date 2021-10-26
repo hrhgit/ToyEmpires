@@ -99,6 +99,7 @@ MonoBehaviour:
     _value: 500
   _defence:
     _value: 5
+  _buffContainer: {fileID: 585082238833719370}
 --- !u!65 &4479257807664989732
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -110,8 +111,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.24572966, y: 0.074187525, z: 0.066797584}
-  m_Center: {x: 0.0005941838, y: 0.0059339292, z: -0.0034170002}
+  m_Size: {x: 0.24572966, y: 0.098357394, z: 0.066797584}
+  m_Center: {x: 0.0005941838, y: 0.018018864, z: -0.0034170002}
 --- !u!114 &585082238833719370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,6 +127,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffList: []
   unit: {fileID: 1834379543501700851}
+  isUnitLimited: 0
+  availableUnitID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &5118076604235564488
 GameObject:
   m_ObjectHideFlags: 0

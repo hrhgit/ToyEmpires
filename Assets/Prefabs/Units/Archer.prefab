@@ -170,15 +170,16 @@ MonoBehaviour:
   _unitTeam: 0
   _unitRoad: 0
   maxSpeed:
-    _value: 0.1
+    _value: 0.5
   productivity:
     _value: 1
   defence:
     _value: 5
   _maxHp:
     _value: 80
+  _buffContainer: {fileID: -53160501156610556}
   _costTime:
-    _value: 8
+    _value: 1
   _costFood:
     _value: 3
   _costWood:
@@ -191,7 +192,7 @@ MonoBehaviour:
     _value: 3
   throwingPoint: {fileID: 3244296224039238681}
   throwingSpeed:
-    _value: 1
+    _value: 0.8
   throwingCount:
     _value: 1
   throwingInterval:
@@ -202,11 +203,11 @@ MonoBehaviour:
   attack:
     _value: 10
   attackRange:
-    _value: 0.2
+    _value: 0.3
   attackInterval:
     _value: 2
   findEnemyRange:
-    _value: 0.2
+    _value: 0.3
 --- !u!114 &8576199978742820415
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -243,6 +244,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffList: []
   unit: {fileID: 4797812589120945999}
+  isUnitLimited: 0
+  availableUnitID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &2088564399442518381
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ namespace Gameplay
         public PlayerBase        userEnemyPlayer;
         public Transform         miscParent;
         public CustomPathFinding customPathFinding;
+        public Transform         tempParent;
 
         public Camera uiCamera;
 

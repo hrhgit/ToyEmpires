@@ -212,9 +212,10 @@ MonoBehaviour:
   productivity:
     _value: 1
   defence:
-    _value: 10
+    _value: 5
   _maxHp:
     _value: 100
+  _buffContainer: {fileID: 4927135255889575692}
   _costTime:
     _value: 3
   _costFood:
@@ -230,7 +231,7 @@ MonoBehaviour:
   attack:
     _value: 10
   attackRange:
-    _value: 0.03
+    _value: 0.1
   attackInterval:
     _value: 1
   findEnemyRange:
@@ -301,6 +302,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffList: []
   unit: {fileID: -1881621187418125474}
+  isUnitLimited: 0
+  availableUnitID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &5169091243970511671
 GameObject:
   m_ObjectHideFlags: 0

@@ -151,20 +151,28 @@ namespace Gameplay.GameUnit.FortificationUnit
 
         protected float GetShootAngle(Vector3 targetPos)
         {
-            float v0 = this.ThrowingSpeed;
-            // float h  = Mathf.Abs(this.throwingPoint.position.y - targetPos.y);
-            float h  = 0;
-            float ud = Mathf.Sqrt(v0 * v0 + 2 * Physics.gravity.magnitude * h);
-            return Mathf.Atan(v0 / ud) * Mathf.Rad2Deg;
+            float maxAngle = 45 * Mathf.Deg2Rad;
+            float vMax     = this.ThrowingSpeed;
+            float h        = Mathf.Abs(this.throwingPoint.position.y - targetPos.y);
+            float s        = Vector3.Distance(this.throwingPoint.position, targetPos);
+            // float h  = 0;
+            float ud    = Mathf.Sqrt(vMax  * vMax + 2 * Physics.gravity.magnitude * h);
+            float angle =  Mathf.Atan(vMax / ud)                               * Mathf.Rad2Deg;
+            return Mathf.LerpAngle(maxAngle, 0, Mathf.Max(0, angle - maxAngle) / 90);
+        }
+
+        protected float GetShootAngle(Vector3 targetPos, float accuracy, float heightOffset)
+        {
+            float maxAngle = 45 * Mathf.Deg2Rad;
+            float vMax     = this.ThrowingSpeed;
+            float s        = Vector3.Distance(this.throwingPoint.position, targetPos) + Random.Range(0.0f, 0.1f) * accuracy;
+            float angle    = Mathf.Asin(s * Physics.gravity.magnitude / (vMax * vMax))                           / 2 * Mathf.Rad2Deg;
+            return Mathf.LerpAngle(maxAngle, 0, Mathf.Max(0, angle - maxAngle)                                       / 90);
         }
         
         protected float GetShootAngle(Vector3 targetPos, float accuracy)
         {
-            float v0       = this.ThrowingSpeed;
-            float h  = Mathf.Abs(this.throwingPoint.position.y - targetPos.y);
-            // float h  = 0;
-            float ud = Mathf.Sqrt(v0 * v0 + 2 * Physics.gravity.magnitude * h);
-            return Mathf.Atan(v0 / ud) * Mathf.Rad2Deg + Random.Range(accuracy-1,1-accuracy) * 30;
+            return GetShootAngle(targetPos, accuracy, 0);
         }
 
         public virtual IDefenable FindAEnemy()

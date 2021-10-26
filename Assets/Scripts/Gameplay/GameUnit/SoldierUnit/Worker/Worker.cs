@@ -10,6 +10,7 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
     public delegate void WorkerFunc(Worker worker);
     public class Worker : SoldierUnitBase,IProduceable
     {
+        [Header("生工作")]
         // 基本能力值
         public IntBuffableValue[]   maxLoad        = new IntBuffableValue[3]{new IntBuffableValue(),new IntBuffableValue(),new IntBuffableValue()};
         public FloatBuffableValue[] workCostTime   = new FloatBuffableValue[3]{new FloatBuffableValue(),new FloatBuffableValue(),new FloatBuffableValue()};
@@ -33,6 +34,7 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
         private                  bool         _isWorking   = false;
         private                  bool         _isLoading   = false;
         
+        [Header("生产")]
         [SerializeField] private FloatBuffableValue _costTime        = new FloatBuffableValue();
         [SerializeField] private IntBuffableValue   _costFood        = new IntBuffableValue();
         [SerializeField] private IntBuffableValue   _costWood        = new IntBuffableValue();

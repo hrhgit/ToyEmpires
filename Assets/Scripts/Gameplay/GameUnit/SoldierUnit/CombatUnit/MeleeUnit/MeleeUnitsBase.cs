@@ -11,7 +11,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
     public class MeleeUnitsBase : SoldierUnitBase, IProduceable, IAttackable 
     {
         #region 生产
-
+        [Header("生产")]
         [SerializeField] private FloatBuffableValue _costTime        = new FloatBuffableValue();
         [SerializeField] private IntBuffableValue   _costFood        = new IntBuffableValue();
         [SerializeField] private IntBuffableValue   _costWood        = new IntBuffableValue();
@@ -51,6 +51,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.MeleeUnit
         #endregion
         
         #region 战斗
+        [Header("战斗")]
         [SerializeField] private IntBuffableValue   attack         = new IntBuffableValue();
         [SerializeField] private FloatBuffableValue attackRange    = new FloatBuffableValue();
         [SerializeField] private FloatBuffableValue attackInterval = new FloatBuffableValue();

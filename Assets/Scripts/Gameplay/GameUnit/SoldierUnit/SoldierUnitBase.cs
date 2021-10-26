@@ -56,15 +56,16 @@ namespace Gameplay.GameUnit.SoldierUnit
 
 
         #region 移动
-
-        public                   GameUnitMover      UnitMover { get; private set; }
+        [Header("移动")]
         [SerializeField] private FloatBuffableValue maxSpeed = new FloatBuffableValue();
+        public                   GameUnitMover      UnitMover { get; private set; }
         public                   float              MaxSpeed    => maxSpeed;
         public                   bool               AtEnemyHome { get; protected set; } = false;
 
         #endregion
 
         #region 生产
+        [Header("生产力")]
         [SerializeField] private IntBuffableValue productivity = new IntBuffableValue();
         public                   int Productivity
         {
@@ -75,7 +76,7 @@ namespace Gameplay.GameUnit.SoldierUnit
         #endregion
 
         #region 受击
-
+        [Header("防御")]
         [SerializeField] protected IntBuffableValue       defence = new IntBuffableValue();
         [SerializeField] private   IntBuffableValue       _maxHp = new IntBuffableValue();
         private                    IntBuffableValue       _curHp = new IntBuffableValue();
@@ -134,7 +135,7 @@ namespace Gameplay.GameUnit.SoldierUnit
         #endregion
 
         #region Buff
-
+        [Header("Buff")]
         [SerializeField] private UnitBuffContainer _buffContainer;
         public UnitBuffContainer BuffContainer
         {

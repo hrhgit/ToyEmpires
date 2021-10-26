@@ -187,6 +187,7 @@ namespace Gameplay.Player
                                                }));
             
             _activeResourceWorkerCount[(int) resourceType]++;
+            workerUnit.gameObject.SetActive(true);
         }
 
         private void WorkerLoadDone(Worker worker)
@@ -217,6 +218,8 @@ namespace Gameplay.Player
 
         private void InitWorker()
         {
+            workerPrefab                = Instantiate(workerPrefab,BattleGameManager.BattleGameManagerInstance.tempParent);
+            workerPrefab.gameObject.SetActive(false);
             workerStatus.freeUnitCount  = this.initWorkerCount;
             workerStatus.totalUnitCount = this.initWorkerCount;
         }
@@ -243,8 +246,11 @@ namespace Gameplay.Player
 
         private void InitUnitList()
         {
+            
             for (int i = 0; i < unitPrefabList.Count; i++)
             {
+                unitPrefabList[i] = Instantiate(unitPrefabList[i],BattleGameManager.BattleGameManagerInstance.tempParent);
+                unitPrefabList[i].gameObject.SetActive(false);
                 UnitStatusList.Add(new UnitStatus()
                                    {
                                        unitID = unitPrefabList[i].unitID
@@ -317,6 +323,7 @@ namespace Gameplay.Player
                 // status.totalUnitCount++;
                 this.CurUnitPopulation += ((IProduceable)unit).CostPopulation;
                 roadUnitsCount[(int)road]++;
+                unitInstance.gameObject.SetActive(true);
             }
         }
         

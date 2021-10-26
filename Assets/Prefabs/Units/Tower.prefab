@@ -157,6 +157,7 @@ MonoBehaviour:
     _value: 1000
   _defence:
     _value: 10
+  _buffContainer: {fileID: -8975346718664288609}
   throwingPoint: {fileID: 8499634614312162195}
   throwingSpeed:
     _value: 2
@@ -170,11 +171,11 @@ MonoBehaviour:
   attack:
     _value: 40
   attackRange:
-    _value: 0.3
+    _value: 0.4
   attackInterval:
     _value: 1
   findEnemyRange:
-    _value: 0.3
+    _value: 0.4
 --- !u!114 &7642204020470401969
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,6 +228,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buffList: []
   unit: {fileID: 928039150638228790}
+  isUnitLimited: 0
+  availableUnitID: 00000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1 &8563773834300887386
 GameObject:
   m_ObjectHideFlags: 0

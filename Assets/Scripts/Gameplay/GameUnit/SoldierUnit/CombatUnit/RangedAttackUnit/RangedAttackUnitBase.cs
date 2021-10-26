@@ -13,16 +13,14 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
 {
     public class RangedAttackUnitBase : SoldierUnitBase, IProduceable, IRangeAttackable
     {
-
-
         #region 生产
 
-        [SerializeField] private FloatBuffableValue _costTime = new FloatBuffableValue();
-        [SerializeField] private IntBuffableValue   _costFood = new IntBuffableValue();
-        [SerializeField] private IntBuffableValue   _costWood = new IntBuffableValue();
-        [SerializeField] private IntBuffableValue   _costGold = new IntBuffableValue();
-        [SerializeField] private IntBuffableValue   _costPopulation = new IntBuffableValue(1);
-        [SerializeField] private IntBuffableValue   _maxReserveCount = new IntBuffableValue();
+        [Header("生产")] [SerializeField] private FloatBuffableValue _costTime        = new FloatBuffableValue();
+        [SerializeField]                private IntBuffableValue   _costFood        = new IntBuffableValue();
+        [SerializeField]                private IntBuffableValue   _costWood        = new IntBuffableValue();
+        [SerializeField]                private IntBuffableValue   _costGold        = new IntBuffableValue();
+        [SerializeField]                private IntBuffableValue   _costPopulation  = new IntBuffableValue(1);
+        [SerializeField]                private IntBuffableValue   _maxReserveCount = new IntBuffableValue();
 
         public float CostTime => _costTime;
 
@@ -30,7 +28,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
 
         public int CostWood => _costWood;
 
-        public int CostGold       => _costGold;
+        public int CostGold => _costGold;
 
         public int CostPopulation => _costPopulation;
 
@@ -42,7 +40,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
                 return;
             if (status.unitProduceProcess < 1)
             {
-                status.unitProduceProcess += Time.fixedDeltaTime / (((IProduceable)unit).CostTime);
+                status.unitProduceProcess += Time.fixedDeltaTime / ((IProduceable)unit).CostTime;
                 player.InvokeUnitProduce(unit, player, status);
             }
             else
@@ -51,20 +49,22 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
                 status.totalUnitCount++;
                 status.freeUnitCount++;
             }
-
         }
 
         #endregion
-        
+
         #region 战斗
 
+        [Header("战斗")]
+
         #region 射击相关
-        public Transform          throwingPoint;
-        
-        [SerializeField] private FloatBuffableValue              throwingSpeed = new FloatBuffableValue();
-        [SerializeField] private IntBuffableValue                throwingCount = new IntBuffableValue();
-        [SerializeField] private FloatBuffableValue              throwingInterval = new FloatBuffableValue();
-        [SerializeField] private FloatBuffableValue              _accuracy = new FloatBuffableValue();
+
+        public Transform throwingPoint;
+
+        [SerializeField] private FloatBuffableValue throwingSpeed    = new FloatBuffableValue();
+        [SerializeField] private IntBuffableValue   throwingCount    = new IntBuffableValue();
+        [SerializeField] private FloatBuffableValue throwingInterval = new FloatBuffableValue();
+        [SerializeField] private FloatBuffableValue _accuracy        = new FloatBuffableValue();
         [SerializeField] private ThrowingObjectBase _throwingObject;
 
 
@@ -80,7 +80,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
             private set => _accuracy.Value = value;
         }
 
-        public int   ThrowingCount
+        public int ThrowingCount
         {
             get => throwingCount;
             private set => throwingCount.Value = value;
@@ -91,11 +91,11 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
             get => throwingInterval;
             private set => throwingInterval.Value = value;
         }
+
         public ThrowingObjectBase ThrowingObject => _throwingObject;
 
 
         public UnityEvent<IRangeAttackable, IDefenable> ThrowingEvent { get; set; } = new UnityEvent<IRangeAttackable, IDefenable>();
-
 
         #endregion
 
@@ -111,14 +111,13 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
 
         public event AttackEventHandler AttackEvent;
 
-        private static int              _maxEnemyFound        = 10;
-        private        List<IDefenable> _visualFieldEnemyList = new List<IDefenable>();
-        private        IDefenable       _curEnemy             = null;
-        private        UnitVisualField  _unitVisualField;
-        private        bool             _attackEnemyBase = true;
-        private        float            _attackTimer     = 0f;
-        private        Transform        _miscParent;
-
+        private static   int              _maxEnemyFound        = 10;
+        private readonly List<IDefenable> _visualFieldEnemyList = new List<IDefenable>();
+        private          IDefenable       _curEnemy;
+        private          UnitVisualField  _unitVisualField;
+        private          bool             _attackEnemyBase = true;
+        private          float            _attackTimer;
+        private          Transform        _miscParent;
 
 
         public override void BeAttacked(IAttackable attacker)
@@ -126,11 +125,8 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
             base.BeAttacked(attacker);
             try
             {
-                IDefenable defenableUnit = (IDefenable)attacker;
-                if (defenableUnit.CurHp < this._curEnemy.CurHp)
-                {
-                    this._curEnemy = defenableUnit;
-                }
+                var defenableUnit                                    = (IDefenable)attacker;
+                if (defenableUnit.CurHp < _curEnemy.CurHp) _curEnemy = defenableUnit;
             }
             catch (Exception e)
             {
@@ -140,94 +136,99 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
 
         public bool DoAttack(IDefenable attackTarget)
         {
-            GameUnitBase u = (GameUnitBase)attackTarget;
-            if(Vector3.Distance(u.transform.position,this.transform.position) < attackRange)
+            var u = (GameUnitBase)attackTarget;
+            if (Vector3.Distance(u.transform.position, transform.position) < attackRange)
             {
-                this.UnitMover.EnableMove = false;
-                StartCoroutine(this.ThrowObjects(attackTarget));
+                UnitMover.EnableMove = false;
+                StartCoroutine(ThrowObjects(attackTarget));
 
                 AttackEvent?.Invoke(this, attackTarget);
                 return true;
             }
-            else
-            {
-                this.UnitMover.EnableMove = true;
-                this.UnitMover.Target     = u.transform;
-                return false;
-            }
+
+            UnitMover.EnableMove = true;
+            UnitMover.Target     = u.transform;
+            return false;
         }
-        
-        
+
+
         public IEnumerator ThrowObjects(IDefenable attackTarget)
         {
-            GameUnitBase   u               = (GameUnitBase)attackTarget;
-            Transform      targetTransform = ((GameUnitBase)attackTarget).transform;
-            WaitForSeconds wfs             = new WaitForSeconds(ThrowingInterval);
-            for (int i = 0; i < ThrowingCount - 1; i++)
+            var u               = (GameUnitBase)attackTarget;
+            var targetTransform = ((GameUnitBase)attackTarget).transform;
+            var wfs             = new WaitForSeconds(ThrowingInterval);
+            for (var i = 0; i < ThrowingCount - 1; i++)
             {
                 ThrowSingleObject(targetTransform, attackTarget);
-                ThrowingEvent.Invoke(this,attackTarget);
+                ThrowingEvent.Invoke(this, attackTarget);
                 yield return wfs;
             }
-            Debug.Log("Shoot Count:" );
+
+            Debug.Log("Shoot Count:");
             ThrowSingleObject(targetTransform, attackTarget);
             // this.UnitMover.EnableMove = true;
-            if(attackTarget.IsDeath)
-            {
-                SearchEnemy();
-            }
+            if (attackTarget.IsDeath) SearchEnemy();
 
             try
             {
-                this.AtEnemyHome = (u is PlayerHomeUnit) || (u is TowerBase);
+                AtEnemyHome = u is PlayerHomeUnit || u is TowerBase;
             }
             catch (Exception e)
             {
                 // ignored
             }
-
         }
-        
-        private void ThrowSingleObject(Transform target,IDefenable targetUnit = null)
+
+        private void ThrowSingleObject(Transform target, IDefenable targetUnit = null)
         {
-            this.transform.LookAt(target);
-            this.transform.localEulerAngles          = new Vector3(0, this.transform.localEulerAngles.y, 0);
-            throwingPoint.transform.localEulerAngles = new Vector3(0, 0, 0);
-            float angle = GetShootAngle(target.position, Accuracy,.01f);
-            throwingPoint.transform.Rotate(angle,0,0);
-            ThrowingObjectBase throwingObjectInstance = Instantiate(ThrowingObject, throwingPoint.position, throwingPoint.rotation, _miscParent);
-            GameObject         throwingGameObject     = throwingObjectInstance.gameObject;
-            Rigidbody          rigidbody              = throwingGameObject.GetComponent<Rigidbody>();
-            throwingObjectInstance.shooter  = this;
-            throwingObjectInstance.UnitTeam = this.UnitTeam;
-            throwingObjectInstance.UnitRoad = this.UnitRoad;
-            throwingObjectInstance.target   = targetUnit;
-            throwingObjectInstance.ShotSuccessedEvent += (shooter, hitter) =>
-                                                         {
-                                                             hitter.BeAttacked(this);
-                                                         };
-            rigidbody.velocity = throwingObjectInstance.transform.forward * (this.ThrowingSpeed  + Random.Range(Accuracy-1,1-Accuracy) * .1f);
+            transform.LookAt(target);
+            if(!(targetUnit is FortificationUnitBase))
+            {
+                transform.localEulerAngles               = new Vector3(0, transform.localEulerAngles.y, 0);
+                throwingPoint.transform.localEulerAngles = new Vector3(0, 0,                            0);
+                var angle = GetShootAngle(target.position, Accuracy);
+                throwingPoint.transform.Rotate(angle, 0, 0);
+            } 
+            var throwingObjectInstance = Instantiate(ThrowingObject, throwingPoint.position, throwingPoint.rotation, _miscParent);
+            var throwingGameObject     = throwingObjectInstance.gameObject;
+            var rigidbody              = throwingGameObject.GetComponent<Rigidbody>();
+            throwingObjectInstance.shooter            =  this;
+            throwingObjectInstance.UnitTeam           =  UnitTeam;
+            throwingObjectInstance.UnitRoad           =  UnitRoad;
+            throwingObjectInstance.target             =  targetUnit;
+            throwingObjectInstance.ShotSuccessedEvent += (shooter, hitter) => { hitter.BeAttacked(this); };
+            rigidbody.velocity                        =  throwingObjectInstance.transform.forward * (ThrowingSpeed + Random.Range(Accuracy - 1, 1 - Accuracy) * .1f);
         }
 
 
         protected float GetShootAngle(Vector3 targetPos)
         {
-            float v0 = this.ThrowingSpeed;
-            float h  = Mathf.Abs(this.throwingPoint.position.y - targetPos.y);
+            var maxAngle = 45 * Mathf.Deg2Rad;
+            var vMax     = ThrowingSpeed;
+            var h        = Mathf.Abs(throwingPoint.position.y - targetPos.y);
+            var s        = Vector3.Distance(throwingPoint.position, targetPos);
             // float h  = 0;
-            float ud = Mathf.Sqrt(v0 * v0 + 2 * Physics.gravity.magnitude * h);
-            return Mathf.Atan(v0 / ud) * Mathf.Rad2Deg;
+            var ud    = Mathf.Sqrt(vMax * vMax + 2 * Physics.gravity.magnitude * h);
+            var angle = Mathf.Atan(vMax / ud)                                  * Mathf.Rad2Deg;
+            return Mathf.LerpAngle(maxAngle, 0, Mathf.Max(0, angle - maxAngle) / 90);
         }
 
         protected float GetShootAngle(Vector3 targetPos, float accuracy, float heightOffset)
         {
-            float v0 = this.ThrowingSpeed;
-            float h  = (this.throwingPoint.position.y + heightOffset) - targetPos.y;
-            // float h  = 0;
-            float ud = Mathf.Sqrt(v0 * v0 + 2 * Physics.gravity.magnitude * h);
-            return Mathf.Atan(v0 / ud) * Mathf.Rad2Deg + Random.Range(accuracy -1, 1 -accuracy) * 30;
+            var maxAngle = 45 * Mathf.Deg2Rad;
+            var vMax     = ThrowingSpeed;
+            var s        = Vector3.Distance(throwingPoint.position, targetPos) + Random.Range(0.0f, 0.1f) * accuracy;
+            var angle    = Mathf.Asin(Mathf.Min(s * Physics.gravity.magnitude / (vMax * vMax), 1))        / 2 * Mathf.Rad2Deg;
+            // Debug.DrawRay(throwingPoint.position,
+            //               new Matrix4x4(new Vector4(1, 0,                                0,                                 0),
+            //                             new Vector4(0, Mathf.Cos(angle * Mathf.Deg2Rad), -Mathf.Sin(angle * Mathf.Deg2Rad), 0),
+            //                             new Vector4(0, Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad),  0),
+            //                             new Vector4(0, 0,                                0,                                 1)) * throwingPoint.forward,
+            //               Color.cyan,
+            //               10f);
+            return Mathf.LerpAngle(maxAngle, -10, Mathf.Max(0, angle - maxAngle) / 90);
         }
-        
+
         protected float GetShootAngle(Vector3 targetPos, float accuracy)
         {
             return GetShootAngle(targetPos, accuracy, 0);
@@ -235,50 +236,49 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
 
         public virtual IDefenable FindAEnemy()
         {
-            float       minDist     = float.MaxValue;
+            var        minDist      = float.MaxValue;
             IDefenable closestEnemy = null;
-            for (int i = 0; i < _visualFieldEnemyList.Count; i++)
+            for (var i = 0; i < _visualFieldEnemyList.Count; i++)
             {
-                IDefenable a = _visualFieldEnemyList[i];
-                if((a.IsDeath) || ((GameUnitBase)a).UnitTeam == this.UnitTeam)
+                var a = _visualFieldEnemyList[i];
+                if (a.IsDeath || ((GameUnitBase)a).UnitTeam == UnitTeam)
                     continue;
-                if(a is PlayerHomeUnit && _visualFieldEnemyList.Count > 1)
+                if (a is PlayerHomeUnit && _visualFieldEnemyList.Count > 1)
                     continue;
-                float d = Vector3.Distance(this.transform.position, ((GameUnitBase)a).transform.position);
-                minDist     = d < minDist ? d : minDist;
+                var d = Vector3.Distance(transform.position, ((GameUnitBase)a).transform.position);
+                minDist      = d < minDist ? d : minDist;
                 closestEnemy = a;
             }
+
             return closestEnemy;
         }
 
         private void EnemyListGC()
         {
-            for (int i = 0; i < _visualFieldEnemyList.Count; i++)
-            {
+            for (var i = 0; i < _visualFieldEnemyList.Count; i++)
                 if (_visualFieldEnemyList[i] == null)
                 {
                     _visualFieldEnemyList.RemoveAt(i);
                     i--;
                 }
-            }
         }
-        
+
         private void SearchEnemy()
         {
             EnemyListGC();
             //当前进攻对象为敌人基地，且有预备敌人
-            if ((_attackEnemyBase && _visualFieldEnemyList.Count >= 0) || (!_attackEnemyBase && !_visualFieldEnemyList.Contains(_curEnemy)) || (_curEnemy.IsDeath) || (_curEnemy == null))
+            if (_attackEnemyBase && _visualFieldEnemyList.Count >= 0 || !_attackEnemyBase && !_visualFieldEnemyList.Contains(_curEnemy) || _curEnemy.IsDeath || _curEnemy == null || UnitMover.EnableMove)
             {
                 _curEnemy = FindAEnemy();
                 if (_curEnemy == null || _curEnemy.IsDeath)
                 {
                     _attackEnemyBase = true;
-                    _curEnemy        = this.EnemySide.homeUnit as IDefenable;
+                    _curEnemy        = EnemySide.homeUnit;
                 }
                 else
                 {
-                    _attackEnemyBase      = false;
-                    this.UnitMover.Target = ((GameUnitBase)_curEnemy).transform;
+                    _attackEnemyBase = false;
+                    UnitMover.Target = ((GameUnitBase)_curEnemy).transform;
                 }
             }
         }
@@ -286,28 +286,21 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
 
         private void FindEnemyInit()
         {
-            _unitVisualField = this.transform.Find("VisualField").GetComponent<UnitVisualField>();
-            _unitVisualField.initEvent.AddListener((visualField =>
-                                                    {
-                                                        visualField.VisualFieldSphere.radius = FindEnemyRange;
-                                                    }));
+            _unitVisualField = transform.Find("VisualField").GetComponent<UnitVisualField>();
+            _unitVisualField.initEvent.AddListener(visualField => { visualField.VisualFieldSphere.radius = FindEnemyRange; });
             _unitVisualField.colliderHitEvent.AddListener((v, c) =>
                                                           {
                                                               IDefenable u = null;
-                                                              if (c.gameObject.TryGetComponent<IDefenable>(out u))
-                                                              {
+                                                              if (c.gameObject.TryGetComponent(out u))
                                                                   // Debug.Log("Enemy In!");
                                                                   _visualFieldEnemyList.Add(u);
-                                                              }
                                                           });
             _unitVisualField.colliderExitEvent.AddListener((v, c) =>
                                                            {
                                                                IDefenable u = null;
-                                                               if (c.gameObject.TryGetComponent<IDefenable>(out u))
-                                                               {
+                                                               if (c.gameObject.TryGetComponent(out u))
                                                                    // Debug.Log("Enemy Lose!");
                                                                    _visualFieldEnemyList.Remove(u);
-                                                               }
                                                            });
         }
 
@@ -316,6 +309,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
         protected override void Awake()
         {
             base.Awake();
+            ThrowingSpeed = Mathf.Sqrt(attackRange * Physics.gravity.magnitude);
             FindEnemyInit();
         }
 
@@ -332,12 +326,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
             SearchEnemy();
 
             _attackTimer += Time.fixedDeltaTime;
-            if (_curEnemy != null && !_curEnemy.IsDeath && _attackTimer > AttackInterval)
-            {
-                _attackTimer = this.DoAttack(_curEnemy) ? 0 : _attackTimer;
-            }
-            
-            
+            if (_curEnemy != null && !_curEnemy.IsDeath && _attackTimer > AttackInterval) _attackTimer = DoAttack(_curEnemy) ? 0 : _attackTimer;
         }
     }
 }

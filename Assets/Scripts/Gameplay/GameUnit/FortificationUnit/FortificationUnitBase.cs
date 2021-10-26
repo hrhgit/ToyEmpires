@@ -9,14 +9,16 @@ using UnityEngine.Events;
 
 namespace Gameplay.GameUnit.FortificationUnit
 {
-    public class FortificationUnitBase : GameUnitBase, IDefenable
+    public class FortificationUnitBase : GameUnitBase, IDefenable,IBuffable<UnitBuffContainer>
     {
-        [SerializeField] private IntBuffableValue _maxHp = new IntBuffableValue();
+        #region 防御
+        [Header("防御")]
+        [SerializeField] private IntBuffableValue _maxHp   = new IntBuffableValue();
         [SerializeField] private IntBuffableValue _defence = new IntBuffableValue();
         private                  bool             _isDeath;
         private                  IntBuffableValue _curHp = new IntBuffableValue();
 
-        public int  MaxHp   => _maxHp.Value;
+        public int MaxHp => _maxHp.Value;
         public int CurHp
         {
             get => _curHp.Value;
@@ -40,7 +42,7 @@ namespace Gameplay.GameUnit.FortificationUnit
             private set => _isDeath = value;
         }
 
-        public int  Defence => _defence;
+        public int Defence => _defence;
 
         public event AttackEventHandler BeAttackedEvent;
         public UnityEvent<IDefenable>   DeathEvent { get; } = new UnityEvent<IDefenable>();
@@ -50,18 +52,31 @@ namespace Gameplay.GameUnit.FortificationUnit
             this.CurHp -= attacker.Attack - this.Defence;
             BeAttackedEvent?.Invoke(attacker, this);
         }
-
-
-        protected virtual void Awake()
-        {
-            
-        }
-
+        
         protected void InitHP()
         {
             this.CurHp = this.MaxHp;
         }
-        
+
+        #endregion
+
+
+        #region Buff
+        [Header("Buff")]
+        [SerializeField] private UnitBuffContainer _buffContainer;
+        public UnitBuffContainer BuffContainer
+        {
+            get => _buffContainer;
+            set => _buffContainer = value;
+        }
+
+        #endregion
+
+
+
+
+        #region 杂项
+
         protected void ChangeUnitMaterialColor()
         {
             this.transform.Find("Sprite").GetComponent<SpriteRendererPlus>().ChangeColor();
@@ -71,6 +86,14 @@ namespace Gameplay.GameUnit.FortificationUnit
                                     }));
         }
 
+        #endregion
+
+        #region 流程
+
+        protected virtual void Awake()
+        {
+            
+        }
 
         protected override void Start()
         {
@@ -93,5 +116,7 @@ namespace Gameplay.GameUnit.FortificationUnit
             // ChangeUnitMaterialColor();
 
         }
+
+        #endregion
     }
 }
