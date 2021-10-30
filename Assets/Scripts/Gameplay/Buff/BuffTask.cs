@@ -3,6 +3,7 @@ using UnityEngine.Events;
 
 namespace Gameplay.Buff
 {
+    [Serializable]
     public class BuffTask
     {
         public BuffBase              buff;

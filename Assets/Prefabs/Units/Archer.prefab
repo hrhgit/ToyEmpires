@@ -170,7 +170,7 @@ MonoBehaviour:
   _unitTeam: 0
   _unitRoad: 0
   maxSpeed:
-    _value: 0.5
+    _value: 0.1
   productivity:
     _value: 1
   defence:
@@ -179,7 +179,7 @@ MonoBehaviour:
     _value: 80
   _buffContainer: {fileID: -53160501156610556}
   _costTime:
-    _value: 1
+    _value: 8
   _costFood:
     _value: 3
   _costWood:

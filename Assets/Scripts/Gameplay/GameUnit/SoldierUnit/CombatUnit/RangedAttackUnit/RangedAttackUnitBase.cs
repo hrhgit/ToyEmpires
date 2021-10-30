@@ -306,6 +306,34 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
 
         #endregion
 
+        #region Buff
+
+        public override bool SetNumericalValueBuff(BuffNumericalValueType buffType, bool isAdditionalValue, float value)
+        {
+            try
+            {
+                base.SetNumericalValueBuff(buffType, isAdditionalValue, value);
+            }
+            catch (Exception e)
+            {
+                switch (buffType)
+                {
+                    case BuffNumericalValueType.CostTime:
+                        if (isAdditionalValue)
+                            this._costTime.AddAdditionalValue(value);
+                        else
+                            this._costTime.AddMagnification(value);
+                        break;
+                    default:
+                        throw new UnityException("未找到Buff: " + buffType.ToString());
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        #endregion
+
         protected override void Awake()
         {
             base.Awake();

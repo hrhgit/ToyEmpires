@@ -340,12 +340,25 @@ namespace Gameplay.Player
 
         [Header("Buff")]
         #region Buff
-
-        private PlayerBuffContainer _buffContainer;
+        
+        [SerializeField]private PlayerBuffContainer _buffContainer;
         public PlayerBuffContainer BuffContainer
         {
             get => _buffContainer;
             set => _buffContainer = value;
+        }
+
+        public bool SetNumericalValueBuff(BuffNumericalValueType buffType, bool isAdditionalValue, float value)
+        {
+            //TODO 未完善
+            switch (buffType)
+            {
+                default:
+                    throw new UnityException("未找到Buff: " + buffType.ToString());
+                    return false;
+            }
+
+            return true;
         }
 
         #endregion
@@ -397,7 +410,19 @@ namespace Gameplay.Player
 
         public void DeactivatePolicy(PolicyBase policyBase)
         {
-            
+            if (_activatedPolicies.Contains(policyBase))
+            {
+                policyBase.playerBuffs.ForEach((buff =>
+                                                {
+                                                    BuffContainer.RemoveBuff(buff);
+                                                }));
+                policyBase.unitBuffs.ForEach((buff =>
+                                              {
+                                                  this._instanceWorkersList.ForEach((worker => worker.BuffContainer.RemoveBuff(buff)));
+                                                  this._instanceUnitsList.ForEach((unit => unit.BuffContainer.RemoveBuff(buff)));
+                                              }));
+                _activatedPolicies.Remove(policyBase);
+            }
         }
 
         #endregion

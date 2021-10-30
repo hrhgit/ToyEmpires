@@ -31,7 +31,7 @@ namespace Gameplay.Buff
         {
             return true;
         }
-        public void AddBuff(BuffBase buff)
+        public virtual void AddBuff(BuffBase buff)
         {
             if (!IsBuffAccessible(buff))
                 return;

@@ -70,6 +70,19 @@ namespace Gameplay.GameUnit.FortificationUnit
             set => _buffContainer = value;
         }
 
+        public bool SetNumericalValueBuff(BuffNumericalValueType buffType, bool isAdditionalValue, float value)
+        {
+            //TODO 未完善
+            switch (buffType)
+            {
+                default:
+                    throw new UnityException("未找到Buff: " + buffType.ToString());
+                    return false;
+            }
+
+            return true;
+        }
+
         #endregion
 
 

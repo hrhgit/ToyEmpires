@@ -143,6 +143,20 @@ namespace Gameplay.GameUnit.SoldierUnit
             set => _buffContainer = value;
         }
 
+        public virtual bool SetNumericalValueBuff(BuffNumericalValueType buffType, bool isAdditionalValue, float value)
+        {
+            //TODO 未完善
+            switch (buffType)
+            {
+                default:
+                    throw new UnityException("未找到Buff: " + buffType.ToString());
+                    return false;
+            }
+
+            return true;
+        }
+
+
         #endregion
 
         #region 杂项

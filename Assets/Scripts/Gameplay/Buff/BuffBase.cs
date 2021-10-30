@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -45,6 +46,36 @@ namespace Gameplay.Buff
         private BuffTask       _updateTask;
         private BuffTimingTask _timingTask;
 
+        public BuffBase()
+        {
+            
+        }
+
+        private BuffBase(List<UnityAction<BuffBase>> startEvent, List<UnityAction<BuffBase>> updateEvent, List<UnityAction<BuffBase>> stopEvent)
+        {
+            if (startEvent != null)
+            {
+                startEvent.ForEach((action => this.buffStartEvent.AddListener(action)));
+            }
+            if (updateEvent != null)
+            {
+                updateEvent.ForEach((action => this.buffUpdateEvent.AddListener(action)));
+            }
+            if (stopEvent != null)
+            {
+                stopEvent.ForEach((action => this.buffStopEvent.AddListener(action)));
+            }
+        }
+        public BuffBase(List<UnityAction<BuffBase>> startEvent, List<UnityAction<BuffBase>> updateEvent, List<UnityAction<BuffBase>> stopEvent,float maxTime) : this(startEvent,updateEvent,stopEvent)
+        {
+            isTimeLimited = true;
+            this.maxTime  = maxTime;
+        }
+        
+        public BuffBase(List<UnityAction<BuffBase>> startEvent, List<UnityAction<BuffBase>> stopEvent) : this(startEvent,null,stopEvent)
+        {
+            isOneOff = true;
+        }
 
         private void Activate()
         {

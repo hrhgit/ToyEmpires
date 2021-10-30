@@ -19,7 +19,7 @@ namespace Gameplay.Buff
 
         public override void AddMagnification(float magnification)
         {
-            _magnification += magnification;
+            _magnification *= magnification;
         }
         
         

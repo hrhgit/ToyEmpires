@@ -1,7 +1,9 @@
-﻿using UnityEngine.Events;
+﻿using System;
+using UnityEngine.Events;
 
 namespace Gameplay.Buff
 {
+    [Serializable]
     public class BuffTimingTask : BuffTask
     {
         public float                 timing;
