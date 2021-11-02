@@ -17,7 +17,7 @@ namespace Gameplay.Buff
         {
             
         }
-        public PlayerBuffBase(List<UnityAction<BuffBase>> startEvent, List<UnityAction<BuffBase>> stopEvent) : base(startEvent, stopEvent)
+        public PlayerBuffBase(List<UnityAction<BuffBase>> startEvent, List<UnityAction<BuffBase>> stopEvent, bool isOneOff) : base(startEvent, stopEvent,isOneOff)
         {
             
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Gameplay.Buff;
 using Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit;
 using Gameplay.Player;
+using GameUI.PolicyUI;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,97 +11,91 @@ namespace Gameplay.Policy
 {
     public class PolicyManager : MonoBehaviour
     {
-        public  List<PolicyBase> availablePolicies              = new List<PolicyBase>();
-        private List<int>        _economyActivatedPolicyIndexes  = new List<int>();
-        private List<int>        _militaryActivatedPolicyIndexes = new List<int>();
-        private List<int>        _specialActivatedPolicyIndexes  = new List<int>();
+        public  List<PolicyBase> availablePolicies        = new List<PolicyBase>();
+        public  List<int>        activatedPoliciesIndexes = new List<int>();
+        public  PlayerBase       targetPlayer;
 
-        public PlayerBase targetPlayer;
+        public  UnityEvent<PolicyManager> policyUpdateEvent               = new UnityEvent<PolicyManager>(); 
+        private List<int>                 _economyActivatedPolicyIndexes  = new List<int>();
+        private List<int>                 _militaryActivatedPolicyIndexes = new List<int>();
+        private List<int>                 _specialActivatedPolicyIndexes  = new List<int>();
+
+        
+        private PolicyManagerUI _policyManagerUI;
 
         public void AddPolicy(PolicyBase policyBase)
         {
             this.availablePolicies.Add(policyBase);
-            int index = this.availablePolicies.IndexOf(policyBase);
-            switch (policyBase.policyType)
-            {
-                case PolicyType.Economy:
-                    _economyActivatedPolicyIndexes.Add(index);
-                    break;
-                case PolicyType.Military:
-                    _militaryActivatedPolicyIndexes.Add(index);
-                    break;
-                case PolicyType.Special:
-                    _specialActivatedPolicyIndexes.Add(index);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            // int index = this.availablePolicies.IndexOf(policyBase);
+            policyUpdateEvent.Invoke(this);
         }
 
         public void RemovePolicy(PolicyBase policyBase)
         {
             int index = this.availablePolicies.IndexOf(policyBase);
-            switch (policyBase.policyType)
-            {
-                case PolicyType.Economy:
-                    _economyActivatedPolicyIndexes[index] = -1;
-                    break;
-                case PolicyType.Military:
-                    _militaryActivatedPolicyIndexes[index] = -1;
-                    break;
-                case PolicyType.Special:
-                    _specialActivatedPolicyIndexes[index] = -1;
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
             this.availablePolicies[index] = null;
+            policyUpdateEvent.Invoke(this);
         }
 
         public void ActivatePolicy(int index)
         {
-            if(availablePolicies[index] != null) 
+            if(availablePolicies[index] != null)
+            {
                 targetPlayer.ActivatePolicy(availablePolicies[index]);
+                activatedPoliciesIndexes.Add(index);
+                switch (availablePolicies[index].policyType)
+                {
+                    case PolicyType.Economy:
+                        _economyActivatedPolicyIndexes.Add(index);
+                        break;
+                    case PolicyType.Military:
+                        _militaryActivatedPolicyIndexes.Add(index);
+                        break;
+                    case PolicyType.Special:
+                        _specialActivatedPolicyIndexes.Add(index);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+
+            }
+            policyUpdateEvent.Invoke(this);
         }
         public void DeactivatePolicy(int index)
         {
-            if(availablePolicies[index] != null) 
+            if(availablePolicies[index] != null)
+            {
                 targetPlayer.DeactivatePolicy(availablePolicies[index]);
+                activatedPoliciesIndexes.Remove(index);
+                switch (availablePolicies[index].policyType)
+                {
+                    case PolicyType.Economy:
+                        _economyActivatedPolicyIndexes.Remove(index);
+                        break;
+                    case PolicyType.Military:
+                        _militaryActivatedPolicyIndexes.Remove(index);
+                        break;
+                    case PolicyType.Special:
+                        _specialActivatedPolicyIndexes.Remove(index);
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
+            policyUpdateEvent.Invoke(this);
         }
 
         
         private void Start()
         {
+            if(BattleGameManager.BattleGameManagerInstance.userPlayer == this.targetPlayer)
+            {
+                _policyManagerUI = BattleGameManager.BattleGameManagerInstance.policyManagerUI;
+                policyUpdateEvent.AddListener((manager => _policyManagerUI.UpdatePolicies()));
+            }
             /********测试***************/
-            this.AddPolicy(new PolicyBase()
-                           {
-                               playerBuffs = new List<PlayerBuffBase>()
-                                             {
-                                                 new PlayerBuffBase(new List<UnityAction<BuffBase>>()
-                                                                    {
-                                                                        (b =>
-                                                                         {
-                                                                             PlayerBuffBase buff = b as PlayerBuffBase;
-                                                                             Debug.Log(buff.activatePlayer);
-                                                                             buff.activatePlayer.unitPrefabList.ForEach((u =>
-                                                                                                                         {
-                                                                                                                             if (u.unitID == 3000)
-                                                                                                                             {
-                                                                                                                                 Archer archer = u as Archer;
-                                                                                                                                 archer.SetNumericalValueBuff(BuffNumericalValueType.CostTime, false, .1f);
-                                                                                                                             }
-                                                                                                                         }));
-                                                                         })
-                                                                    },null)
-                                                 {
-                                                     buffID = 1000,
-                                                     isSuperimposable = true,
-                                                 }
-                                             },
-                               occupancy = 1,
-                               policyType = PolicyType.Economy,
-                           });
-
+            this.AddPolicy(PolicyGenerator.GeneratePolicy(2000));
+            this.AddPolicy(PolicyGenerator.GeneratePolicy(2001));
             /********测试***************/
         }
     }

@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE root [
+        <!ELEMENT root ANY>
+        <!ELEMENT Policy (Name+,Content+)>
+            <!ATTLIST Policy 
+                    PID ID #REQUIRED
+                    Type (0|1|2|3) #REQUIRED
+                    Occupancy CDATA #REQUIRED
+            >
+        <!ELEMENT Name (#PCDATA) >
+        <!ELEMENT Content (#PCDATA)>
+]>
+<!---->
+<!-- ID [0000] 0:Normal 1:ECO 2:MIL 3:SPEC-->
+<!---->
+
+<root>
+    <Policy PID="p2000" Type="2" Occupancy="1">
+        <Name>
+            动员令
+        </Name>
+        <Content>
+            剑士的生产效率提高50%。
+        </Content>
+    </Policy>
+    <Policy PID="p2001" Type="2" Occupancy="1">
+        <Name>
+            扩军
+        </Name>
+        <Content>
+            所有军事单位的预备役数量+2。
+        </Content>
+    </Policy>
+</root>

@@ -1,5 +1,6 @@
 using System;
 using Gameplay.Player;
+using GameUI.PolicyUI;
 using PathFindingPlus;
 using UnityEngine;
 
@@ -19,7 +20,8 @@ namespace Gameplay
         public CustomPathFinding customPathFinding;
         public Transform         tempParent;
 
-        public Camera uiCamera;
+        public Camera          uiCamera;
+        public PolicyManagerUI policyManagerUI;
 
 
         private void Awake()

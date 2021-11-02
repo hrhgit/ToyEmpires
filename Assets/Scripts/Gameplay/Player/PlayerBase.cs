@@ -31,9 +31,9 @@ namespace Gameplay.Player
 
         #endregion
 
-        [Header("经济")]
+        
         #region 经济
-
+        [Header("经济")]
         //Economics
         private IntBuffableValue _food = new IntBuffableValue();
         private IntBuffableValue _gold = new IntBuffableValue();
@@ -110,8 +110,9 @@ namespace Gameplay.Player
         
         private readonly List<FortificationUnitBase> _instanceFortificationList = new List<FortificationUnitBase>();
 
-        [Header("工人")]
+        
         #region 工人
+        [Header("工人")]
         //Workers
         public int maxWorkerCount;
         public int             initWorkerCount;
@@ -227,9 +228,9 @@ namespace Gameplay.Player
 
         #endregion
 
-        [Header("战斗")]
+        
         #region 战斗单位
-
+        [Header("战斗")]
         #region 生产
 
         public int maxBattleUnitCount;
@@ -338,9 +339,9 @@ namespace Gameplay.Player
 
         #endregion
 
-        [Header("Buff")]
-        #region Buff
         
+        #region Buff
+        [Header("Buff")]
         [SerializeField]private PlayerBuffContainer _buffContainer;
         public PlayerBuffContainer BuffContainer
         {
@@ -363,15 +364,18 @@ namespace Gameplay.Player
 
         #endregion
         
-        [Header("政策")]
+        
         #region 政策
-
+        [Header("政策")]
         public                   PolicyManager    playerPolicyManager;
+
+        [SerializeField] private IntBuffableValue policyCapacity = new IntBuffableValue(3);
         [SerializeField] private int              economyPolicyCapacity;
         [SerializeField] private int              militaryPolicyCapacity;
         [SerializeField] private int              specialPolicyCapacity;
 
         private List<PolicyBase> _activatedPolicies = new List<PolicyBase>();
+        private int              _curPolicyActivatedCount = 0;
         public int EconomyPolicyCapacity
         {
             get => economyPolicyCapacity;
@@ -389,10 +393,18 @@ namespace Gameplay.Player
             get => specialPolicyCapacity;
             set => specialPolicyCapacity = value;
         }
+        
+        public int PolicyCapacity
+        {
+            get => policyCapacity;
+        }
 
 
         public void ActivatePolicy(PolicyBase policyBase)
         {
+            if (_curPolicyActivatedCount + policyBase.occupancy > PolicyCapacity)
+                throw new Exception("政策满额");
+            
             if (!_activatedPolicies.Contains(policyBase))
             {
                 _activatedPolicies.Add(policyBase);
@@ -405,11 +417,13 @@ namespace Gameplay.Player
                                                   this._instanceWorkersList.ForEach((worker => worker.BuffContainer.AddBuff(buff)));
                                                   this._instanceUnitsList.ForEach((unit => unit.BuffContainer.AddBuff(buff)));
                                               }));
+                _curPolicyActivatedCount+=policyBase.occupancy;
             }
         }
 
         public void DeactivatePolicy(PolicyBase policyBase)
         {
+            
             if (_activatedPolicies.Contains(policyBase))
             {
                 policyBase.playerBuffs.ForEach((buff =>
@@ -422,6 +436,7 @@ namespace Gameplay.Player
                                                   this._instanceUnitsList.ForEach((unit => unit.BuffContainer.RemoveBuff(buff)));
                                               }));
                 _activatedPolicies.Remove(policyBase);
+                _curPolicyActivatedCount -= policyBase.occupancy;
             }
         }
 

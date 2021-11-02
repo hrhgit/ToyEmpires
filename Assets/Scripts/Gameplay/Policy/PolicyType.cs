@@ -2,6 +2,7 @@
 {
     public enum PolicyType
     {
+        Normal,
         Economy,
         Military,
         Special

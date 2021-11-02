@@ -53,7 +53,7 @@ namespace Gameplay.Buff
             if (buffId != -1)
             {
                 buff.IsActivated = false;
-                buffList.RemoveAt(buffId);
+                // buffList.RemoveAt(buffId);
             }
         }
     }

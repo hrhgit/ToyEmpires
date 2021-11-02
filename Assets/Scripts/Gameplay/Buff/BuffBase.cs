@@ -72,9 +72,9 @@ namespace Gameplay.Buff
             this.maxTime  = maxTime;
         }
         
-        public BuffBase(List<UnityAction<BuffBase>> startEvent, List<UnityAction<BuffBase>> stopEvent) : this(startEvent,null,stopEvent)
+        public BuffBase(List<UnityAction<BuffBase>> startEvent, List<UnityAction<BuffBase>> stopEvent, bool isOneOff) : this(startEvent,null,stopEvent)
         {
-            isOneOff = true;
+            this.isOneOff = isOneOff;
         }
 
         private void Activate()

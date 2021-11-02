@@ -15,6 +15,7 @@
         CostGold,
         CostWood,
         CostTime,
+        MaxReserveCount,
         
         //战斗
         Attack,

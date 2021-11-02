@@ -11,48 +11,8 @@ using Random = UnityEngine.Random;
 
 namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
 {
-    public class RangedAttackUnitBase : SoldierUnitBase, IProduceable, IRangeAttackable
+    public class RangedAttackUnitBase : ProducebleCombatUnitBase, IRangeAttackable
     {
-        #region 生产
-
-        [Header("生产")] [SerializeField] private FloatBuffableValue _costTime        = new FloatBuffableValue();
-        [SerializeField]                private IntBuffableValue   _costFood        = new IntBuffableValue();
-        [SerializeField]                private IntBuffableValue   _costWood        = new IntBuffableValue();
-        [SerializeField]                private IntBuffableValue   _costGold        = new IntBuffableValue();
-        [SerializeField]                private IntBuffableValue   _costPopulation  = new IntBuffableValue(1);
-        [SerializeField]                private IntBuffableValue   _maxReserveCount = new IntBuffableValue();
-
-        public float CostTime => _costTime;
-
-        public int CostFood => _costFood;
-
-        public int CostWood => _costWood;
-
-        public int CostGold => _costGold;
-
-        public int CostPopulation => _costPopulation;
-
-        public int MaxReserveCount => _maxReserveCount;
-
-        public void Produce(SoldierUnitBase unit, PlayerBase player, UnitStatus status)
-        {
-            if (status.freeUnitCount >= MaxReserveCount)
-                return;
-            if (status.unitProduceProcess < 1)
-            {
-                status.unitProduceProcess += Time.fixedDeltaTime / ((IProduceable)unit).CostTime;
-                player.InvokeUnitProduce(unit, player, status);
-            }
-            else
-            {
-                status.unitProduceProcess = 0;
-                status.totalUnitCount++;
-                status.freeUnitCount++;
-            }
-        }
-
-        #endregion
-
         #region 战斗
 
         [Header("战斗")]
@@ -163,8 +123,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
                 ThrowingEvent.Invoke(this, attackTarget);
                 yield return wfs;
             }
-
-            Debug.Log("Shoot Count:");
+            
             ThrowSingleObject(targetTransform, attackTarget);
             // this.UnitMover.EnableMove = true;
             if (attackTarget.IsDeath) SearchEnemy();
@@ -302,34 +261,6 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
                                                                    // Debug.Log("Enemy Lose!");
                                                                    _visualFieldEnemyList.Remove(u);
                                                            });
-        }
-
-        #endregion
-
-        #region Buff
-
-        public override bool SetNumericalValueBuff(BuffNumericalValueType buffType, bool isAdditionalValue, float value)
-        {
-            try
-            {
-                base.SetNumericalValueBuff(buffType, isAdditionalValue, value);
-            }
-            catch (Exception e)
-            {
-                switch (buffType)
-                {
-                    case BuffNumericalValueType.CostTime:
-                        if (isAdditionalValue)
-                            this._costTime.AddAdditionalValue(value);
-                        else
-                            this._costTime.AddMagnification(value);
-                        break;
-                    default:
-                        throw new UnityException("未找到Buff: " + buffType.ToString());
-                        return false;
-                }
-            }
-            return true;
         }
 
         #endregion
