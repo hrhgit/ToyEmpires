@@ -8,6 +8,7 @@ using Gameplay.GameUnit.FortificationUnit;
 using Gameplay.GameUnit.SoldierUnit;
 using Gameplay.GameUnit.SoldierUnit.Worker;
 using Gameplay.Policy;
+using Gameplay.TechTree;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -362,6 +363,13 @@ namespace Gameplay.Player
             return true;
         }
 
+        public void AddUnitsBuff(BuffBase buff)
+        {
+            this._instanceWorkersList.ForEach((worker => worker.BuffContainer.AddBuff(buff)));
+            this._instanceUnitsList.ForEach((unit => unit.BuffContainer.AddBuff(buff)));
+        }
+
+
         #endregion
         
         
@@ -414,12 +422,13 @@ namespace Gameplay.Player
                                                 }));
                 policyBase.unitBuffs.ForEach((buff =>
                                               {
-                                                  this._instanceWorkersList.ForEach((worker => worker.BuffContainer.AddBuff(buff)));
-                                                  this._instanceUnitsList.ForEach((unit => unit.BuffContainer.AddBuff(buff)));
+                                                  AddUnitsBuff(buff);
                                               }));
+                                                  
                 _curPolicyActivatedCount+=policyBase.occupancy;
             }
         }
+
 
         public void DeactivatePolicy(PolicyBase policyBase)
         {
@@ -438,6 +447,54 @@ namespace Gameplay.Player
                 _activatedPolicies.Remove(policyBase);
                 _curPolicyActivatedCount -= policyBase.occupancy;
             }
+        }
+
+        #endregion
+
+        #region 科技
+
+        [Header("科技")] 
+        public TechTree.TechTree techTree;
+        public bool PurchaseTechNode(int nodeIdx,bool isUseGold)
+        {
+            TechTreeNode techNode = techTree.techTreeNodes[nodeIdx];
+            if (techNode.IsReady)
+            {
+                if (isUseGold && this.Gold >= techNode.CurCostGold)
+                {
+                    this.AddResource(ResourceType.Gold,-techNode.CurCostGold);
+                    techNode.Purchase();
+                    return true;
+                }else if (!isUseGold && (this.Food >= techNode.CurCostFood && this.Wood >= techNode.CurCostWood))
+                {
+                    this.AddResource(ResourceType.Food, -techNode.CurCostFood);
+                    this.AddResource(ResourceType.Wood, -techNode.CurCostWood);
+                    techNode.Purchase();
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        public void ActivateTech(int nodeIdx)
+        {
+            this.ActivateTech(techTree.techTreeNodes[nodeIdx].technology);
+        }
+        public void ActivateTech(TechTreeNode node)
+        {
+            this.ActivateTech(node.technology);
+        }
+        public void ActivateTech(Technology tech)
+        {
+            tech.playerBuffs.ForEach((buff =>
+                                      { 
+                                          this.BuffContainer.AddBuff(buff);
+                                      }));
+            tech.unitBuffs.ForEach((buff =>
+                                    { 
+                                        this.AddUnitsBuff(buff);
+                                    }));
+
         }
 
         #endregion

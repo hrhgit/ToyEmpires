@@ -1,0 +1,48 @@
+v1.0.1
+- added property for UIC_LineRenderer.UILines with null check
+
+v1.2
+- UIC_LineRenderer code optimization and refactoring
+- using static Manager instance to set parent of dropped entity
+- added method that sets the number of points in the line based on its curvature 
+- Added sprite to UI Line Renderer on scenes to minimize jagged sides
+- changed from DistanceToSpline(obsolete) to DistanceToConnection, a general and more precise way to find distance to connections independent of the lineType
+- fix: excessive frame drop on spline drawing
+
+v1.2.1
+- added uiline count limit
+- UIC_Node.ConnectTo return UIC_Connection
+
+v1.3
+- UIC_Manager.AddConnection return UIC_Connection
+- working on Canvas screen space Overlay and Camera
+- added prefab and script to set nodes to be connected On Start
+- added duplicate block button on sample scene
+- cleaner Node inspector
+
+v1.4
+- added method to get entities connected to an specific node polarity
+- line animation feature added: {type: Lerp, Constant Speed; number of points; size; color; draw type: Square, Circle, Triangle; speed}
+- NodesAreConnected verification method made public
+- fix: circle cap with uv wrongly positioned
+- context menu line animation active toggle added
+- context menu line animation point count slider added
+- Logic Gates scene added
+
+v1.5
+- working on Canvas World Space
+- fix: incorrect enabling of button "duplicate"
+
+v2.0
+- UIC components refactored to enable multiple UIC views in the same scene
+- new scene added: Multiple Charts
+- fix: wrong raycaster found when using more than one canvas
+- fix: uILines list reset on enable
+- method to find closest node by distance made obsolete, using detect nodes from raycast instead of distance to pointer
+- new method to find node using raycast from pointer
+
+v2.1
+- Working inside ScrollViews and movable panels 
+- fix: Corrected lines position when LineRenderer is offset
+- new scene added: ScrollView Graphs
+

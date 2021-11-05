@@ -15,6 +15,7 @@ namespace Gameplay.Buff
             get;
             set;
         }
+        
 
         public abstract void AddAdditionalValue(T   additionalValue);
         public abstract void AddMagnification(float magnification);
