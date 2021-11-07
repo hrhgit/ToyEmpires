@@ -36,7 +36,7 @@ public class UIC_Entity : MonoBehaviour, I_UIC_Object, I_UIC_Selectable, I_UIC_D
         get => uicManager;
         set
         {
-            Debug.Log(value);
+            // Debug.Log(value);
             uicManager = value;
         }
     }

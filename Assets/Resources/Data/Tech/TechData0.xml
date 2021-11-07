@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE root [
+        <!ELEMENT root ANY>
+        <!ELEMENT Tech (Name+,Content+)>
+            <!ATTLIST Tech 
+                    TID ID #REQUIRED
+            >
+        <!ELEMENT Name (#PCDATA) >
+        <!ELEMENT Content (#PCDATA)>
+]>
+<!---->
+<!-- ID [0000] 0:Normal 1:ECO 2:MIL 3:SPEC-->
+<!---->
+
+<root>
+    <Tech  TID="t0000"  >
+        <Name>
+            炼钢
+        </Name>
+        <Content>
+            单位的防御力+3。
+        </Content>
+    </Tech >
+    <Tech  TID="t0001" >
+        <Name>
+            手推车
+        </Name>
+        <Content>
+            工人的运载量+2。
+        </Content>
+    </Tech >
+    <Tech  TID="t0002" >
+        <Name>
+            屯田
+        </Name>
+        <Content>
+            预备役士兵提供的生产力+1。
+        </Content>
+    </Tech >
+</root>

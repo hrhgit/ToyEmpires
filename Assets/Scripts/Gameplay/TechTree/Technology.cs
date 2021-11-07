@@ -10,18 +10,20 @@ namespace Gameplay.TechTree
     {
         public int technologyID;
 
-        public Technology() : this(0,0,0,0,0,0,1)
+        public Technology() : this(0,0,0,0,0,0,0,5)
         {
             
         }
-        public Technology(int   maxCostFood,
-                          int   maxCostGold,
-                          int   maxCostWood,
-                          int   minCostFood,
-                          int   minCostGold,
-                          int   minCostWood,
-                          float costTime)
+        public Technology(int   technologyID,
+                          int   maxCostFood = 0,
+                          int   maxCostWood = 0,
+                          int   maxCostGold = 0,
+                          int   minCostFood = 0,
+                          int   minCostWood = 0,
+                          int   minCostGold = 0,
+                          float costTime    = 5)
         {
+            this.technologyID      = technologyID;
             this.maxCostFood.Value = maxCostFood;
             this.maxCostGold.Value = maxCostGold;
             this.maxCostWood.Value = maxCostWood;

@@ -458,7 +458,7 @@ namespace Gameplay.Player
         public bool PurchaseTechNode(int nodeIdx,bool isUseGold)
         {
             TechTreeNode techNode = techTree.techTreeNodes[nodeIdx];
-            if (techNode.IsReady)
+            if (techNode.IsDevelopable)
             {
                 if (isUseGold && this.Gold >= techNode.CurCostGold)
                 {

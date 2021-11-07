@@ -1,7 +1,6 @@
 ﻿using System;
-using Gameplay.Policy;
 
-namespace GameUI.PolicyUI
+namespace Gameplay.Policy
 {
     [Serializable]
     public struct PolicyData

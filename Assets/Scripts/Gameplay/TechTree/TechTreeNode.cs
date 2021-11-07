@@ -11,33 +11,60 @@ namespace Gameplay.TechTree
     [Serializable]
     public class TechTreeNode
     {
-        public                            int                nodeIdx;
-        public                            Technology         technology;
-        [SerializeField] private readonly List<TechTreeNode> _formerNodes = new List<TechTreeNode>();
-        [SerializeField] private readonly List<TechTreeNode> _afterNodes  = new List<TechTreeNode>();
+        public                   TechTree           techTree;
+        public                   int                nodeIdx;
+        public                   Technology         technology;
+        [SerializeField] private List<TechTreeNode> _formerNodes = new List<TechTreeNode>();
+        [SerializeField] private List<TechTreeNode> _afterNodes  = new List<TechTreeNode>();
 
+        public List<TechTreeNode> AfterNodes  => _afterNodes;
+        public List<TechTreeNode> FormerNodes => _formerNodes;
 
         public int depth = 0;
 
 
-        public TechTreeNode()
+        public TechTreeNode(TechTree techTree)
         {
-            
+            this.techTree = techTree;
         }
         
-        public TechTreeNode(List<TechTreeNode> formerNodes, TechDevelopFunc developingFunc = null, TechDevelopFunc readyFunc = null, TechDevelopFunc developedFunc = null)
+        public TechTreeNode(TechTree techTree, Technology technology,List<TechTreeNode> formerNodes, TechDevelopFunc developingFunc = null, TechDevelopFunc readyFunc = null, TechDevelopFunc developedFunc = null)
         {
+            this.techTree   = techTree;
+            this.technology = technology;
             formerNodes?.ForEach((node => node.AddAfterNode(this)));
-            TechDevelopingEvent += developingFunc;
-            TechReadyEvent      += readyFunc;
-            TechDevelopedEvent  += developedFunc;
+            
+            if(developingFunc != null)
+                TechDevelopingEvent += developingFunc;
+            if(readyFunc != null)
+                TechReadyEvent      += readyFunc;
+            if(developedFunc != null)
+                TechDevelopedEvent  += developedFunc;
+        }
+
+        public TechTreeNode(TechTree techTree, Technology technology, TechTreeNode[] formerNodes, TechDevelopFunc developingFunc = null, TechDevelopFunc readyFunc = null, TechDevelopFunc developedFunc = null)
+            : this(techTree,technology,formerNodes.ToList(), developingFunc, readyFunc, developedFunc)
+        {
+        }
+
+        public TechTreeNode(TechTree techTree, Technology technology, TechDevelopFunc developingFunc = null, TechDevelopFunc readyFunc = null, TechDevelopFunc developedFunc = null)
+        {
+            this.techTree   = techTree;
+            this.technology = technology;
+            
+            if(developingFunc != null)
+                TechDevelopingEvent += developingFunc;
+            if(readyFunc != null)
+                TechReadyEvent += readyFunc;
+            if(developedFunc != null)
+                TechDevelopedEvent += developedFunc;
         }
         public void AddAfterNode(TechTreeNode node)
         {
-            this._afterNodes.Add(node);
-            node._formerNodes.Add(this);
+            this.AfterNodes.Add(node);
+            node.FormerNodes.Add(this);
             node.depth          =  this.depth >= node.depth ? this.depth + 1 : node.depth;
-            this.TechReadyEvent += node.CheckSelfDevelopable;
+            this.TechDevelopedEvent += node.CheckSelfDevelopable;
         }
         
         
@@ -62,7 +89,8 @@ namespace Gameplay.TechTree
         private bool  _isReady  = false;
         private bool  _isDevelopable  = false;
         private float _developProcess = 0f;
-        
+
+        public float Process => DevelopProcess / this.technology.CostTime;
         public float DevelopProcess
         {
             get => _developProcess;
@@ -75,7 +103,6 @@ namespace Gameplay.TechTree
                 else
                 {
                     this.IsReady = true;
-                    TechReadyEvent?.Invoke(this);
                 }
             }
         }
@@ -111,10 +138,11 @@ namespace Gameplay.TechTree
                 _isReady = value;
                 if (value)
                 {
-                    this.CurCostFood = technology.MinCostFood;
-                    this.CurCostWood = technology.MinCostWood;
-                    this.CurCostGold = technology.MinCostGold;
-                    TechDevelopedEvent?.Invoke(this);
+                    this._developProcess = 999f;
+                    this.CurCostFood    = technology.MinCostFood;
+                    this.CurCostWood    = technology.MinCostWood;
+                    this.CurCostGold    = technology.MinCostGold;
+                    TechReadyEvent?.Invoke(this);
                 }
                 
             }
@@ -146,7 +174,8 @@ namespace Gameplay.TechTree
         }
         public bool CheckDevelopable()
         {
-            return this._formerNodes.Count == 0 || this._formerNodes.All((node => node._isDeveloped));
+            // return false;
+            return this.FormerNodes.Count == 0 || this.FormerNodes.All((node => node._isDeveloped));
         }
         
         public void CheckSelfDevelopable(TechTreeNode techTreeNode)
@@ -182,9 +211,13 @@ namespace Gameplay.TechTree
         }
 
 
+
+
         public void Purchase()
         {
-            this.IsDeveloped = true;
+            // this.DevelopProcess = this.technology.CostTime + .1f;
+            this.IsReady        = true;
+            this.IsDeveloped    = true;
         }
 
         #endregion

@@ -11,7 +11,7 @@ public class UIC_Node : MonoBehaviour, I_UIC_Object, I_UIC_Draggable, I_UIC_Clic
     public enum PolarityTypeEnum { _in, _out, _all };
     [Header("Logic")]
     public PolarityTypeEnum polarityType;
-    [HideInInspector]
+    // [HideInInspector]
     public UIC_Entity entity;
 
     public int maxConnections = 0; // 0 - no limit
@@ -49,7 +49,7 @@ public class UIC_Node : MonoBehaviour, I_UIC_Object, I_UIC_Draggable, I_UIC_Clic
 
     public bool DisableClick => false;
 
-    UIC_Line connectionUILine;
+    UIC_Line connectionUILine = new UIC_Line();
     UISpline connectionUISpline;
 
     public UIC_LineRenderer uILineRenderer;
@@ -58,7 +58,7 @@ public class UIC_Node : MonoBehaviour, I_UIC_Object, I_UIC_Draggable, I_UIC_Clic
     public UIC_Node lastFoundNode;
     UIC_Node closestFoundNode;
 
-    public List<UIC_Connection> connectionsList;
+    public List<UIC_Connection> connectionsList = new List<UIC_Connection>();
 
     void OnValidate()
     {
@@ -77,9 +77,9 @@ public class UIC_Node : MonoBehaviour, I_UIC_Object, I_UIC_Draggable, I_UIC_Clic
         Init();
 
         imageCurrentIcon.color = iconColorDefault;
-        connectionsList = new List<UIC_Connection>();
+        // connectionsList 
 
-        connectionUILine = new UIC_Line();
+        // connectionUILine = ;
         connectionUILine.animation.isActive = false;
     }
 
@@ -131,6 +131,7 @@ public class UIC_Node : MonoBehaviour, I_UIC_Object, I_UIC_Draggable, I_UIC_Clic
     {
         if (connectionsList.Count > 0)
         {
+
             imageCurrentIcon.sprite = iconConnected;
             imageCurrentIcon.color = iconColorConnected;
         }
