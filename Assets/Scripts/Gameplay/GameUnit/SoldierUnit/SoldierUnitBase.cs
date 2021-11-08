@@ -148,6 +148,18 @@ namespace Gameplay.GameUnit.SoldierUnit
             //TODO 未完善
             switch (buffType)
             {
+                case BuffNumericalValueType.Defence:
+                    if (isAdditionalValue)
+                        this.defence.AddAdditionalValue((int)value);
+                    else
+                        this.defence.AddMagnification(value);
+                    break;
+                case BuffNumericalValueType.Productivity:
+                    if (isAdditionalValue)
+                        this.productivity.AddAdditionalValue((int)value);
+                    else
+                        this.productivity.AddMagnification(value);
+                    break;
                 default:
                     throw new UnityException("未找到Buff: " + buffType.ToString());
                     return false;

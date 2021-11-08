@@ -11,11 +11,12 @@ namespace Gameplay.TechTree
     [Serializable]
     public class TechTreeNode
     {
+        [HideInInspector]
         public                   TechTree           techTree;
         public                   int                nodeIdx;
         public                   Technology         technology;
-        [SerializeField] private List<TechTreeNode> _formerNodes = new List<TechTreeNode>();
-        [SerializeField] private List<TechTreeNode> _afterNodes  = new List<TechTreeNode>();
+        [HideInInspector] private List<TechTreeNode> _formerNodes = new List<TechTreeNode>();
+        [HideInInspector] private List<TechTreeNode> _afterNodes  = new List<TechTreeNode>();
 
         public List<TechTreeNode> AfterNodes  => _afterNodes;
         public List<TechTreeNode> FormerNodes => _formerNodes;
@@ -26,6 +27,7 @@ namespace Gameplay.TechTree
         public TechTreeNode(TechTree techTree)
         {
             this.techTree = techTree;
+            this.Generate();
         }
         
         public TechTreeNode(TechTree techTree, Technology technology,List<TechTreeNode> formerNodes, TechDevelopFunc developingFunc = null, TechDevelopFunc readyFunc = null, TechDevelopFunc developedFunc = null)
@@ -40,6 +42,9 @@ namespace Gameplay.TechTree
                 TechReadyEvent      += readyFunc;
             if(developedFunc != null)
                 TechDevelopedEvent  += developedFunc;
+            
+            this.Generate();
+
         }
 
         public TechTreeNode(TechTree techTree, Technology technology, TechTreeNode[] formerNodes, TechDevelopFunc developingFunc = null, TechDevelopFunc readyFunc = null, TechDevelopFunc developedFunc = null)
@@ -58,6 +63,9 @@ namespace Gameplay.TechTree
                 TechReadyEvent += readyFunc;
             if(developedFunc != null)
                 TechDevelopedEvent += developedFunc;
+            
+            this.Generate();
+
         }
         public void AddAfterNode(TechTreeNode node)
         {
@@ -90,7 +98,7 @@ namespace Gameplay.TechTree
         private bool  _isDevelopable  = false;
         private float _developProcess = 0f;
 
-        public float Process => DevelopProcess / this.technology.CostTime;
+        public float Process => IsReady ? 1 : DevelopProcess / this.technology.CostTime;
         public float DevelopProcess
         {
             get => _developProcess;
@@ -154,9 +162,9 @@ namespace Gameplay.TechTree
             if (_isReady) return;
             this.DevelopProcess += developSpeed * Time.fixedDeltaTime;
             
-            this.CurCostFood    =  (int)Mathf.Ceil(Mathf.Lerp(technology.MaxCostFood, technology.MinCostFood, DevelopProcess));
-            this.CurCostWood    =  (int)Mathf.Ceil(Mathf.Lerp(technology.MaxCostWood, technology.MinCostWood, DevelopProcess));
-            this.CurCostGold    =  (int)Mathf.Ceil(Mathf.Lerp(technology.MaxCostGold, technology.MinCostGold, DevelopProcess));
+            this.CurCostFood    =  (int)Mathf.Ceil(Mathf.Lerp(technology.MaxCostFood, technology.MinCostFood, Process));
+            this.CurCostWood    =  (int)Mathf.Ceil(Mathf.Lerp(technology.MaxCostWood, technology.MinCostWood, Process));
+            this.CurCostGold    =  (int)Mathf.Ceil(Mathf.Lerp(technology.MaxCostGold, technology.MinCostGold, Process));
 
             this.TechDevelopingEvent?.Invoke(this);
         }
@@ -166,9 +174,9 @@ namespace Gameplay.TechTree
             if (_isReady) return;
             this.DevelopProcess += (developSpeed + additionalSpeed) * magnificationSpeed * Time.fixedDeltaTime;
             
-            this.CurCostFood    =  (int)Mathf.Ceil(Mathf.Lerp(technology.MaxCostFood, technology.MinCostFood, DevelopProcess));
-            this.CurCostWood    =  (int)Mathf.Ceil(Mathf.Lerp(technology.MaxCostWood, technology.MinCostWood, DevelopProcess));
-            this.CurCostGold    =  (int)Mathf.Ceil(Mathf.Lerp(technology.MaxCostGold, technology.MinCostGold, DevelopProcess));
+            this.CurCostFood    =  (int)Mathf.Ceil(Mathf.Lerp(technology.MaxCostFood, technology.MinCostFood, Process));
+            this.CurCostWood    =  (int)Mathf.Ceil(Mathf.Lerp(technology.MaxCostWood, technology.MinCostWood, Process));
+            this.CurCostGold    =  (int)Mathf.Ceil(Mathf.Lerp(technology.MaxCostGold, technology.MinCostGold, Process));
             
             this.TechDevelopingEvent?.Invoke(this);
         }

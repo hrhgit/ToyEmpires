@@ -11,11 +11,15 @@
         Speed,
 
         //生产
+        Productivity,
         CostFood,
         CostGold,
         CostWood,
         CostTime,
         MaxReserveCount,
+        MaxLoadWood,
+        MaxLoadFood,
+        MaxLoadGold,
         
         //战斗
         Attack,
@@ -27,6 +31,7 @@
         ThrowingSpeed,
         ThrowingInterval,
         Accuracy,
+
         
     }
 

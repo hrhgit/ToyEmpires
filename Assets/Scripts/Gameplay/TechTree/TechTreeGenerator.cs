@@ -18,11 +18,11 @@ namespace Gameplay.TechTree
                                                                                                                                                   ),
                                                                                                                               new TechTreeNodeStat(techTree,
                                                                                                                                                    new[] { 0 },
-                                                                                                                                                   TechGenerator.GenerateTechnology(0)
+                                                                                                                                                   TechGenerator.GenerateTechnology(1)
                                                                                                                                                   ),
                                                                                                                               new TechTreeNodeStat(techTree,
                                                                                                                                                    new[] { 0 },
-                                                                                                                                                   TechGenerator.GenerateTechnology(0)
+                                                                                                                                                   TechGenerator.GenerateTechnology(2)
                                                                                                                                                   ),
                                                                                                                               new TechTreeNodeStat(techTree,
                                                                                                                                                    new[] { 1 },
@@ -30,11 +30,11 @@ namespace Gameplay.TechTree
                                                                                                                                                   ),
                                                                                                                               new TechTreeNodeStat(techTree,
                                                                                                                                                    new[] { 1 },
-                                                                                                                                                   TechGenerator.GenerateTechnology(0)
+                                                                                                                                                   TechGenerator.GenerateTechnology(1)
                                                                                                                                                   ),
                                                                                                                               new TechTreeNodeStat(techTree,
                                                                                                                                                    new[] { 1, 2 },
-                                                                                                                                                   TechGenerator.GenerateTechnology(0)
+                                                                                                                                                   TechGenerator.GenerateTechnology(2)
                                                                                                                                                   ),
 
                                                                                                                           });

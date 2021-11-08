@@ -98,14 +98,14 @@ public class UIC_Manager : MonoBehaviour
         Awake();
     }
 
-    void Awake()
+    public void Awake()
     {
         // canvas = GetComponent<Canvas>();
         canvasRectTransform = canvas.GetComponent<RectTransform>();
         pointer = GetComponentInChildren<UIC_Pointer>();
     }
 
-    void Start()
+    public void Start()
     {
         _entityList = new List<UIC_Entity>();
         UpdateEntityList();

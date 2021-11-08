@@ -6,6 +6,7 @@ using Gameplay;
 using Gameplay.TechTree;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace GameUI.TechTreeUI
@@ -27,9 +28,14 @@ namespace GameUI.TechTreeUI
 
         private void Update()
         {
-            foreach (UIC_Connection conn in connectionManager.ConnectionsList)
+            // foreach (UIC_Connection conn in connectionManager.ConnectionsList)
+            // {
+            //     conn.UpdateLine();
+            // }
+            if (_isTracing)
             {
-                conn.UpdateLine();
+                this.TraceDetail();
+
             }
         }
 
@@ -65,6 +71,7 @@ namespace GameUI.TechTreeUI
 
         public void Clear()
         {
+            connectionManager.sta
             connectionManager.EntityList.Clear();
             connectionManager.ConnectionsList.Clear();
             this.techTreeNodeUis.Clear();
@@ -75,9 +82,11 @@ namespace GameUI.TechTreeUI
                 if(!isNode) continue;
                 DestroyImmediate(this.nodesRect.transform.GetChild(i).gameObject);
             }
+            
         }
         public void GenerateLayout(TechTree techTree)
         {
+            // panel.SetActive(true);
             Clear();
             List<TechTreeNodeUI> nodeUIList = new List<TechTreeNodeUI>();
             var depthGroup = (from node in techTree.techTreeNodes.NodeList
@@ -97,9 +106,11 @@ namespace GameUI.TechTreeUI
                 for (int i = 0; i < depthGrp.nodes.Count; i++)
                 {
                     TechTreeNodeUI node     = Instantiate<TechTreeNodeUI>(nodeUiPrefab, nodesRect.transform);
-                    // TechData       techData = GetTechData(depthGrp.nodes[i].technology.technologyID);
-                    // node.techName   = techData.techName;
-                    // node.techDetail = techData.techContent;
+                    TechData       techData = GetTechData(depthGrp.nodes[i].technology.technologyID);
+                    node.techTreePanelUI = this;
+                    node.techName        = techData.techName;
+                    node.techDetail      = techData.techContent;
+                    node.techID          = depthGrp.nodes[i].technology.technologyID;
                     nodeUIList.Add(node);
                     RectTransform  nodeRect = node.gameObject.GetComponent<RectTransform>();
                     node.techTreeNode         = depthGrp.nodes[i];
@@ -112,6 +123,7 @@ namespace GameUI.TechTreeUI
             GenerateNodeLinks(nodeUIList);
             GenerateNodes(nodeUIList);
             GenerateConection();
+            // panel.SetActive(false);
         }
         
         public void GenerateNodes(List<TechTreeNodeUI> nodeUIList)
@@ -170,27 +182,72 @@ namespace GameUI.TechTreeUI
         #region 详情
 
         [Header("Content")]
-        public RectTransform DetailRect;
-        public Text DetailNameTextUI;
-        public Text DetailTextUI;
-        public Text DetailCostTextUI;
-        public Text DetailProcessTextUI;
+        public RectTransform detailCanvasRect;
+        public RectTransform detailRect;
+        public Text          detailNameTextUI;
+        public Text          detailTextUI;
+        public Text          detailCostTextUI;
+        public Text          detailProcessTextUI;
 
         private TechData GetTechData(int techIdx)
         {
-            int         policyID  = techTree.techTreeNodes[techIdx].technology.technologyID;
+            int         techID  = techTree.techTreeNodes[techIdx].technology.technologyID;
             TextAsset   textAsset = (TextAsset)Resources.Load("Data/Tech/TechData0");
             XmlDocument xmlDoc    = new XmlDocument();
             xmlDoc.LoadXml(textAsset.text);
-            XmlNode policyXml = xmlDoc.GetElementById("p" + policyID);
+            XmlNode policyXml = xmlDoc.GetElementById("t" + techID.ToString("d4"));
             return new TechData(techIdx, techTree.techTreeNodes[techIdx].technology, policyXml["Name"].InnerText.Trim(), policyXml["Content"].InnerText.Trim());
         }
 
+        private bool           _isTracing = false;
+        private TechTreeNodeUI _curShowNode;
         public void ShowDetail(TechTreeNodeUI nodeUI)
         {
-            this.DetailNameTextUI.text  = nodeUI.techName;
-            this.DetailTextUI.text      = nodeUI.techDetail;
-            DetailRect.gameObject.SetActive(true);
+            _curShowNode               = nodeUI;
+            this.detailNameTextUI.text = _curShowNode.techName;
+            this.detailTextUI.text     = _curShowNode.techDetail;
+            _isTracing                 = true;
+            detailRect.gameObject.SetActive(true);
+        }
+
+        public void CloseDetail()
+        {
+            _isTracing = false;
+            detailRect.gameObject.SetActive(false);
+        }
+
+        private bool _isRightPanel = true;
+        public void TraceDetail()
+        {
+            Vector2 mousePos;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(detailCanvasRect, Input.mousePosition, null, out mousePos);
+            detailRect.pivot         = new Vector2(_isRightPanel ? 0 : 1, 1);
+            detailRect.localPosition = mousePos;
+            if (-detailRect.offsetMax.x < -60) //Right
+                _isRightPanel = false;
+            else if(detailRect.offsetMin.x < -60) //Left
+                _isRightPanel = true;
+
+            this.detailProcessTextUI.text = (_curShowNode.techTreeNode.Process * 100).ToString("f0") + "%";
+            this.detailCostTextUI.text = "当前购买需要花费 <color=#2A8533>" + _curShowNode.techTreeNode.CurCostWood + "木+" +
+                                         _curShowNode.techTreeNode.CurCostFood + "食</color> 或 <color=#E99F20>" +
+                                         _curShowNode.techTreeNode.CurCostGold + "金</color>";
+
+        }
+
+        #endregion
+
+        #region 开关
+
+        public GameObject panel;
+        public void Open()
+        {
+            panel.SetActive(true);
+        }
+
+        public void Close()
+        {
+            panel.SetActive(false);
         }
 
         #endregion

@@ -124,6 +124,8 @@ namespace Gameplay.Player
         public           UnitStatus   workerStatus;
         private readonly int[]        _activeResourceWorkerCount = new int[]{0, 0, 0};
         private readonly List<Worker> _instanceWorkersList       = new List<Worker>();
+        
+        public List<Worker> InstanceWorkersList => _instanceWorkersList;
 
         public void DispatchWorker(ResourceType resourceType, bool isAdd)
         {
@@ -177,7 +179,7 @@ namespace Gameplay.Player
                                       _                 => throw new ArgumentOutOfRangeException(nameof(resourceType), resourceType, null)
                                   };
             ((Worker) workerUnit).WorkerLoadDoneFunc += WorkerLoadDone;
-            _instanceWorkersList.Add( ((Worker) workerUnit));
+            InstanceWorkersList.Add( ((Worker) workerUnit));
             workerUnit.DeathEvent.AddListener((u =>
                                                {
                                                    _activeResourceWorkerCount[(int)resourceType]--;
@@ -185,7 +187,7 @@ namespace Gameplay.Player
                                                    roadUnitsCount[(int)resourceType]--;
                                                    workerStatus.curUnitCount--;
                                                    workerStatus.totalUnitCount--;
-                                                   _instanceWorkersList.Remove( ((Worker) u));
+                                                   InstanceWorkersList.Remove( ((Worker) u));
                                                }));
             
             _activeResourceWorkerCount[(int) resourceType]++;
@@ -365,7 +367,7 @@ namespace Gameplay.Player
 
         public void AddUnitsBuff(BuffBase buff)
         {
-            this._instanceWorkersList.ForEach((worker => worker.BuffContainer.AddBuff(buff)));
+            this.InstanceWorkersList.ForEach((worker => worker.BuffContainer.AddBuff(buff)));
             this._instanceUnitsList.ForEach((unit => unit.BuffContainer.AddBuff(buff)));
         }
 
@@ -407,6 +409,8 @@ namespace Gameplay.Player
             get => policyCapacity;
         }
 
+        
+
 
         public void ActivatePolicy(PolicyBase policyBase)
         {
@@ -435,13 +439,13 @@ namespace Gameplay.Player
             
             if (_activatedPolicies.Contains(policyBase))
             {
-                policyBase.playerBuffs.ForEach((buff =>
+                policyBase.playerBuffs?.ForEach((buff =>
                                                 {
                                                     BuffContainer.RemoveBuff(buff);
                                                 }));
-                policyBase.unitBuffs.ForEach((buff =>
+                policyBase.unitBuffs?.ForEach((buff =>
                                               {
-                                                  this._instanceWorkersList.ForEach((worker => worker.BuffContainer.RemoveBuff(buff)));
+                                                  this.InstanceWorkersList.ForEach((worker => worker.BuffContainer.RemoveBuff(buff)));
                                                   this._instanceUnitsList.ForEach((unit => unit.BuffContainer.RemoveBuff(buff)));
                                               }));
                 _activatedPolicies.Remove(policyBase);
@@ -486,11 +490,11 @@ namespace Gameplay.Player
         }
         public void ActivateTech(Technology tech)
         {
-            tech.playerBuffs.ForEach((buff =>
+            tech.playerBuffs?.ForEach((buff =>
                                       { 
                                           this.BuffContainer.AddBuff(buff);
                                       }));
-            tech.unitBuffs.ForEach((buff =>
+            tech.unitBuffs?.ForEach((buff =>
                                     { 
                                         this.AddUnitsBuff(buff);
                                     }));

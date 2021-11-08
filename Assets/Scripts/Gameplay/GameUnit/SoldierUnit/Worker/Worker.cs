@@ -133,6 +133,24 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
             {
                 switch (buffType)
                 {
+                    case BuffNumericalValueType.MaxLoadFood:
+                        if (isAdditionalValue)
+                            this._costFood.AddAdditionalValue((int)value);
+                        else
+                            this._costFood.AddMagnification(value);
+                        break;
+                    case BuffNumericalValueType.MaxLoadWood:
+                        if (isAdditionalValue)
+                            this._costWood.AddAdditionalValue((int)value);
+                        else
+                            this._costWood.AddMagnification(value);
+                        break;
+                    case BuffNumericalValueType.MaxLoadGold:
+                        if (isAdditionalValue)
+                            this._costGold.AddAdditionalValue((int)value);
+                        else
+                            this._costGold.AddMagnification(value);
+                        break;
                     default:
                         throw new UnityException("未找到Buff: " + buffType.ToString());
                         return false;

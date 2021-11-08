@@ -19,8 +19,8 @@ namespace GameUI.TechTreeUI
         /// </summary>
         public UIC_Node   inNode;
         
-        public UIC_Entity entity;
-
+        public UIC_Entity           entity;
+        public TechTreePanelUI      techTreePanelUI;
         public List<TechTreeNodeUI> formerNodes = new List<TechTreeNodeUI>();
         public List<TechTreeNodeUI> afterNodes  = new List<TechTreeNodeUI>();
         public TechTreeNode         techTreeNode;
@@ -78,6 +78,16 @@ namespace GameUI.TechTreeUI
         public String techName;
         [TextArea]
         public String techDetail;
+
+        public void OnMouseIn()
+        {
+            this.techTreePanelUI.ShowDetail(this);
+        }
+        
+        public void OnMouseLeft()
+        {
+            this.techTreePanelUI.CloseDetail();
+        }
 
         #endregion
     }

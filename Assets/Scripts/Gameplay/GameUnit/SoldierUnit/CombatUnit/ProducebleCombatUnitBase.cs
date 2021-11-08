@@ -72,7 +72,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit
                         else
                             this._maxReserveCount.AddMagnification(value);
                         break;
-                    
+
                     default:
                         throw new UnityException("未找到Buff: " + buffType.ToString());
                         return false;
