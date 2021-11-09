@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace Gameplay.TechTree
 {
-    public delegate TechTreeNodeList GenerateTechTreeNodeList(TechTree techTree);
+    public delegate TechTreeNodeList GenerateTechTreeNodeListFunc(TechTree techTree);
     public static class TechTreeGenerator
     {
-        private static readonly Dictionary<int, GenerateTechTreeNodeList> _techTreeNodeListDict = new Dictionary<int, GenerateTechTreeNodeList>
+        private static readonly Dictionary<int, GenerateTechTreeNodeListFunc> _techTreeNodeListDict = new Dictionary<int, GenerateTechTreeNodeListFunc>
                                                                                   {
                                                                                       {0,((techTree) =>
                                                                                           {
@@ -34,7 +34,7 @@ namespace Gameplay.TechTree
                                                                                                                                                   ),
                                                                                                                               new TechTreeNodeStat(techTree,
                                                                                                                                                    new[] { 1, 2 },
-                                                                                                                                                   TechGenerator.GenerateTechnology(2)
+                                                                                                                                                   TechGenerator.GenerateTechnology(3)
                                                                                                                                                   ),
 
                                                                                                                           });

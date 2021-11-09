@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Gameplay.Buff;
+using Gameplay.Buildings;
 using Gameplay.GameUnit;
 using Gameplay.GameUnit.FortificationUnit;
 using Gameplay.GameUnit.SoldierUnit;
@@ -70,7 +71,9 @@ namespace Gameplay.Player
                     this.Gold += count;
                     break;
                 case ResourceType.Wood:
-                    this.Wood += count;
+                    //TODO 粗暴地把木头换成了食物
+                    this.Food += count;
+                    // this.Wood += count;
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(resourceType), resourceType, null);
@@ -91,17 +94,42 @@ namespace Gameplay.Player
         /// <returns></returns>
         public int CanAfford(IProduceable u,int count)
         {
-            uint r = 00;
+            uint r = 0x00;
             
             if (this.CanAfford(0, 0, u.CostGold * count))
             {
-                r |= 01;
+                r |= 0x01;
             }
             if (this.CanAfford(u.CostFood * count, u.CostWood * count, 0))
             {
-                r |= 010;
+                r |= 0x03;
             }
 
+            return (int)r;
+        }
+        
+        /// <summary>
+        /// 是否能承担建筑的成本
+        /// 0 =》 不能
+        /// 1 =》 用黄金
+        /// 2 =》 用食物木材
+        /// 3 =》 黄金/食物木材 都可以
+        /// </summary>
+        /// <param name="b">建筑</param>
+        /// <param name="count">数量</param>
+        /// <returns></returns>
+        public int CanAfford(Building b,int count = 1)
+        {
+            uint r = 0x00;
+            
+            if (this.CanAfford(0, 0, b.BuildingCostGold * count))
+            {
+                r |= 0x01;
+            }
+            if (this.CanAfford(b.BuildingCostFood * count, b.BuildingCostWood * count, 0))
+            {
+                r |= 0x03;
+            }
             return (int)r;
         }
 
@@ -116,9 +144,10 @@ namespace Gameplay.Player
         [Header("工人")]
         //Workers
         public int maxWorkerCount;
-        public int             initWorkerCount;
-        public SoldierUnitBase workerPrefab;
-        public UnityEvent      onWorkerProduce = new UnityEvent();
+        public                   int             initWorkerCount;
+        public                   SoldierUnitBase workerPrefab;
+        public                   UnityEvent      onWorkerProduce = new UnityEvent();
+        [HideInInspector] public Transform[]     resourceHome;
         
         public readonly  int[]        ResourceWorkerCount = new int[]{0, 0, 0};
         public           UnitStatus   workerStatus;
@@ -189,6 +218,8 @@ namespace Gameplay.Player
                                                    workerStatus.totalUnitCount--;
                                                    InstanceWorkersList.Remove( ((Worker) u));
                                                }));
+            workerUnit.BuffContainer.buffList = this.workerPrefab.BuffContainer.buffList;
+            workerUnit.BuffContainer.ApplyBuff();
             
             _activeResourceWorkerCount[(int) resourceType]++;
             workerUnit.gameObject.SetActive(true);
@@ -222,13 +253,25 @@ namespace Gameplay.Player
 
         private void InitWorker()
         {
-            workerPrefab                = Instantiate(workerPrefab,BattleGameManager.BattleGameManagerInstance.tempParent);
+            resourceHome = new Transform[]
+                           {
+                               this.topPos, this.midPos, this.botPos
+                           };
+
+            workerPrefab = Instantiate(workerPrefab, BattleGameManager.BattleGameManagerInstance.tempParent);
             workerPrefab.gameObject.SetActive(false);
             workerStatus.freeUnitCount  = this.initWorkerCount;
             workerStatus.totalUnitCount = this.initWorkerCount;
         }
-        
 
+        public void ChangeResourceHome(Road road, Transform newHome, bool isMandatory = false)
+        {
+            this.resourceHome[(int)road] = newHome;
+            (from worker in this._instanceWorkersList
+             where worker.UnitRoad == road
+             select worker).ToList().ForEach((worker => worker.ChangeHomePos(newHome, isMandatory)));
+        }
+        
         #endregion
 
         
@@ -240,11 +283,12 @@ namespace Gameplay.Player
         public List<SoldierUnitBase>                                     unitPrefabList         = new List<SoldierUnitBase>();
         public List<UnityEvent<SoldierUnitBase, PlayerBase, UnitStatus>> onUnitProduceEventList = new List<UnityEvent<SoldierUnitBase, PlayerBase, UnitStatus>>();
 
-        private readonly List<SoldierUnitBase> _instanceUnitsList = new List<SoldierUnitBase>();
+        [SerializeField]private  List<SoldierUnitBase> _instanceUnitsList = new List<SoldierUnitBase>();
 
         public List<UnitStatus> UnitStatusList { get; private set; } = new List<UnitStatus>();
 
-        public int CurUnitPopulation { get; private set; } = 0;
+        public int                   CurUnitPopulation { get; private set; } = 0;
+        public List<SoldierUnitBase> InstanceUnitsList => _instanceUnitsList;
 
 
 
@@ -301,9 +345,11 @@ namespace Gameplay.Player
                 float           r            = _dispatchOffset * Random.Range(0f, 1f);
                 Vector3         exactPos     = parent.position + new Vector3(r * Mathf.Cos(angle), 0, r * Mathf.Sin(angle));
                 SoldierUnitBase unitInstance = Instantiate(unit, exactPos, Quaternion.Euler(0, 0, 0), parent);
-                unitInstance.UnitTeam = this.playerTeam;
-                unitInstance.UnitRoad = road;
-                _instanceUnitsList.Add(unitInstance);
+                unitInstance.UnitTeam               = this.playerTeam;
+                unitInstance.UnitRoad               = road;
+                unitInstance.BuffContainer.buffList = unit.BuffContainer.buffList;
+                unitInstance.BuffContainer.ApplyBuff();
+                InstanceUnitsList.Add(unitInstance);
                 try
                 {
                     IDefenable defenable = (IDefenable)unitInstance;
@@ -314,7 +360,7 @@ namespace Gameplay.Player
                                                           s.curUnitCount--;
                                                           s.totalUnitCount--;
                                                           this.roadUnitsCount[(int)road]++;
-                                                          this._instanceUnitsList.Remove((SoldierUnitBase)u);
+                                                          this.InstanceUnitsList.Remove((SoldierUnitBase)u);
                                                       }));
                 }
                 catch (Exception e)
@@ -335,6 +381,30 @@ namespace Gameplay.Player
         {
             DispatchUnits(unitPrefabList[index], count, road, UnitStatusList[index]);
         }
+
+        #endregion
+
+        #region 维护
+
+        // [Header("维护")]
+        
+        
+        public bool Maintain(SoldierUnitBase soldierUnitBase)
+        {
+            int totalMaintenanceCost = soldierUnitBase.MaintenanceCostFood;
+            if (this.Food >= totalMaintenanceCost)
+            {
+                this.AddResource(ResourceType.Food, -totalMaintenanceCost);
+                return true;
+            }
+            else
+            {
+                this.AddResource(ResourceType.Food, -this.Food);
+                return false;
+            }
+        }
+
+        
 
         #endregion
 
@@ -367,8 +437,10 @@ namespace Gameplay.Player
 
         public void AddUnitsBuff(BuffBase buff)
         {
+            this.workerPrefab.BuffContainer.AddBuff(buff);
+            this.unitPrefabList.ForEach((unit => unit.BuffContainer.AddBuff(buff)));
             this.InstanceWorkersList.ForEach((worker => worker.BuffContainer.AddBuff(buff)));
-            this._instanceUnitsList.ForEach((unit => unit.BuffContainer.AddBuff(buff)));
+            this.InstanceUnitsList.ForEach((unit => unit.BuffContainer.AddBuff(buff)));
         }
 
 
@@ -446,7 +518,7 @@ namespace Gameplay.Player
                 policyBase.unitBuffs?.ForEach((buff =>
                                               {
                                                   this.InstanceWorkersList.ForEach((worker => worker.BuffContainer.RemoveBuff(buff)));
-                                                  this._instanceUnitsList.ForEach((unit => unit.BuffContainer.RemoveBuff(buff)));
+                                                  this.InstanceUnitsList.ForEach((unit => unit.BuffContainer.RemoveBuff(buff)));
                                               }));
                 _activatedPolicies.Remove(policyBase);
                 _curPolicyActivatedCount -= policyBase.occupancy;
@@ -459,6 +531,7 @@ namespace Gameplay.Player
 
         [Header("科技")] 
         public TechTree.TechTree techTree;
+
         public bool PurchaseTechNode(int nodeIdx,bool isUseGold)
         {
             TechTreeNode techNode = techTree.techTreeNodes[nodeIdx];
@@ -495,11 +568,18 @@ namespace Gameplay.Player
                                           this.BuffContainer.AddBuff(buff);
                                       }));
             tech.unitBuffs?.ForEach((buff =>
-                                    { 
+                                    {
                                         this.AddUnitsBuff(buff);
                                     }));
 
         }
+
+        #endregion
+
+        #region 建筑
+
+        [Header("建筑")]
+        public BuildingsManager buildingManager;
 
         #endregion
 
@@ -522,6 +602,7 @@ namespace Gameplay.Player
 
         private void FixedUpdate()
         {
+
             ProduceWorker();
             ProduceUnit();
         }

@@ -28,6 +28,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit
 
         public int MaxReserveCount => _maxReserveCount;
 
+
         public void Produce(SoldierUnitBase unit, PlayerBase player, UnitStatus status)
         {
             if (status.freeUnitCount >= MaxReserveCount)
@@ -82,6 +83,7 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit
         }
 
         #endregion
+
 
     }
 }

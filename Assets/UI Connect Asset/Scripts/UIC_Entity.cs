@@ -54,7 +54,7 @@ public class UIC_Entity : MonoBehaviour, I_UIC_Object, I_UIC_Selectable, I_UIC_D
         parent = transform.parent;
     }
 
-    void OnValidate()
+    public void OnValidate()
     {
         Init();
 

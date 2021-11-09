@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 namespace Gameplay.TechTree
 {
-    [Serializable]
+    // [Serializable]
     public class TechTreeNodeList
     {
         public  UnityEvent<TechTreeNodeList> nodeListUpdateEvent = new UnityEvent<TechTreeNodeList>();
@@ -29,10 +29,10 @@ namespace Gameplay.TechTree
                 {
                     var formerNodes = (from idx in nodeStat.formerNodesIdxs
                                        select NodeList[idx]).ToList();
-                    for (int i = 0; i < nodeStat.formerNodesIdxs.Length; i++)
-                    {
-                        Debug.Log("former idx:" + nodeStat.formerNodesIdxs[i] + " : " + NodeList[i].nodeIdx);
-                    }
+                    // for (int i = 0; i < nodeStat.formerNodesIdxs.Length; i++)
+                    // {
+                    //     Debug.Log("former idx:" + nodeStat.formerNodesIdxs[i] + " : " + NodeList[i].nodeIdx);
+                    // }
                     // formerNodes = new List<TechTreeNode>();
                     AddNode(new TechTreeNode(nodeStat.techTree, nodeStat.tech,formerNodes, nodeStat.developingFunc, nodeStat.readyFunc, nodeStat.developedFunc));
                 }                

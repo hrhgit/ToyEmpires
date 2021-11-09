@@ -18,23 +18,26 @@ namespace Gameplay.GameUnit.FortificationUnit
         private                  bool             _isDeath;
         private                  IntBuffableValue _curHp = new IntBuffableValue();
 
-        public int MaxHp => _maxHp.Value;
+        public int MaxHp
+        {
+            get => _maxHp.Value;
+            protected set => _maxHp.Value = value;
+        }
+
         public int CurHp
         {
             get => _curHp.Value;
-            private set
+            protected set
             {
                 _curHp.Value = value;
                 if (_curHp.Value <= 0)
                 {
                     // _curHp = 0;
-                    IsDeath = true;
-                    Destroy(this.gameObject);
-                    DeathEvent.Invoke(this);
-                    
+                    Die();
                 }
             }
         }
+
 
         public bool IsDeath
         {
@@ -56,6 +59,14 @@ namespace Gameplay.GameUnit.FortificationUnit
         protected void InitHP()
         {
             this.CurHp = this.MaxHp;
+        }
+
+
+        protected virtual void Die()
+        {
+            IsDeath = true;
+            Destroy(this.gameObject);
+            DeathEvent.Invoke(this);
         }
 
         #endregion

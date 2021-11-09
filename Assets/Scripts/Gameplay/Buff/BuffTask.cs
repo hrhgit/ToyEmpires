@@ -3,24 +3,27 @@ using UnityEngine.Events;
 
 namespace Gameplay.Buff
 {
-    [Serializable]
+    // [Serializable]
     public class BuffTask
     {
-        public BuffBase              buff;
-        public float                 startTime;
-        public UnityEvent<BuffBase>  taskEvent;
-        public UnityAction<BuffBase> additionalAction;
+        public BuffBase                                buff;
+        public BuffContainerBase                       container;
+        public float                                   startTime;
+        public UnityEvent<BuffBase,BuffContainerBase>  taskEvent;
+        public UnityAction<BuffBase,BuffContainerBase> additionalAction;
         
-        public BuffTask(BuffBase buff, float startTime, UnityEvent<BuffBase> taskEvent)
+        public BuffTask(BuffBase buff, BuffContainerBase container,float startTime, UnityEvent<BuffBase,BuffContainerBase> taskEvent)
         {
             this.buff      = buff;
+            this.container = container;
             this.startTime = startTime;
             this.taskEvent = taskEvent;
         }
 
-        public BuffTask(BuffBase buff, float startTime, UnityEvent<BuffBase> taskEvent, UnityAction<BuffBase> additionalAction)
+        public BuffTask(BuffBase buff, BuffContainerBase container, float startTime, UnityEvent<BuffBase,BuffContainerBase> taskEvent, UnityAction<BuffBase,BuffContainerBase> additionalAction)
         {
             this.buff             = buff;
+            this.container        = container;
             this.startTime        = startTime;
             this.taskEvent        = taskEvent;
             this.additionalAction = additionalAction;
@@ -28,8 +31,8 @@ namespace Gameplay.Buff
 
         public virtual bool Run(float curTime)
         {
-            additionalAction.Invoke(buff);
-            taskEvent.Invoke(buff);
+            additionalAction.Invoke(buff, container);
+            taskEvent.Invoke(buff, container);
             return true;
         }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Gameplay.TechTree
 {
-    [Serializable]
+    // [Serializable]
     public class Technology
     {
         public int technologyID;

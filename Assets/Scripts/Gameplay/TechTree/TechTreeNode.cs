@@ -8,7 +8,7 @@ namespace Gameplay.TechTree
 {
     public delegate void TechDevelopFunc(TechTreeNode techTreeNode);
     
-    [Serializable]
+    // [Serializable]
     public class TechTreeNode
     {
         [HideInInspector]

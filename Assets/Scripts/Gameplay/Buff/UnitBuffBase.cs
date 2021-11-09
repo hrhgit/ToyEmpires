@@ -7,16 +7,15 @@ namespace Gameplay.Buff
 {
     public class UnitBuffBase : BuffBase
     {
-        public GameUnitBase activateUnit;
         public UnitBuffBase() : base()
         {
             
         }
-        public UnitBuffBase(List<UnityAction<BuffBase>> startEvent, List<UnityAction<BuffBase>> updateEvent, List<UnityAction<BuffBase>> stopEvent, float maxTime) : base(startEvent, updateEvent, stopEvent,maxTime)
+        public UnitBuffBase(List<UnityAction<BuffBase,BuffContainerBase>> startEvent, List<UnityAction<BuffBase,BuffContainerBase>> updateEvent, List<UnityAction<BuffBase,BuffContainerBase>> stopEvent, float maxTime) : base(startEvent, updateEvent, stopEvent,maxTime)
         {
             
         }
-        public UnitBuffBase(List<UnityAction<BuffBase>> startEvent, List<UnityAction<BuffBase>> stopEvent, bool isOneOff) : base(startEvent, stopEvent, isOneOff)
+        public UnitBuffBase(List<UnityAction<BuffBase,BuffContainerBase>> startEvent, List<UnityAction<BuffBase,BuffContainerBase>> stopEvent, bool isOneOff) : base(startEvent, stopEvent, isOneOff)
         {
             
         }

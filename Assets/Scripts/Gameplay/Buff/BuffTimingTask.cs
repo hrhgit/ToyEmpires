@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 namespace Gameplay.Buff
 {
-    [Serializable]
+    // [Serializable]
     public class BuffTimingTask : BuffTask
     {
         public float                 timing;
@@ -12,20 +12,20 @@ namespace Gameplay.Buff
         {
             if (curTime >= (startTime + timing))
             {
-                additionalAction.Invoke(buff);
-                taskEvent.Invoke(buff);
+                additionalAction.Invoke(buff,this.container);
+                taskEvent.Invoke(buff,this.container);
                 return true;
             }
 
             return false;
         }
 
-        public BuffTimingTask(BuffBase buff, float startTime, float timing, UnityEvent<BuffBase> taskEvent) : base(buff, startTime, taskEvent)
+        public BuffTimingTask(BuffBase buff, BuffContainerBase container, float startTime, float timing, UnityEvent<BuffBase,BuffContainerBase> taskEvent) : base(buff,container,startTime, taskEvent)
         {
             this.timing = timing;
         }
 
-        public BuffTimingTask(BuffBase buff, float startTime, float timing, UnityEvent<BuffBase> taskEvent, UnityAction<BuffBase> additionalAction) : base(buff, startTime, taskEvent, additionalAction)
+        public BuffTimingTask(BuffBase buff, BuffContainerBase container, float startTime, float timing, UnityEvent<BuffBase,BuffContainerBase> taskEvent, UnityAction<BuffBase,BuffContainerBase> additionalAction) : base(buff, container,startTime, taskEvent, additionalAction)
         {
             this.timing = timing;
         }

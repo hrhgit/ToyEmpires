@@ -66,12 +66,11 @@ namespace GameUI.TechTreeUI
 
         //高： +- 413
         //宽：1349
-        private static float _height = 400f;
+        private static float _height = 350f;
         private static float _width  = 1349f;
 
         public void Clear()
         {
-            connectionManager.sta
             connectionManager.EntityList.Clear();
             connectionManager.ConnectionsList.Clear();
             this.techTreeNodeUis.Clear();
@@ -87,6 +86,8 @@ namespace GameUI.TechTreeUI
         public void GenerateLayout(TechTree techTree)
         {
             // panel.SetActive(true);
+            connectionManager.OnValidate();
+
             Clear();
             List<TechTreeNodeUI> nodeUIList = new List<TechTreeNodeUI>();
             var depthGroup = (from node in techTree.techTreeNodes.NodeList
@@ -107,6 +108,7 @@ namespace GameUI.TechTreeUI
                 {
                     TechTreeNodeUI node     = Instantiate<TechTreeNodeUI>(nodeUiPrefab, nodesRect.transform);
                     TechData       techData = GetTechData(depthGrp.nodes[i].technology.technologyID);
+                    node.GetComponent<UIC_Entity>().OnValidate();
                     node.techTreePanelUI = this;
                     node.techName        = techData.techName;
                     node.techDetail      = techData.techContent;
@@ -130,14 +132,15 @@ namespace GameUI.TechTreeUI
         {
             nodeUIList.ForEach((nodeUI =>
                                 {
+                                    
                                     connectionManager.AddEntity(nodeUI.entity);
+                                    nodeUI.inNode.OnValidate();
+                                    nodeUI.outNode.OnValidate();
                                     nodeUI.entity.UicManager      = this.connectionManager;
                                     nodeUI.inNode.uILineRenderer  = this.connectionLineRenderer;
                                     nodeUI.outNode.uILineRenderer = this.connectionLineRenderer;
                                     nodeUI.inNode.entity          = nodeUI.entity;
                                     nodeUI.outNode.entity          = nodeUI.entity;
-                                    nodeUI.inNode.Init();
-                                    nodeUI.outNode.Init();
                                 }));
         }
 
@@ -189,14 +192,14 @@ namespace GameUI.TechTreeUI
         public Text          detailCostTextUI;
         public Text          detailProcessTextUI;
 
-        private TechData GetTechData(int techIdx)
+        private TechData GetTechData(int techId)
         {
-            int         techID  = techTree.techTreeNodes[techIdx].technology.technologyID;
+            int         techID    = techId;
             TextAsset   textAsset = (TextAsset)Resources.Load("Data/Tech/TechData0");
             XmlDocument xmlDoc    = new XmlDocument();
             xmlDoc.LoadXml(textAsset.text);
-            XmlNode policyXml = xmlDoc.GetElementById("t" + techID.ToString("d4"));
-            return new TechData(techIdx, techTree.techTreeNodes[techIdx].technology, policyXml["Name"].InnerText.Trim(), policyXml["Content"].InnerText.Trim());
+            XmlNode techXml = xmlDoc.GetElementById("t" + techID.ToString("d4"));
+            return new TechData(techXml["Name"].InnerText.Trim(), techXml["Content"].InnerText.Trim());
         }
 
         private bool           _isTracing = false;
@@ -229,8 +232,7 @@ namespace GameUI.TechTreeUI
                 _isRightPanel = true;
 
             this.detailProcessTextUI.text = (_curShowNode.techTreeNode.Process * 100).ToString("f0") + "%";
-            this.detailCostTextUI.text = "当前购买需要花费 <color=#2A8533>" + _curShowNode.techTreeNode.CurCostWood + "木+" +
-                                         _curShowNode.techTreeNode.CurCostFood + "食</color> 或 <color=#E99F20>" +
+            this.detailCostTextUI.text = "当前购买需要花费 <color=#E76868>" + _curShowNode.techTreeNode.CurCostFood + "食</color> 或 <color=#E99F20>" +
                                          _curShowNode.techTreeNode.CurCostGold + "金</color>";
 
         }

@@ -15,32 +15,15 @@ namespace Gameplay.Buff
         public bool isOneOff         = false;
         public bool isSuperimposable = false;
 
-        public bool IsActivated
-        {
-            get => _isActivated;
 
-            set
-            {
-                _isActivated = value;
-                if (_isActivated)
-                {
-                    this.Activate();
-                }
-                else
-                {
-                    this.Deactivate();
-                }
-            }
-        }
 
 
         public float maxTime;
+        
 
-        public BuffContainerBase container;
-
-        public  UnityEvent<BuffBase> buffStartEvent  = new UnityEvent<BuffBase>();
-        public  UnityEvent<BuffBase> buffUpdateEvent = new UnityEvent<BuffBase>();
-        public  UnityEvent<BuffBase> buffStopEvent   = new UnityEvent<BuffBase>();
+        public  UnityEvent<BuffBase,BuffContainerBase> buffStartEvent  = new UnityEvent<BuffBase,BuffContainerBase>();
+        public  UnityEvent<BuffBase,BuffContainerBase> buffUpdateEvent = new UnityEvent<BuffBase,BuffContainerBase>();
+        public  UnityEvent<BuffBase,BuffContainerBase> buffStopEvent   = new UnityEvent<BuffBase,BuffContainerBase>();
         
         private bool           _isActivated = false;
         private BuffTask       _updateTask;
@@ -51,7 +34,7 @@ namespace Gameplay.Buff
             
         }
 
-        private BuffBase(List<UnityAction<BuffBase>> startEvent, List<UnityAction<BuffBase>> updateEvent, List<UnityAction<BuffBase>> stopEvent)
+        private BuffBase(List<UnityAction<BuffBase,BuffContainerBase>> startEvent, List<UnityAction<BuffBase,BuffContainerBase>> updateEvent, List<UnityAction<BuffBase,BuffContainerBase>> stopEvent)
         {
             if (startEvent != null)
             {
@@ -66,46 +49,47 @@ namespace Gameplay.Buff
                 stopEvent.ForEach((action => this.buffStopEvent.AddListener(action)));
             }
         }
-        public BuffBase(List<UnityAction<BuffBase>> startEvent, List<UnityAction<BuffBase>> updateEvent, List<UnityAction<BuffBase>> stopEvent,float maxTime) : this(startEvent,updateEvent,stopEvent)
+        public BuffBase(List<UnityAction<BuffBase,BuffContainerBase>> startEvent, List<UnityAction<BuffBase,BuffContainerBase>> updateEvent, List<UnityAction<BuffBase,BuffContainerBase>> stopEvent,float maxTime) : this(startEvent,updateEvent,stopEvent)
         {
             isTimeLimited = true;
             this.maxTime  = maxTime;
         }
         
-        public BuffBase(List<UnityAction<BuffBase>> startEvent, List<UnityAction<BuffBase>> stopEvent, bool isOneOff) : this(startEvent,null,stopEvent)
+        public BuffBase(List<UnityAction<BuffBase,BuffContainerBase>> startEvent, List<UnityAction<BuffBase,BuffContainerBase>> stopEvent, bool isOneOff) : this(startEvent,null,stopEvent)
         {
             this.isOneOff = isOneOff;
         }
 
-        private void Activate()
+        public void Activate(BuffContainerBase container)
         {
-            buffStartEvent.Invoke(this);
+            buffStartEvent.Invoke(this,container);
             
+
             if (isOneOff)
             {
-                IsActivated = false;
+                Deactivate(container);
             }
-            else if(container.buffUpdateTaskList.Count > 0)
+            else if(container.buffUpdateTaskList.Count > 0) //存在更新任务
             {
-                _updateTask = new BuffTask(this, container.CurTime, buffUpdateEvent);
+                _updateTask = new BuffTask(this,container, container.CurTime, buffUpdateEvent);
                 container.buffUpdateTaskList.Add(_updateTask);
             }
 
             if (isTimeLimited)
             {
-                _timingTask = new BuffTimingTask(this, container.CurTime, maxTime, buffStopEvent, (buff =>
+                _timingTask = new BuffTimingTask(this, container,container.CurTime, maxTime, buffStopEvent, ((buff,container) =>
                                                                                                    {
-                                                                                                       buff.IsActivated = false;
+                                                                                                       Deactivate(container);
                                                                                                    }));
                 container.buffTimingTaskList.Add(_timingTask);
             }
 
                 
         }
-        
-        private void Deactivate()
+
+        public void Deactivate(BuffContainerBase container)
         {
-            buffStopEvent.Invoke(this);
+            buffStopEvent.Invoke(this,container);
             
             container.buffList.Remove(this);
             if(!isOneOff && container.buffUpdateTaskList.Count > 0)

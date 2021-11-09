@@ -178,12 +178,14 @@ MonoBehaviour:
   _maxHp:
     _value: 80
   _buffContainer: {fileID: -53160501156610556}
+  maintenanceCostFood:
+    _value: 2
   _costTime:
     _value: 8
   _costFood:
-    _value: 3
+    _value: 6
   _costWood:
-    _value: 4
+    _value: 0
   _costGold:
     _value: 2
   _costPopulation:

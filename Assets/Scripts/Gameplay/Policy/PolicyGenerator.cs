@@ -6,11 +6,11 @@ using UnityEngine.Events;
 
 namespace Gameplay.Policy
 {
-    public delegate PolicyBase GeneratePolicy();
+    public delegate PolicyBase GeneratePolicyFunc();
 
     public static class PolicyGenerator
     {
-        private static readonly Dictionary<int, GeneratePolicy> _policyDict = new Dictionary<int, GeneratePolicy>
+        private static readonly Dictionary<int, GeneratePolicyFunc> _policyDict = new Dictionary<int, GeneratePolicyFunc>
                                                                               {
                                                                                   {
                                                                                       2000, () =>
@@ -22,35 +22,35 @@ namespace Gameplay.Policy
                                                                                                            policyType = PolicyType.Military,
                                                                                                            playerBuffs = new List<PlayerBuffBase>
                                                                                                                          {
-                                                                                                                             new PlayerBuffBase(new List<UnityAction<BuffBase>>
+                                                                                                                             new PlayerBuffBase(new List<UnityAction<BuffBase,BuffContainerBase>>
                                                                                                                                                 {
-                                                                                                                                                    b =>
+                                                                                                                                                    (b, c) =>
                                                                                                                                                     {
                                                                                                                                                         var buff = b as PlayerBuffBase;
                                                                                                                                                         // Debug.Log(buff.activatePlayer);
-                                                                                                                                                        buff.activatePlayer.unitPrefabList.ForEach(u =>
-                                                                                                                                                                                                   {
-                                                                                                                                                                                                       if (u.unitID == 2000)
-                                                                                                                                                                                                       {
-                                                                                                                                                                                                           var swordsman = u as Swordsman;
-                                                                                                                                                                                                           swordsman.SetNumericalValueBuff(BuffNumericalValueType.CostTime, false, .5f);
-                                                                                                                                                                                                       }
-                                                                                                                                                                                                   });
+                                                                                                                                                        ((PlayerBuffContainer)c).player.unitPrefabList.ForEach(u =>
+                                                                                                                                                                                                               {
+                                                                                                                                                                                                                   if (u.unitID == 2000)
+                                                                                                                                                                                                                   {
+                                                                                                                                                                                                                       var swordsman = u as Swordsman;
+                                                                                                                                                                                                                       swordsman.SetNumericalValueBuff(BuffNumericalValueType.CostTime, false, .5f);
+                                                                                                                                                                                                                   }
+                                                                                                                                                                                                               });
                                                                                                                                                     }
-                                                                                                                                                }, new List<UnityAction<BuffBase>>
+                                                                                                                                                }, new List<UnityAction<BuffBase,BuffContainerBase>>
                                                                                                                                                    {
-                                                                                                                                                       b =>
+                                                                                                                                                       (b, c) =>
                                                                                                                                                        {
                                                                                                                                                            var buff = b as PlayerBuffBase;
                                                                                                                                                            // Debug.Log(buff.activatePlayer);
-                                                                                                                                                           buff.activatePlayer.unitPrefabList.ForEach(u =>
-                                                                                                                                                                                                      {
-                                                                                                                                                                                                          if (u.unitID == 2000)
-                                                                                                                                                                                                          {
-                                                                                                                                                                                                              var swordsman = u as Swordsman;
-                                                                                                                                                                                                              swordsman.SetNumericalValueBuff(BuffNumericalValueType.CostTime, false, 2f);
-                                                                                                                                                                                                          }
-                                                                                                                                                                                                      });
+                                                                                                                                                           ((PlayerBuffContainer)c).player.unitPrefabList.ForEach(u =>
+                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                      if (u.unitID == 2000)
+                                                                                                                                                                                                                      {
+                                                                                                                                                                                                                          var swordsman = u as Swordsman;
+                                                                                                                                                                                                                          swordsman.SetNumericalValueBuff(BuffNumericalValueType.CostTime, false, 2f);
+                                                                                                                                                                                                                      }
+                                                                                                                                                                                                                  });
                                                                                                                                                        }
                                                                                                                                                    }, false)
                                                                                                                              {
@@ -71,27 +71,27 @@ namespace Gameplay.Policy
                                                                                                            policyType = PolicyType.Military,
                                                                                                            playerBuffs = new List<PlayerBuffBase>
                                                                                                                          {
-                                                                                                                             new PlayerBuffBase(new List<UnityAction<BuffBase>>
+                                                                                                                             new PlayerBuffBase(new List<UnityAction<BuffBase,BuffContainerBase>>
                                                                                                                                                 {
-                                                                                                                                                    b =>
+                                                                                                                                                    (b, c) =>
                                                                                                                                                     {
                                                                                                                                                         var buff = b as PlayerBuffBase;
                                                                                                                                                         // Debug.Log(buff.activatePlayer);
-                                                                                                                                                        buff.activatePlayer.unitPrefabList.ForEach(u =>
-                                                                                                                                                                                                   {
-                                                                                                                                                                                                       if (u is ProducebleCombatUnitBase) ((ProducebleCombatUnitBase)u).SetNumericalValueBuff(BuffNumericalValueType.MaxReserveCount, true, 2);
-                                                                                                                                                                                                   });
+                                                                                                                                                        ((PlayerBuffContainer)c).player.unitPrefabList.ForEach(u =>
+                                                                                                                                                                                                               {
+                                                                                                                                                                                                                   if (u is ProducebleCombatUnitBase) ((ProducebleCombatUnitBase)u).SetNumericalValueBuff(BuffNumericalValueType.MaxReserveCount, true, 2);
+                                                                                                                                                                                                               });
                                                                                                                                                     }
-                                                                                                                                                }, new List<UnityAction<BuffBase>>
+                                                                                                                                                }, new List<UnityAction<BuffBase,BuffContainerBase>>
                                                                                                                                                    {
-                                                                                                                                                       b =>
+                                                                                                                                                       (b, c) =>
                                                                                                                                                        {
                                                                                                                                                            var buff = b as PlayerBuffBase;
                                                                                                                                                            // Debug.Log(buff.activatePlayer);
-                                                                                                                                                           buff.activatePlayer.unitPrefabList.ForEach(u =>
-                                                                                                                                                                                                      {
-                                                                                                                                                                                                          if (u is ProducebleCombatUnitBase) ((ProducebleCombatUnitBase)u).SetNumericalValueBuff(BuffNumericalValueType.MaxReserveCount, true, -2);
-                                                                                                                                                                                                      });
+                                                                                                                                                           ((PlayerBuffContainer)c).player.unitPrefabList.ForEach(u =>
+                                                                                                                                                                                                                  {
+                                                                                                                                                                                                                      if (u is ProducebleCombatUnitBase) ((ProducebleCombatUnitBase)u).SetNumericalValueBuff(BuffNumericalValueType.MaxReserveCount, true, -2);
+                                                                                                                                                                                                                  });
                                                                                                                                                        }
                                                                                                                                                    }, false)
                                                                                                                              {

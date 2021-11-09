@@ -120,7 +120,7 @@ namespace Gameplay.GameUnit.FortificationUnit
                 ThrowingEvent.Invoke(this,attackTarget);
                 yield return wfs;
             }
-            Debug.Log("Shoot Count:" );
+            // Debug.Log("Shoot Count:" );
             ThrowSingleObject(targetTransform, attackTarget);
             // this.UnitMover.EnableMove = true;
             if(attackTarget.IsDeath)

@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &1825016525507300698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5269115722522737761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 84705d0ccee672c40988fcea2d618e2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingID: 0
+  buildingUnit: {fileID: 1318602798505451005}
+  buildingsGroup: {fileID: 0}
+  manager: {fileID: 0}
+  maxLevel: 0
+  level: 0
+  buildingCostFood:
+    _value: 0
+  buildingCostWood:
+    _value: 0
+  buildingCostGold:
+    _value: 0
+  buildingCostTime:
+  - _value: 10
+  - _value: 20
+  - _value: 30
+  hp: e8030000d0070000b80b0000
+  OnBuildingSet:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBuildingBuilt:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBuildingAvailable:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBuildingUpgraded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnBuildingDestroy:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1001 &1081606438835988657
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1661133596212221341, guid: b936fe64024d4a94db44644a9a443a67, type: 3}
+      propertyPath: building
+      value: 
+      objectReference: {fileID: 1825016525507300698}
+    - target: {fileID: 2111692418932340044, guid: b936fe64024d4a94db44644a9a443a67, type: 3}
+      propertyPath: building
+      value: 
+      objectReference: {fileID: 1825016525507300698}
+    - target: {fileID: 5052207029230015696, guid: b936fe64024d4a94db44644a9a443a67, type: 3}
+      propertyPath: m_Name
+      value: Depot Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5052207029230015700, guid: b936fe64024d4a94db44644a9a443a67, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5052207029230015700, guid: b936fe64024d4a94db44644a9a443a67, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5052207029230015700, guid: b936fe64024d4a94db44644a9a443a67, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5052207029230015700, guid: b936fe64024d4a94db44644a9a443a67, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1475477066212025938, guid: b936fe64024d4a94db44644a9a443a67, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: b936fe64024d4a94db44644a9a443a67, type: 3}
+--- !u!1 &5269115722522737761 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5052207029230015696, guid: b936fe64024d4a94db44644a9a443a67, type: 3}
+  m_PrefabInstance: {fileID: 1081606438835988657}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1318602798505451005 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2111692418932340044, guid: b936fe64024d4a94db44644a9a443a67, type: 3}
+  m_PrefabInstance: {fileID: 1081606438835988657}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5269115722522737761}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee52cd34b9a54d9d8a345d1643323a01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

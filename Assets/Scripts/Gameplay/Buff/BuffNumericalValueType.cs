@@ -26,6 +26,9 @@
         AttackRange,
         AttackInterval,
         
+        //维护
+        MaintenanceTime,
+        
         //远程
         ThrowingCount,
         ThrowingSpeed,

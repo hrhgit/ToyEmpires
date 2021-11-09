@@ -81,6 +81,12 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
             this.UnitMover.Target = _workPos;
         }
 
+        public void ChangeHomePos(Transform newTransform, bool isMandatory)
+        {
+            if (_isReturning && (isMandatory || Vector3.Distance(this.transform.position, this._homePos.position) > Vector3.Distance(this.transform.position, newTransform.position)))
+                this.UnitMover.Target = newTransform;
+            this._homePos = newTransform;
+        }
         #endregion
 
 
@@ -186,15 +192,15 @@ namespace Gameplay.GameUnit.SoldierUnit.Worker
             {
                 case ResourceType.Food:
                     this._workPos = _player.foodWorkPos;
-                    this._homePos = _player.topPos;
+                    this._homePos = _player.resourceHome[0];
                     break;
                 case ResourceType.Gold:
                     this._workPos = _player.goldWorkPos;
-                    this._homePos = _player.midPos;
+                    this._homePos = _player.resourceHome[1];
                     break;
                 case ResourceType.Wood:
                     this._workPos = _player.woodWorkPos;
-                    this._homePos = _player.botPos;
+                    this._homePos = _player.resourceHome[2];
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

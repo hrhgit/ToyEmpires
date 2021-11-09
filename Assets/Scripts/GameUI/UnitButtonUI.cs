@@ -32,7 +32,9 @@ namespace GameUI
                                                              this.unitProduceBarUI.fillAmount = status.unitProduceProcess;
                                                          });
             _status                     = _player.UnitStatusList[unitIndex];
-            unitFoodWoodCostTextUI.text = ((IProduceable)_player.unitPrefabList[unitIndex]).CostFood + "食+" + ((IProduceable)_player.unitPrefabList[unitIndex]).CostWood + "木";
+            //TODO 粗暴地把木材换成了食物
+            // unitFoodWoodCostTextUI.text = ((IProduceable)_player.unitPrefabList[unitIndex]).CostFood + "食+" + ((IProduceable)_player.unitPrefabList[unitIndex]).CostWood + "木";
+            unitFoodWoodCostTextUI.text = ((IProduceable)_player.unitPrefabList[unitIndex]).CostFood + "食";
                 unitGoldCostTextUI.text = ((IProduceable)_player.unitPrefabList[unitIndex]).CostGold + "金";
         }
         

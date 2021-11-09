@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE root [
+        <!ELEMENT root ANY>
+        <!ELEMENT Building (Name+,Content+)>
+            <!ATTLIST Building 
+                    BID ID #REQUIRED
+            >
+        <!ELEMENT Name (#PCDATA) >
+        <!ELEMENT Content (#PCDATA)>
+]>
+<!---->
+<!-- ID [0000]-->
+<!---->
+
+<root>
+    <Building  BID="b0000"  >
+        <Name>
+            仓库
+        </Name>
+        <Content>
+            工人可以将资源直接储存至仓库中。
+        </Content>
+    </Building >
+</root>

@@ -9,7 +9,7 @@ using UnityEngine.Events;
 namespace Gameplay.GameUnit.SoldierUnit
 {
     public delegate void GameUnitEvent(SoldierUnitBase soldierUnitBase, PlayerBase playerBase,UnitStatus status);
-    public abstract class  SoldierUnitBase : GameUnitBase, IDefenable, IMovable, IBuffable<UnitBuffContainer>
+    public abstract class  SoldierUnitBase : GameUnitBase, IDefenable, IMovable, IMaintenanceRequired, IBuffable<UnitBuffContainer>
     {
         public override float UnitValue
         {
@@ -97,13 +97,12 @@ namespace Gameplay.GameUnit.SoldierUnit
                 if (_curHp.Value <= 0)
                 {
                     // _curHp = 0;
-                    IsDeath = true;
-                    Destroy(this.gameObject);
-                    DeathEvent.Invoke(this);
-                    
+                    Die();
                 }
             }
         }
+
+
 
         public bool IsDeath { get; private set; } = false;
 
@@ -129,6 +128,12 @@ namespace Gameplay.GameUnit.SoldierUnit
         {
             this.CurHp -= attacker.Attack - this.Defence;
             BeAttackedEvent?.Invoke(attacker, this);
+        }
+        protected virtual void Die()
+        {
+            IsDeath = true;
+            Destroy(this.gameObject);
+            DeathEvent.Invoke(this);
         }
 
 
@@ -160,6 +165,12 @@ namespace Gameplay.GameUnit.SoldierUnit
                     else
                         this.productivity.AddMagnification(value);
                     break;
+                case BuffNumericalValueType.MaintenanceTime:
+                    if (isAdditionalValue)
+                        this.maintenanceTime.AddAdditionalValue((int)value);
+                    else
+                        this.maintenanceTime.AddMagnification(value);
+                    break;
                 default:
                     throw new UnityException("未找到Buff: " + buffType.ToString());
                     return false;
@@ -170,6 +181,47 @@ namespace Gameplay.GameUnit.SoldierUnit
 
 
         #endregion
+        
+        #region 维护费用
+
+        [Header("维护费用")]
+        [SerializeField] private IntBuffableValue maintenanceCostFood = new IntBuffableValue(0);
+        [SerializeField] private FloatBuffableValue maintenanceTime = new FloatBuffableValue(5f);
+        
+        private                  bool               _isWellResourced;
+        public                   int                MaintenanceCostFood => maintenanceCostFood;
+
+        protected      int          hungerBuffId = 240000;
+        public virtual UnitBuffBase NonResourceDeBuff => BuffGenerator.GenerateBuff(hungerBuffId) as UnitBuffBase;
+
+        private float _maintenanceTimer = 0f;
+
+        public virtual bool IsWellResourced
+        {
+            get => _isWellResourced;
+            set
+            {
+                if (value && !_isWellResourced)  //伙食改产
+                {
+                    this.BuffContainer.RemoveBuffByID(hungerBuffId);
+                }
+                else if(!value && _isWellResourced) //伙食变差
+                {
+                    this.BuffContainer.AddBuff(this.NonResourceDeBuff);
+                }
+
+                _isWellResourced = value;
+            }
+        }
+        
+
+        public void RequireMaintenance()
+        {
+            this.IsWellResourced = this.UnitSide.Maintain(this);
+        }
+
+        #endregion
+
 
         #region 杂项
 
@@ -185,5 +237,14 @@ namespace Gameplay.GameUnit.SoldierUnit
 
         #endregion
 
+        protected virtual void FixedUpdate()
+        {
+            _maintenanceTimer += Time.fixedDeltaTime;
+            if (_maintenanceTimer >= maintenanceTime)
+            {
+                RequireMaintenance();
+                _maintenanceTimer = 0f;
+            }
+        }
     }
 }

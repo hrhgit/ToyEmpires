@@ -201,7 +201,8 @@ namespace Gameplay.Player.AI
         private DispatchPlanDict[] SelectUnits(out UnitTmpData[] selectableUnitsOut)
         {
             int           populationAvailable = aiPlayer.maxBattleUnitCount - aiPlayer.CurUnitPopulation;
-            UnitTmpData[] selectableUnits     = aiPlayer.UnitStatusList.Where(status => status.freeUnitCount > 0).Select((status, index) => new UnitTmpData(index, aiPlayer.unitPrefabList[index], Mathf.Min(aiPlayer.Food / ((IProduceable)aiPlayer.unitPrefabList[index]).CostFood, aiPlayer.Wood / ((IProduceable)aiPlayer.unitPrefabList[index]).CostWood), aiPlayer.Gold / ((IProduceable)aiPlayer.unitPrefabList[index]).CostGold, status)).ToArray();
+            UnitTmpData[] selectableUnits     = aiPlayer.UnitStatusList.Where(status => status.freeUnitCount > 0).Select((status, index) => new UnitTmpData(index, aiPlayer.unitPrefabList[index], aiPlayer.Food / ((IProduceable)aiPlayer.unitPrefabList[index]).CostFood, aiPlayer.Gold / ((IProduceable)aiPlayer.unitPrefabList[index]).CostGold, status)).ToArray();
+            //TODO 粗暴地修改木材为食物
             DispatchPlanDict[] planDicts = Enumerable.Range(0, populationAvailable + 1).Select(i =>
                                                                                                    new DispatchPlanDict(selectableUnits.Select(j =>
                                                                                                                                                    new DispatchPlan(j.playerListidx, 0)).ToArray())

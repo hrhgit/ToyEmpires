@@ -24,15 +24,14 @@ namespace Gameplay.Buff
                     return;
             }
             buffList.Add(buff);
-            buff.container   = this;
-            
+
 
             if (IsBuffAccessible(buff))
             {
-                ((UnitBuffBase)buff).activateUnit = unit;
+                // ((UnitBuffBase)buff).activateUnit = unit;
             }
             
-            buff.IsActivated = true;
+            buff.Activate(this);
         }
 
         public virtual bool IsAvailableUnit(GameUnitBase u)

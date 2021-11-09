@@ -9,12 +9,12 @@ public class UIC_Manager : MonoBehaviour
 {
     // v2.0 - entity list not static to localize UIC to children
     // list of entities in the scene, used to improve performance of detections 
-    List<UIC_Entity> _entityList;
+    List<UIC_Entity>        _entityList = new List<UIC_Entity>();
     public List<UIC_Entity> EntityList { get => _entityList; }
 
     // v2.0 - made not static to localize UIC to children
     // list of connections in the scene, used to improve performance of detections
-    List<UIC_Connection> _connectionsList;
+    List<UIC_Connection>        _connectionsList =new List<UIC_Connection>();
     public List<UIC_Connection> ConnectionsList { get => _connectionsList; }
 
     // v2.0 - made not static to localize UIC to children
@@ -93,9 +93,11 @@ public class UIC_Manager : MonoBehaviour
         InitUILineRenderer();
     }
 
-    void OnValidate()
+    public void OnValidate()
     {
         Awake();
+        UpdateEntityList();
+        InitUILineRenderer();
     }
 
     public void Awake()
@@ -107,10 +109,7 @@ public class UIC_Manager : MonoBehaviour
 
     public void Start()
     {
-        _entityList = new List<UIC_Entity>();
         UpdateEntityList();
-        _connectionsList = new List<UIC_Connection>();
-
         InitUILineRenderer();
     }
 

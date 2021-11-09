@@ -17,12 +17,11 @@ namespace Gameplay.Buff
                     return;
             }
             buffList.Add(buff);
-            buff.container   = this;
             if (IsBuffAccessible(buff))
             {
-                ((PlayerBuffBase)buff).activatePlayer = player;
+                // ((PlayerBuffBase)buff).activatePlayer = player;
             }
-            buff.IsActivated = true;
+            buff.Activate(this);
         }
 
         protected override bool IsBuffAccessible(BuffBase buff)

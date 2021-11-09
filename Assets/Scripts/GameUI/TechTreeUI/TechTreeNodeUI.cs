@@ -25,9 +25,9 @@ namespace GameUI.TechTreeUI
         public List<TechTreeNodeUI> afterNodes  = new List<TechTreeNodeUI>();
         public TechTreeNode         techTreeNode;
         public Image                techImage;
-        public GameObject           outline;
-        public GameObject           goldBtn;
-        public GameObject           foodWoodBtn;
+        public Image                outline;
+        public Button           goldBtn;
+        public Button           foodWoodBtn;
 
         private void Update()
         {
@@ -38,28 +38,36 @@ namespace GameUI.TechTreeUI
                 this.outNode.connectionsList.ForEach((connection => connection.line.color             = new Color(1f,    1f,    1f)));
                 this.inNode.connectionsList.ForEach((connection => connection.line.color              = new Color(0.25f, 0.81f, 0.45f)));
                 this.inNode.connectionsList.ForEach((connection => connection.line.animation.isActive = false));
-                goldBtn.SetActive(false);
-                foodWoodBtn.SetActive(false);
-                outline.SetActive(true);
+                outline.color = new Color(0.25f, 0.81f, 0.45f);
+                goldBtn.gameObject.SetActive(false);
+                foodWoodBtn.gameObject.SetActive(false);
+                outline.gameObject.SetActive(true);
             }else if (this.techTreeNode.IsReady)
             {
-                this.inNode.connectionsList.ForEach((connection => connection.line.animation.isActive = false));
-                this.inNode.connectionsList.ForEach((connection => connection.line.color              = new Color(0.25f, 0.81f, 0.45f)));
-                goldBtn.SetActive(true);
-                foodWoodBtn.SetActive(true);
-                outline.SetActive(true);
+                this.outNode.connectionsList.ForEach((connection => connection.line.animation.isActive = false));
+                this.inNode.connectionsList.ForEach((connection => connection.line.animation.isActive  = false));
+                this.inNode.connectionsList.ForEach((connection => connection.line.color               = new Color(0.25f, 0.81f, 0.45f)));
+                outline.color = new Color(1f, 1f, 1f);
+                goldBtn.gameObject.SetActive(true);
+                foodWoodBtn.gameObject.SetActive(true);
+                goldBtn.interactable     = techTreePanelUI.techTree.player.CanAfford(0,                        0,                        techTreeNode.CurCostGold);
+                foodWoodBtn.interactable = techTreePanelUI.techTree.player.CanAfford(techTreeNode.CurCostFood, techTreeNode.CurCostWood, 0);
+                outline.gameObject.SetActive(true);
             }else if (this.techTreeNode.IsDevelopable)
             {
                 this.outNode.connectionsList.ForEach((connection => connection.line.animation.isActive = false));
                 this.inNode.connectionsList.ForEach((connection => connection.line.animation.isActive = true));
-                goldBtn.SetActive(true);
-                foodWoodBtn.SetActive(true);
+                goldBtn.gameObject.SetActive(true);
+                foodWoodBtn.gameObject.SetActive(true);
+                goldBtn.interactable     = techTreePanelUI.techTree.player.CanAfford(0,                        0,                        techTreeNode.CurCostGold);
+                foodWoodBtn.interactable = techTreePanelUI.techTree.player.CanAfford(techTreeNode.CurCostFood, techTreeNode.CurCostWood, 0);
+
             }
             else
             {
                 this.outNode.connectionsList.ForEach((connection => connection.line.animation.isActive = false));
-                goldBtn.SetActive(false);
-                foodWoodBtn.SetActive(false);
+                goldBtn.gameObject.SetActive(false);
+                foodWoodBtn.gameObject.SetActive(false);
                 // this.inNode.connectionsList.ForEach((connection => connection.line.color               = new Color(0.45f, 0.45f, 0.44f)));
             }
         }
@@ -68,8 +76,8 @@ namespace GameUI.TechTreeUI
         {
             if (techTreeNode.techTree.Purchase(techTreeNode.nodeIdx, useGold))
             {
-                goldBtn.SetActive(false);
-                foodWoodBtn.SetActive(false);
+                goldBtn.gameObject.SetActive(false);
+                foodWoodBtn.gameObject.SetActive(false);
             }
         }
 

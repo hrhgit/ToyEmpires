@@ -4,7 +4,7 @@ using Gameplay.Buff;
 
 namespace Gameplay.Policy
 {
-    [Serializable]
+    // [Serializable]
     public class PolicyBase
     {
         public int        policyID;

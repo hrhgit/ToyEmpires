@@ -8,8 +8,10 @@ namespace GameUI.UnitUI
 {
     public class UnitStatusBarUI : MonoBehaviour
     {
-        public  GameUnitBase unit;
-        public  Image        hpBarUI;
+        public static Color        blueHpColor = new Color(0.18f, 0.36f, 1f);
+        public static Color        redHpColor  = new Color(1f,    0.31f, 0.42f);
+        public        GameUnitBase unit;
+        public        Image        hpBarUI;
 
         private Camera      _camera;
         private Canvas      _canvas;
@@ -26,6 +28,12 @@ namespace GameUI.UnitUI
         private void Start()
         {
             _canvas.worldCamera = BattleGameManager.BattleGameManagerInstance.uiCamera;
+            hpBarUI.color = unit.GetComponent<GameUnitBase>().UnitTeam switch
+                            {
+                                Team.Blue => blueHpColor,
+                                Team.Red  => redHpColor,
+                                _         => throw new ArgumentOutOfRangeException()
+                            };
         }
 
         private void Update()

@@ -265,6 +265,36 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
 
         #endregion
 
+        #region Buff
+
+        public override bool SetNumericalValueBuff(BuffNumericalValueType buffType, bool isAdditionalValue, float value)
+        {
+            try
+            {
+                base.SetNumericalValueBuff(buffType, isAdditionalValue, value);
+            }
+            catch (Exception e)
+            {
+                switch (buffType)
+                {
+                    case BuffNumericalValueType.Attack:
+                        if (isAdditionalValue)
+                            this.attack.AddAdditionalValue((int)value);
+                        else
+                            this.attack.AddMagnification(value);
+                        break;
+
+                    default:
+                        throw new UnityException("未找到Buff: " + buffType.ToString());
+                        return false;
+                }
+            }
+            return true;
+        }
+
+
+        #endregion
+
         protected override void Awake()
         {
             base.Awake();
@@ -280,8 +310,9 @@ namespace Gameplay.GameUnit.SoldierUnit.CombatUnit.RangedAttackUnit
         }
 
 
-        private void FixedUpdate()
+        protected override void FixedUpdate()
         {
+            base.FixedUpdate();
             SearchEnemy();
 
             _attackTimer += Time.fixedDeltaTime;

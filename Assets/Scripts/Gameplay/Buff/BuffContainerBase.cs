@@ -13,7 +13,15 @@ namespace Gameplay.Buff
 
         public float CurTime { get; protected set; } = 0;
 
-
+        public void ApplyBuff()
+        {
+            buffList.ForEach((b =>
+                              {
+                                  b.Activate(this);
+                              }));
+            
+        }
+        
         private void FixedUpdate()
         {
             CurTime += Time.fixedDeltaTime;
@@ -41,8 +49,7 @@ namespace Gameplay.Buff
                     return;
             }
             buffList.Add(buff);
-            buff.container   = this;
-            buff.IsActivated = true;
+            buff.Activate(this);
         }
 
         public void RemoveBuff(BuffBase buff)
@@ -52,7 +59,17 @@ namespace Gameplay.Buff
             int buffId = buffList.FindIndex((b => b.buffID == buff.buffID));
             if (buffId != -1)
             {
-                buff.IsActivated = false;
+                buff.Deactivate(this);
+                // buffList.RemoveAt(buffId);
+            }
+        }
+        
+        public void RemoveBuffByID(int buffID)
+        {
+            int buffIndex = buffList.FindIndex((b => b.buffID == buffID));
+            if (buffIndex != -1)
+            {
+                buffList[buffIndex].Deactivate(this);
                 // buffList.RemoveAt(buffId);
             }
         }

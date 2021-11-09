@@ -60,7 +60,7 @@ public class UIC_Node : MonoBehaviour, I_UIC_Object, I_UIC_Draggable, I_UIC_Clic
 
     public List<UIC_Connection> connectionsList = new List<UIC_Connection>();
 
-    void OnValidate()
+    public void OnValidate()
     {
         Init();
 
@@ -149,6 +149,8 @@ public class UIC_Node : MonoBehaviour, I_UIC_Object, I_UIC_Draggable, I_UIC_Clic
 
         if (otherNode.haveSpots && this.haveSpots)
         {
+            // Debug.Log(entity);
+            // Debug.Log(entity.UicManager);
             _connection = entity.UicManager.AddConnection(this, otherNode, entity.UicManager.globalLineType);
             otherNode.SetIcon();
         }

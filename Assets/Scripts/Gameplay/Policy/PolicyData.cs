@@ -2,7 +2,7 @@
 
 namespace Gameplay.Policy
 {
-    [Serializable]
+    // [Serializable]
     public struct PolicyData
     {
         public int        policyIdx;

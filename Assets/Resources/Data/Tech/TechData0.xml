@@ -37,4 +37,12 @@
             预备役士兵提供的生产力+1。
         </Content>
     </Tech >
+    <Tech  TID="t0003" >
+        <Name>
+            民族主义
+        </Name>
+        <Content>
+            单位的补给要求时间延长100%。
+        </Content>
+    </Tech >
 </root>

@@ -56,7 +56,15 @@ namespace Gameplay.GameUnit.ThrowingObject
 
         private void OnCollisionEnter(Collision other)
         {
-            if (other.collider.isTrigger || other.transform == ((GameUnitBase)shooter).transform) return;
+            try
+            {
+                if (other.collider.isTrigger || other.transform == ((GameUnitBase)shooter).transform) return;
+
+            }
+            catch (MissingReferenceException e)
+            {
+                Miss();
+            }
             try
             {
                 GameObject   gameObj = other.gameObject;
