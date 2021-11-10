@@ -167,9 +167,9 @@ namespace Gameplay.GameUnit.SoldierUnit
                     break;
                 case BuffNumericalValueType.MaintenanceTime:
                     if (isAdditionalValue)
-                        this.maintenanceTime.AddAdditionalValue((int)value);
+                        this.MaintenanceTime.AddAdditionalValue((int)value);
                     else
-                        this.maintenanceTime.AddMagnification(value);
+                        this.MaintenanceTime.AddMagnification(value);
                     break;
                 default:
                     throw new UnityException("未找到Buff: " + buffType.ToString());
@@ -188,7 +188,7 @@ namespace Gameplay.GameUnit.SoldierUnit
         [SerializeField] private IntBuffableValue maintenanceCostFood = new IntBuffableValue(0);
         [SerializeField] private FloatBuffableValue maintenanceTime = new FloatBuffableValue(5f);
         
-        private                  bool               _isWellResourced;
+        private                  bool               _isWellResourced = true;
         public                   int                MaintenanceCostFood => maintenanceCostFood;
 
         protected      int          hungerBuffId = 240000;
@@ -213,7 +213,9 @@ namespace Gameplay.GameUnit.SoldierUnit
                 _isWellResourced = value;
             }
         }
-        
+
+        public FloatBuffableValue MaintenanceTime => maintenanceTime;
+
 
         public void RequireMaintenance()
         {
@@ -240,7 +242,7 @@ namespace Gameplay.GameUnit.SoldierUnit
         protected virtual void FixedUpdate()
         {
             _maintenanceTimer += Time.fixedDeltaTime;
-            if (_maintenanceTimer >= maintenanceTime)
+            if (_maintenanceTimer >= MaintenanceTime)
             {
                 RequireMaintenance();
                 _maintenanceTimer = 0f;

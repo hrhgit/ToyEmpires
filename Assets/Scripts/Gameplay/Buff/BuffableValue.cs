@@ -24,6 +24,10 @@ namespace Gameplay.Buff
         {
             return n.Value;
         }
-        
+
+        public override string ToString()
+        {
+            return ((T) Value).ToString();
+        }
     }
 }

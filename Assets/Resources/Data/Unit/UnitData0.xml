@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE root [
+        <!ELEMENT root ANY>
+        <!ELEMENT Unit (Name+,Content+)>
+            <!ATTLIST Unit 
+                    UID ID #REQUIRED
+            >
+        <!ELEMENT Name (#PCDATA) >
+        <!ELEMENT Content (#PCDATA)>
+]>
+<!---->
+<!-- ID [u00000] 0:player 1:工人 2:近战 3:远程 5:防御工事-->
+<!---->
+
+<root>
+    <Unit  UID="u1000"  >
+        <Name>
+            工人
+        </Name>
+        <Content>
+            在资源采集点采集资源并带回基地。
+        </Content>
+    </Unit>
+    <Unit  UID="u2000"  >
+        <Name>
+            剑士
+        </Name>
+        <Content>
+            普通的近战单位。
+        </Content>
+    </Unit>
+    <Unit  UID="u3000"  >
+        <Name>
+            弓箭手
+        </Name>
+        <Content>
+            普通的远程单位。
+        </Content>
+    </Unit>
+</root>

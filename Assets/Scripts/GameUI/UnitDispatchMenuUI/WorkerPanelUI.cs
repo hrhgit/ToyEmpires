@@ -1,5 +1,6 @@
 using Gameplay;
 using Gameplay.Player;
+using GameUI.UnitDispatchMenuUI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,10 +9,11 @@ namespace GameUI
 {
     public class WorkerPanelUI : MonoBehaviour
     {
-        public  Text       freeWorkerTextUI;
-        public  Text       workerCountTextUI;
-        public  Image      workerProduceBarUI;
-        private PlayerBase _player;
+        public  UnitDetailUI detailUI;
+        public  Text         freeWorkerTextUI;
+        public  Text         workerCountTextUI;
+        public  Image        workerProduceBarUI;
+        private PlayerBase   _player;
 
         private void Start()
         {
@@ -27,5 +29,16 @@ namespace GameUI
             freeWorkerTextUI.text  = _player.workerStatus.freeUnitCount.ToString();
             workerCountTextUI.text = _player.workerStatus.totalUnitCount + " / " + _player.maxWorkerCount;
         }
+        
+        public void OnMouseHover()
+        {
+            detailUI.Show(this._player.workerPrefab);
+        }
+
+        public void OnMouseLeave()
+        {
+            detailUI.Close();
+        }
+
     }
 }

@@ -1,16 +1,14 @@
-using System;
 using System.Collections.Generic;
 using Gameplay;
 using Gameplay.Player;
 using UnityEngine;
-using UnityEngine.UI;
 
-
-namespace GameUI
+namespace GameUI.UnitDispatchMenuUI
 {
     public class UnitDispatchManagerUI : MonoBehaviour
     {
-        public GameObject dispatchBtns;
+        public GameObject   dispatchBtns;
+        public UnitDetailUI unitDetailUI;
 
         private PlayerBase         _player;
         private List<UnitButtonUI> unitButtonUiList = new List<UnitButtonUI>();

@@ -2,7 +2,9 @@ using System;
 using Gameplay;
 using Gameplay.GameUnit;
 using Gameplay.Player;
+using GameUI.UnitDispatchMenuUI;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 
@@ -10,14 +12,16 @@ namespace GameUI
 {
     public class UnitButtonUI : MonoBehaviour
     {
-        public  int                   unitIndex;
-        public  Text                  freeUnitTextUI;
-        public  Text                  unitCountTextUI;
-        public  Text                  unitFoodWoodCostTextUI;
-        public  Text                  unitGoldCostTextUI;
-        public  GameObject            selectedUI;
-        public  Text                  selectedTextUI;
-        public  Image                 unitProduceBarUI;
+        public int        unitIndex;
+        public Text       freeUnitTextUI;
+        public Text       unitCountTextUI;
+        public Text       unitFoodWoodCostTextUI;
+        public Button     foodBtn;
+        public Button     goldBtn;
+        public Text       unitGoldCostTextUI;
+        public GameObject selectedUI;
+        public Text       selectedTextUI;
+        public Image      unitProduceBarUI;
         
         private UnitDispatchManagerUI _unitDispatchManagerUI;
         private PlayerBase            _player;
@@ -32,10 +36,12 @@ namespace GameUI
                                                              this.unitProduceBarUI.fillAmount = status.unitProduceProcess;
                                                          });
             _status                     = _player.UnitStatusList[unitIndex];
+            _unitProduceable = (IProduceable)_player.unitPrefabList[unitIndex];
             //TODO 粗暴地把木材换成了食物
             // unitFoodWoodCostTextUI.text = ((IProduceable)_player.unitPrefabList[unitIndex]).CostFood + "食+" + ((IProduceable)_player.unitPrefabList[unitIndex]).CostWood + "木";
-            unitFoodWoodCostTextUI.text = ((IProduceable)_player.unitPrefabList[unitIndex]).CostFood + "食";
-                unitGoldCostTextUI.text = ((IProduceable)_player.unitPrefabList[unitIndex]).CostGold + "金";
+            unitFoodWoodCostTextUI.text = (_unitProduceable).CostFood + "食";
+                unitGoldCostTextUI.text = (_unitProduceable).CostGold + "金";
+                
         }
         
 
@@ -45,6 +51,7 @@ namespace GameUI
             {
                 freeUnitTextUI.text  = _player.UnitStatusList[unitIndex].freeUnitCount.ToString();
                 unitCountTextUI.text = _player.UnitStatusList[unitIndex].curUnitCount.ToString();
+                SetInteractable();
             }
             catch (Exception e)
             {
@@ -52,20 +59,28 @@ namespace GameUI
             }
         }
 
+        IProduceable _unitProduceable;
+        private void SetInteractable()
+        {
+            goldBtn.interactable = _player.CanAfford(0, 0, _unitProduceable.CostGold);
+            foodBtn.interactable =
+                _player.CanAfford(_unitProduceable.CostFood, _unitProduceable.CostWood, 0);
+
+        }
+
         public int FoodWoodBuyCount { get; private set; } = 0;
         public int GoldBuyCount { get; private set; } = 0;
 
         public void BuyUnit(bool useGold)
         {
-            IProduceable unitProduceable = (IProduceable)_player.unitPrefabList[unitIndex];
 
-            if(_status.freeUnitCount <=0 || _player.CurUnitPopulation + (this.GoldBuyCount + this.FoodWoodBuyCount) *unitProduceable.CostPopulation >= _player.maxBattleUnitCount)
+            if(_status.freeUnitCount <=0 || _player.CurUnitPopulation + (this.GoldBuyCount + this.FoodWoodBuyCount) * _unitProduceable.CostPopulation >= _player.maxBattleUnitCount)
                 return;
             if (useGold)
             {
-                if (_player.CanAfford(0, 0, unitProduceable.CostGold))
+                if (_player.CanAfford(0, 0, _unitProduceable.CostGold))
                 {
-                    _player.AddResource(ResourceType.Gold, -unitProduceable.CostGold );
+                    _player.AddResource(ResourceType.Gold, -_unitProduceable.CostGold );
                     GoldBuyCount++;
                     _status.freeUnitCount--;
                     _unitDispatchManagerUI.ShowBtn(true);
@@ -76,10 +91,10 @@ namespace GameUI
             }
             else
             {
-                if (_player.CanAfford(unitProduceable.CostFood , unitProduceable.CostWood , 0))
+                if (_player.CanAfford(_unitProduceable.CostFood , _unitProduceable.CostWood , 0))
                 {
-                    _player.AddResource(ResourceType.Wood, -unitProduceable.CostWood );
-                    _player.AddResource(ResourceType.Food, -unitProduceable.CostFood );
+                    _player.AddResource(ResourceType.Wood, -_unitProduceable.CostWood );
+                    _player.AddResource(ResourceType.Food, -_unitProduceable.CostFood );
                     FoodWoodBuyCount++;
                     _status.freeUnitCount--;
                     _unitDispatchManagerUI.ShowBtn(true);
@@ -119,6 +134,15 @@ namespace GameUI
             selectedUI.SetActive(false);
             FoodWoodBuyCount = 0;
             GoldBuyCount     = 0;
+        }
+
+        public void OnMouseHover()
+        {
+            _unitDispatchManagerUI.unitDetailUI.Show(this._player.unitPrefabList[this.unitIndex]);
+        }
+        public void OnMouseLeave()
+        {
+            _unitDispatchManagerUI.unitDetailUI.Close();
         }
     }
 }

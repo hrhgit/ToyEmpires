@@ -13,12 +13,14 @@ namespace Gameplay.Buff
 
         public float CurTime { get; protected set; } = 0;
 
-        public void ApplyBuff()
+        public void InitBuff()
         {
-            buffList.ForEach((b =>
-                              {
-                                  b.Activate(this);
-                              }));
+            List<BuffBase> tmpBuffList = buffList;
+            buffList = new List<BuffBase>();
+            tmpBuffList.ForEach((b =>
+                                 {
+                                     this.AddBuff(b);
+                                 }));
             
         }
         

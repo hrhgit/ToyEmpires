@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Gameplay.Buff;
 using Gameplay.GameUnit.SoldierUnit;
+using Gameplay.GameUnit.SoldierUnit.Worker;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,29 +18,29 @@ namespace Gameplay.TechTree
                                                                                          {
                                                                                              return new Technology(0, 10, 0, 5, 4, 0,2)
                                                                                                     {
-                                                                                                        playerBuffs = new List<PlayerBuffBase>
-                                                                                                                                        {
-                                                                                                                                            new PlayerBuffBase(new List<UnityAction<BuffBase,BuffContainerBase>>
-                                                                                                                                                               {
-                                                                                                                                                                   (b, c) =>
-                                                                                                                                                                   {
-                                                                                                                                                                       var buff = b as PlayerBuffBase;
-                                                                                                                                                                       ((PlayerBuffContainer)c).player.unitPrefabList.ForEach(u =>
-                                                                                                                                                                                                                               {
-                                                                                                                                                                                                                                   u.SetNumericalValueBuff(BuffNumericalValueType.Defence, true,
-                                                                                                                                                                                                                                                           3);
-                                                                                                                                                                                                                               });
-                                                                                                                                                                   }
-                                                                                                                                                               }, new List<UnityAction<BuffBase,BuffContainerBase>>
-                                                                                                                                                                  {
-                                                                                                                                                                      (b, c) =>
-                                                                                                                                                                      {
-                                                                                                                                                                          var buff = b as PlayerBuffBase;
-                                                                                                                                                                          ((PlayerBuffContainer)c).player.unitPrefabList.ForEach(u => { u.SetNumericalValueBuff(BuffNumericalValueType.Defence, true, -3); });
-                                                                                                                                                                      }
-                                                                                                                                                                  }, false) { buffID = 1001, isSuperimposable = false }
-                                                                                                                                        },
-                                                                                                        unitBuffs = null
+                                                                                                        unitBuffs = new List<UnitBuffBase>
+                                                                                                                      {
+                                                                                                                          new UnitBuffBase(new List<UnityAction<BuffBase,BuffContainerBase>>
+                                                                                                                                             {
+                                                                                                                                                 (b,c) =>
+                                                                                                                                                 {
+                                                                                                                                                     var container = c as UnitBuffContainer;
+                                                                                                                                                     ((SoldierUnitBase)(container.unit)).SetNumericalValueBuff(BuffNumericalValueType.Defence, true, 3);
+                                                                                                                                                                                                
+                                                                                                                                                 }
+                                                                                                                                             }, new List<UnityAction<BuffBase,BuffContainerBase>>
+                                                                                                                                                {
+                                                                                                                                                    (b, c) =>
+                                                                                                                                                    {
+                                                                                                                                                        var container = c as UnitBuffContainer;
+                                                                                                                                                        ((SoldierUnitBase)(container.unit)).SetNumericalValueBuff(BuffNumericalValueType.Defence, true, -3);                                                                                                                                                    }
+                                                                                                                                                }, false)
+                                                                                                                          {
+                                                                                                                              buffID           = 1002,
+                                                                                                                              isSuperimposable = true
+                                                                                                                          }
+                                                                                                                      },
+                                                                                                        playerBuffs = null
                                                                                                     };
                                                                                          }
                                                                                   },
@@ -48,41 +49,41 @@ namespace Gameplay.TechTree
                                                                                          {
                                                                                              return new Technology(1, 10, 0, 5, 4, 0, 2)
                                                                                                     {
-                                                                                                        playerBuffs = new List<PlayerBuffBase>
+                                                                                                        unitBuffs = new List<UnitBuffBase>
+                                                                                                            {
+                                                                                                                 new UnitBuffBase(new List<UnityAction<BuffBase,BuffContainerBase>>
+                                                                                                                                    {
+                                                                                                                                        (b,c) =>
                                                                                                                                         {
-                                                                                                                                            new PlayerBuffBase(new List<UnityAction<BuffBase,BuffContainerBase>>
-                                                                                                                                                               {
-                                                                                                                                                                   (b, c) =>
-                                                                                                                                                                   {
-                                                                                                                                                                       var buff = b as PlayerBuffBase;
-                                                                                                                                                                       ((PlayerBuffContainer)c).player.InstanceWorkersList.ForEach(worker =>
-                                                                                                                                                                                                                                    {
-                                                                                                                                                                                                                                        worker.SetNumericalValueBuff(BuffNumericalValueType.MaxLoadFood, true, 2);
-                                                                                                                                                                                                                                        worker.SetNumericalValueBuff(BuffNumericalValueType.MaxLoadWood, true, 2);
-                                                                                                                                                                                                                                        worker.SetNumericalValueBuff(BuffNumericalValueType.MaxLoadGold, true,
-                                                                                                                                                                                                                                                                     2);
-                                                                                                                                                                                                                                    });
-                                                                                                                                                                   }
-                                                                                                                                                               }, new List<UnityAction<BuffBase,BuffContainerBase>>
-                                                                                                                                                                  {
-                                                                                                                                                                      (b, c) =>
-                                                                                                                                                                      {
-                                                                                                                                                                          var buff = b as PlayerBuffBase;
-                                                                                                                                                                          ((PlayerBuffContainer)c).player.InstanceWorkersList.ForEach(worker =>
-                                                                                                                                                                                                                                      {
-                                                                                                                                                                                                                                          worker.SetNumericalValueBuff(BuffNumericalValueType.MaxLoadFood, true, -2);
-                                                                                                                                                                                                                                          worker.SetNumericalValueBuff(BuffNumericalValueType.MaxLoadWood, true, -2);
-                                                                                                                                                                                                                                          worker.SetNumericalValueBuff(BuffNumericalValueType.MaxLoadGold, true,
-                                                                                                                                                                                                                                                                       -2);
-                                                                                                                                                                                                                                      });
-                                                                                                                                                                      }
-                                                                                                                                                                  }, false)
+                                                                                                                                            var container = c as UnitBuffContainer;
+                                                                                                                                            if((container.unit) is Worker)
                                                                                                                                             {
-                                                                                                                                                buffID           = 1003,
-                                                                                                                                                isSuperimposable = true
+                                                                                                                                               ((Worker)(container.unit)).SetNumericalValueBuff(BuffNumericalValueType.MaxLoadFood, true, 2);
+                                                                                                                                               ((Worker)(container.unit)).SetNumericalValueBuff(BuffNumericalValueType.MaxLoadWood, true, 2);
+                                                                                                                                               ((Worker)(container.unit)).SetNumericalValueBuff(BuffNumericalValueType.MaxLoadGold, true, 2);
                                                                                                                                             }
-                                                                                                                                        },
-                                                                                                        unitBuffs = null
+                                                                                                                                                                                       
+                                                                                                                                        }
+                                                                                                                                    }, new List<UnityAction<BuffBase,BuffContainerBase>>
+                                                                                                                                       {
+                                                                                                                                           (b, c) =>
+                                                                                                                                           {
+                                                                                                                                               var container = c as UnitBuffContainer;
+                                                                                                                                               if((container.unit) is Worker)
+                                                                                                                                               {
+                                                                                                                                                   ((Worker)(container.unit)).SetNumericalValueBuff(BuffNumericalValueType.MaxLoadFood, true, -2);
+                                                                                                                                                   ((Worker)(container.unit)).SetNumericalValueBuff(BuffNumericalValueType.MaxLoadWood, true, -2);
+                                                                                                                                                   ((Worker)(container.unit)).SetNumericalValueBuff(BuffNumericalValueType.MaxLoadGold, true, -2);
+                                                                                                                                               }
+                                                                                                                                                   
+                                                                                                                                           }
+                                                                                                                                       }, false)
+                                                                                                                 {
+                                                                                                                     buffID           = 1003,
+                                                                                                                     isSuperimposable = true
+                                                                                                                 }
+                                                                                                            },
+                                                                                                        playerBuffs = null
                                                                                                     };
                                                                                          }
                                                                                   },
@@ -91,39 +92,29 @@ namespace Gameplay.TechTree
                                                                                          {
                                                                                              return new Technology(2, 10, 0, 5, 4, 0, 2)
                                                                                                     {
-                                                                                                        playerBuffs = new List<PlayerBuffBase>
+                                                                                                        unitBuffs = new List<UnitBuffBase>
                                                                                                                       {
-                                                                                                                          new PlayerBuffBase(new List<UnityAction<BuffBase,BuffContainerBase>>
+                                                                                                                          new UnitBuffBase(new List<UnityAction<BuffBase,BuffContainerBase>>
                                                                                                                                              {
                                                                                                                                                  (b,c) =>
                                                                                                                                                  {
-                                                                                                                                                     var buff = b as PlayerBuffBase;
-                                                                                                                                                     ((PlayerBuffContainer)c).player.unitPrefabList.ForEach(u =>
-                                                                                                                                                                                                {
-                                                                                                                                                                                                    u.SetNumericalValueBuff(BuffNumericalValueType.Productivity,
-                                                                                                                                                                                                                            true,
-                                                                                                                                                                                                                            1);
-                                                                                                                                                                                                });
+                                                                                                                                                     var container = c as UnitBuffContainer;
+                                                                                                                                                     ((SoldierUnitBase)(container.unit)).SetNumericalValueBuff(BuffNumericalValueType.Productivity, true, 1);
+                                                                                                                                                                                                
                                                                                                                                                  }
                                                                                                                                              }, new List<UnityAction<BuffBase,BuffContainerBase>>
                                                                                                                                                 {
                                                                                                                                                     (b, c) =>
                                                                                                                                                     {
-                                                                                                                                                        var buff = b as PlayerBuffBase;
-                                                                                                                                                        ((PlayerBuffContainer)c).player.unitPrefabList.ForEach(u =>
-                                                                                                                                                                                                               {
-                                                                                                                                                                                                                   u.SetNumericalValueBuff(BuffNumericalValueType.Productivity,
-                                                                                                                                                                                                                                           true,
-                                                                                                                                                                                                                                           -1);
-                                                                                                                                                                                                               });
-                                                                                                                                                    }
+                                                                                                                                                        var container = c as UnitBuffContainer;
+                                                                                                                                                        ((SoldierUnitBase)(container.unit)).SetNumericalValueBuff(BuffNumericalValueType.Productivity, true, -1);                                                                                                                                                    }
                                                                                                                                                 }, false)
                                                                                                                           {
                                                                                                                               buffID           = 1004,
                                                                                                                               isSuperimposable = true
                                                                                                                           }
                                                                                                                       },
-                                                                                                        unitBuffs = null
+                                                                                                        playerBuffs = null
                                                                                                     };
                                                                                          }
                                                                                   },

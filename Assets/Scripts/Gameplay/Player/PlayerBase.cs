@@ -219,7 +219,7 @@ namespace Gameplay.Player
                                                    InstanceWorkersList.Remove( ((Worker) u));
                                                }));
             workerUnit.BuffContainer.buffList = this.workerPrefab.BuffContainer.buffList;
-            workerUnit.BuffContainer.ApplyBuff();
+            workerUnit.BuffContainer.InitBuff();
             
             _activeResourceWorkerCount[(int) resourceType]++;
             workerUnit.gameObject.SetActive(true);
@@ -348,7 +348,7 @@ namespace Gameplay.Player
                 unitInstance.UnitTeam               = this.playerTeam;
                 unitInstance.UnitRoad               = road;
                 unitInstance.BuffContainer.buffList = unit.BuffContainer.buffList;
-                unitInstance.BuffContainer.ApplyBuff();
+                unitInstance.BuffContainer.InitBuff();
                 InstanceUnitsList.Add(unitInstance);
                 try
                 {

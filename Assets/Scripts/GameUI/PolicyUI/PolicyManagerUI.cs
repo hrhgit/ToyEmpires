@@ -97,8 +97,7 @@ namespace GameUI.PolicyUI
 
         }
 
-        private bool _isRightPanel = true;
-
+        
         public void EnableDetailPanel(PolicyLineUI policyLineUI)
         {
             Color color = policyLineUI.type switch
@@ -123,6 +122,8 @@ namespace GameUI.PolicyUI
         {
             ContentRect.gameObject.SetActive(false);
         }
+        private bool _isRightPanel = true;
+
         public void TraceDetail(PolicyLineUI policyLineUI)
         {
             Vector2 mousePos;
