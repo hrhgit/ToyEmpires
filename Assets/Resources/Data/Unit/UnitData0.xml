@@ -4,6 +4,7 @@
         <!ELEMENT Unit (Name+,Content+)>
             <!ATTLIST Unit 
                     UID ID #REQUIRED
+                    fileName CDATA #REQUIRED
             >
         <!ELEMENT Name (#PCDATA) >
         <!ELEMENT Content (#PCDATA)>
@@ -13,7 +14,7 @@
 <!---->
 
 <root>
-    <Unit  UID="u1000"  >
+    <Unit  UID="u1000" fileName="Worker" >
         <Name>
             工人
         </Name>
@@ -21,7 +22,7 @@
             在资源采集点采集资源并带回基地。
         </Content>
     </Unit>
-    <Unit  UID="u2000"  >
+    <Unit  UID="u2000"  fileName="Swordsman">
         <Name>
             剑士
         </Name>
@@ -29,7 +30,7 @@
             普通的近战单位。
         </Content>
     </Unit>
-    <Unit  UID="u3000"  >
+    <Unit  UID="u3000" fileName="Archer" >
         <Name>
             弓箭手
         </Name>
