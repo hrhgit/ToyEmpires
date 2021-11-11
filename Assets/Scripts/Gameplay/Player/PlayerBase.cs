@@ -122,11 +122,11 @@ namespace Gameplay.Player
         {
             uint r = 0x00;
             
-            if (this.CanAfford(0, 0, b.BuildingCostGold * count))
+            if (this.CanAfford(0, 0, b.BuildingCostGold[b.level] * count))
             {
                 r |= 0x01;
             }
-            if (this.CanAfford(b.BuildingCostFood * count, b.BuildingCostWood * count, 0))
+            if (this.CanAfford(b.BuildingCostFood[b.level] * count, b.BuildingCostWood[b.level] * count, 0))
             {
                 r |= 0x03;
             }

@@ -10,7 +10,7 @@ namespace Gameplay.GameUnit.FortificationUnit.BuildingUnit
 
         public void Set()
         {
-            this.MaxHp = building.hp[building.level];
+            this.MaxHp = building.Hp[building.level];
             this.CurHp = this.MaxHp;
         }
 

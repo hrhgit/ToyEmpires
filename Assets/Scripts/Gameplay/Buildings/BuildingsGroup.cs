@@ -24,7 +24,7 @@ namespace Gameplay.Buildings
             {
                 if (isResourceAvailable == 1 || isResourceAvailable == 3)
                 {
-                    manager.player.AddResource(ResourceType.Gold, -building.BuildingCostGold);
+                    manager.player.AddResource(ResourceType.Gold, -building.BuildingCostGold[building.level]);
                     buildings[posIdx]        = InstantiateBuilding(building, buildingsPos[posIdx]);
                     buildings[posIdx].posIdx = posIdx;
 
@@ -34,8 +34,8 @@ namespace Gameplay.Buildings
             {
                 if (isResourceAvailable == 2 || isResourceAvailable == 3)
                 {
-                    manager.player.AddResource(ResourceType.Food, -building.BuildingCostFood);
-                    manager.player.AddResource(ResourceType.Wood, -building.BuildingCostWood);
+                    manager.player.AddResource(ResourceType.Food, -building.BuildingCostFood[building.level]);
+                    manager.player.AddResource(ResourceType.Wood, -building.BuildingCostWood[building.level]);
                     buildings[posIdx]        = InstantiateBuilding(building, buildingsPos[posIdx]);
                     buildings[posIdx].posIdx = posIdx;
                 }

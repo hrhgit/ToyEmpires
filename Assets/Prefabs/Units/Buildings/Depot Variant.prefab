@@ -18,17 +18,28 @@ MonoBehaviour:
   manager: {fileID: 0}
   maxLevel: 0
   level: 0
+  road: 0
+  posIdx: 0
   buildingCostFood:
-    _value: 0
+  - _value: 10
+  - _value: 20
+  - _value: 30
   buildingCostWood:
-    _value: 0
+  - _value: 0
+  - _value: 0
+  - _value: 0
   buildingCostGold:
-    _value: 0
+  - _value: 3
+  - _value: 6
+  - _value: 9
   buildingCostTime:
   - _value: 10
   - _value: 20
   - _value: 30
-  hp: e8030000d0070000b80b0000
+  hp:
+  - _value: 1000
+  - _value: 2000
+  - _value: 3000
   OnBuildingSet:
     m_PersistentCalls:
       m_Calls: []

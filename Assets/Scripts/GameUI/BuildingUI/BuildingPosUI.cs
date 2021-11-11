@@ -30,9 +30,9 @@ namespace GameUI.BuildingUI
                     mainBtn.colors = new ColorBlock()
                                      {
                                          normalColor      = new Color(1f,    0.82f, 0.14f),
-                                         highlightedColor = new Color(0.96f, 0.96f, 0.96f),
-                                         pressedColor     = new Color(0.78f, 0.78f, 0.78f),
-                                         selectedColor    = new Color(0.96f, 0.96f, 0.96f),
+                                         highlightedColor = new Color(1f,    0.99f, 0.63f),
+                                         pressedColor     = new Color(0.67f, 0.56f, 0.13f),
+                                         selectedColor    = new Color(1f,    0.82f, 0.14f),
                                          disabledColor    = new Color(0.78f, 0.78f, 0.78f, .5f),
                                          colorMultiplier  = 1,
                                          fadeDuration     = .1f
@@ -64,9 +64,9 @@ namespace GameUI.BuildingUI
                 mainBtn.colors = new ColorBlock()
                                  {
                                      normalColor      = new Color(1f,    0.82f, 0.14f),
-                                     highlightedColor = new Color(0.96f, 0.96f, 0.96f),
-                                     pressedColor     = new Color(0.78f, 0.78f, 0.78f),
-                                     selectedColor    = new Color(0.96f, 0.96f, 0.96f),
+                                     highlightedColor = new Color(1f,    0.99f, 0.63f),
+                                     pressedColor     = new Color(0.67f, 0.56f, 0.13f),
+                                     selectedColor    = new Color(1f,    0.82f, 0.14f),
                                      disabledColor    = new Color(0.78f, 0.78f, 0.78f, .5f),
                                      colorMultiplier  = 1,
                                      fadeDuration     = .1f
@@ -107,9 +107,15 @@ namespace GameUI.BuildingUI
             if(IsSet)
             {
                 if (_showSubmenu)
+                {
                     subMenu.SetActive(false);
-                else
+                    _showSubmenu = false;
+                }else
+                {
                     subMenu.SetActive(true);
+                    _showSubmenu = true;
+                }
+                
             }
             else
             {

@@ -8,9 +8,10 @@ namespace GameUI.BuildingUI
 {
     public class BuildingListUI : MonoBehaviour
     {
-        public                   BuildingPanelUI panelUI;
-        [HideInInspector] public Road            tmpRoad;
-        [HideInInspector] public int             tmpIdx;
+        public                   BuildingPanelUI  panelUI;
+        [HideInInspector] public Road             tmpRoad;
+        [HideInInspector] public int              tmpIdx;
+        public                   BuildingDetailUI detailUI;
 
         
         [Header("建筑列表")]
@@ -46,13 +47,13 @@ namespace GameUI.BuildingUI
             rect.anchoredPosition = new Vector2(0, -(idx + 1) * _yOffset - idx * rect.sizeDelta.y);
             line.building         = building;
             line.buildingListUI   = this;
-            BuildingData data = GetBuildingDataData(idx);
+            BuildingData data = GetBuildingData(idx);
             line.name   = data.buildingName;
             line.detail = data.buildingContent;
             line.Init();
         }
-        
-        private BuildingData GetBuildingDataData(int buildingIdx)
+
+        public BuildingData GetBuildingData(int buildingIdx)
         {
             int         techID    = panelUI.manager.buildingPrefabs[buildingIdx].buildingID;
             TextAsset   textAsset = (TextAsset)Resources.Load("Data/Buildings/BuildingsData0");
@@ -60,7 +61,7 @@ namespace GameUI.BuildingUI
             xmlDoc.LoadXml(textAsset.text);
             XmlNode buildingXml = xmlDoc.GetElementById("b" + techID.ToString("d4"));
 
-            return new BuildingData(buildingIdx, panelUI.manager.buildingPrefabs[buildingIdx], buildingXml["Name"].InnerText.Trim(), buildingXml["Content"].InnerText.Trim());
+            return new BuildingData(buildingXml["Name"].InnerText.Trim(), buildingXml["Content"].InnerText.Trim());
         }
 
         public void ClosePanel()

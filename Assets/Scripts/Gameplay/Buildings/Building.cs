@@ -25,9 +25,9 @@ namespace Gameplay.Buildings
         #region 建造
 
         [Header("建造")] 
-        [SerializeField] private IntBuffableValue buildingCostFood = new IntBuffableValue(0);
-        [SerializeField] private IntBuffableValue buildingCostWood = new IntBuffableValue(0);
-        [SerializeField] private IntBuffableValue buildingCostGold = new IntBuffableValue(0);
+        [SerializeField] private IntBuffableValue[] buildingCostFood;
+        [SerializeField] private IntBuffableValue[] buildingCostWood;
+        [SerializeField] private IntBuffableValue[] buildingCostGold;
         [SerializeField] private IntBuffableValue[] buildingCostTime;
         
         private bool _isBuilding  = true;
@@ -35,9 +35,12 @@ namespace Gameplay.Buildings
         private bool _isFixing    = false;
         private bool _isUpgrading = false;
         
-        public int BuildingCostFood => buildingCostFood;
-        public int BuildingCostWood => buildingCostWood;
-        public int BuildingCostGold => buildingCostGold;
+        public int[] BuildingCostFood =>  (from t in buildingCostFood 
+                                         select t.Value).ToArray();
+        public int[] BuildingCostWood => (from t in buildingCostWood 
+                                          select t.Value).ToArray();
+        public int[] BuildingCostGold => (from t in buildingCostGold 
+                                          select t.Value).ToArray();
         public int[] BuildingCostTime => (from t in buildingCostTime 
                                           select t.Value).ToArray();
 
@@ -68,6 +71,8 @@ namespace Gameplay.Buildings
         }
 
         public virtual bool IsProdutivityRequiring => this.IsBuilding || this.IsFixing || this.IsUpgrading;
+
+        
 
         public virtual void Set()
         {
@@ -133,7 +138,9 @@ namespace Gameplay.Buildings
 
         #region 血量
 
-        public int[] hp = new int[10];
+        [SerializeField]private IntBuffableValue[] hp = new IntBuffableValue[10];
+        public  int[] Hp => (from h in hp
+                                          select h.Value).ToArray();
 
         #endregion
         
