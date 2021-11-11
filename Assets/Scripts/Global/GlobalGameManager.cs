@@ -36,8 +36,12 @@ namespace Global
             }
         }
 
-        public SoldierUnitBase GetSoldierPrefab (int id) {
-            return (SoldierUnitBase)Resources.Load("Prefabs/Units/Soldiers" + unitId2FileNameDict[id]);
+        public string GetFileName (int id) {
+            return unitId2FileNameDict[id];
+        }
+
+        public GameObject GetSoldierPrefab (int id) {
+            return  (GameObject)Resources.Load("Prefabs/Units/Soldiers/" + unitId2FileNameDict[id]);
         }
 
         public void Load (string sceneName) {

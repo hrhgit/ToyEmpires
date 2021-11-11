@@ -3,9 +3,11 @@ using Gameplay;
 using Gameplay.GameUnit;
 using Gameplay.Player;
 using GameUI.UnitDispatchMenuUI;
+using Global;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Object = UnityEngine.Object;
 
 
 namespace GameUI
@@ -21,7 +23,8 @@ namespace GameUI
         public Text       unitGoldCostTextUI;
         public GameObject selectedUI;
         public Text       selectedTextUI;
-        public Image      unitProduceBarUI;
+        public Image unitAvatar;
+        public Image unitProduceBarUI;
         
         private UnitDispatchManagerUI _unitDispatchManagerUI;
         private PlayerBase            _player;
@@ -31,6 +34,16 @@ namespace GameUI
         {
             _unitDispatchManagerUI = this.transform.parent.GetComponent<UnitDispatchManagerUI>();
             _player               = BattleGameManager.BattleGameManagerInstance.userPlayer;
+
+            Object spriteObj = Resources.Load("UI/UnitAvatars/" + GlobalGameManager.GlobalGameManagerInstance.GetFileName(_player.unitPrefabList[unitIndex].unitID), typeof(Sprite));
+            Sprite sprite = null;
+            try {
+                sprite = Instantiate(spriteObj) as Sprite;
+            } catch (Exception e) {
+
+            }
+            unitAvatar.sprite = sprite;
+            
             _player.onUnitProduceEventList[unitIndex].AddListener((unit, player, status) =>
                                                          {
                                                              this.unitProduceBarUI.fillAmount = status.unitProduceProcess;

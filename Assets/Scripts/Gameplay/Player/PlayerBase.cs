@@ -4,12 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using Gameplay.Buff;
 using Gameplay.Buildings;
+using Gameplay.Civilization;
 using Gameplay.GameUnit;
 using Gameplay.GameUnit.FortificationUnit;
 using Gameplay.GameUnit.SoldierUnit;
 using Gameplay.GameUnit.SoldierUnit.Worker;
 using Gameplay.Policy;
 using Gameplay.TechTree;
+using Global;
 using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
@@ -32,7 +34,6 @@ namespace Gameplay.Player
         public Transform      botPos;
 
         #endregion
-
         
         #region 经济
         [Header("经济")]
@@ -411,7 +412,6 @@ namespace Gameplay.Player
         #endregion
 
         #endregion
-
         
         #region Buff
         [Header("Buff")]
@@ -446,10 +446,9 @@ namespace Gameplay.Player
 
         #endregion
         
-        
         #region 政策
         [Header("政策")]
-        public                   PolicyManager    playerPolicyManager;
+        public                   PolicyManager    policyManager;
 
         [SerializeField] private IntBuffableValue policyCapacity = new IntBuffableValue(3);
         [SerializeField] private int              economyPolicyCapacity;
@@ -583,28 +582,51 @@ namespace Gameplay.Player
 
         #endregion
 
+        #region 文明
+
+        [Header("文明")]
+        public CivilizationBase civilization;
+
+        public void GetCivilizationSetup () {
+            
+        }
+
+        
+
+        #endregion
+
         #region 执行逻辑
+
+        public UnityEvent<PlayerBase> playerLoadDone = new UnityEvent<PlayerBase>();
 
         private void Awake()
         {
+
+        }
+
+        private void OnEnable() {
+            Init();
+            playerLoadDone.Invoke(this);
+        }
+
+        private void FixedUpdate()
+        {
+            ProduceWorker();
+            ProduceUnit();
+        }
+
+        private void Init () {
+            this.unitPrefabList = (from prefab in civilization.GetUnitPrefabsList()
+                                   select prefab.GetComponent<SoldierUnitBase>()).ToList();
+            this.workerPrefab = civilization.GetWorkerPrefab().GetComponent<Worker>();
             workerStatus = new UnitStatus()
                            {
                                unitID = workerPrefab.unitID
                            };
             InitWorker();
             InitUnitList();
-
-        }
-
-        private void Start()
-        {
-        }
-
-        private void FixedUpdate()
-        {
-
-            ProduceWorker();
-            ProduceUnit();
+            this.techTree.InitTechTree();
+            this.policyManager.InitPolicies();
         }
 
 

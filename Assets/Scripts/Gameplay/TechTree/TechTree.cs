@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Gameplay.Buff;
 using Gameplay.Player;
+using GameUI.TechTreeUI;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -15,6 +16,7 @@ namespace Gameplay.TechTree
         public  UnityEvent<TechTree> techTreeInitializedEvent = new UnityEvent<TechTree>();
         private FloatBuffableValue   additionalSpeed          = new FloatBuffableValue(0);
         private FloatBuffableValue   magnificationSpeed       = new FloatBuffableValue(1);
+        private TechTreePanelUI      _techTreePanelUI;
 
         
 
@@ -30,80 +32,22 @@ namespace Gameplay.TechTree
         private void Start()
         {
             //测试
-            InitTechTree();
+            // InitTechTree();
             //
-            // Generate();
-            techTreeInitializedEvent.Invoke(this);
+            
+            
         }
-        
 
-        private void InitTechTree()
+
+        public void InitTechTree()
         {
-            // this.techTreeNodes.AddNode(new TechTreeNode(
-            //                                             this,
-            //                                             new Technology(),
-            //                                             (node => Debug.Log("0 is developing!")),
-            //                                             (node => Debug.Log("0 is done!!")),
-            //                                             (node => Debug.Log("0 is developed!!"))
-            //                                            )
-            //                            {
-            //                                
-            //                            });
-            //
-            // this.techTreeNodes.AddNode(new TechTreeNode(
-            //                                             this,
-            //                                             new Technology(0, 0, 0, 0, 0, 0, 5),
-            //                                             new[] { this.techTreeNodes[0] },
-            //                                             (node => Debug.Log("1 is developing!")),
-            //                                             (node => Debug.Log("1 is done!!")),
-            //                                             (node => Debug.Log("1 is developed!!"))
-            //                                            )
-            //                            {
-            //                                developSpeed = new FloatBuffableValue(3f),
-            //                            });
-            //
-            // this.techTreeNodes.AddNode(new TechTreeNode(
-            //                                             this,
-            //                                             new Technology(),
-            //                                             new[] { this.techTreeNodes[0] },
-            //                                             (node => Debug.Log("2 is developing!")),
-            //                                             (node => Debug.Log("2 is done!!")),
-            //                                             (node => Debug.Log("2 is developed!!"))
-            //                                            )
-            //                            {
-            //                            });
-            // this.techTreeNodes.AddNode(new TechTreeNode(
-            //                                             this,
-            //                                             new Technology(),
-            //                                             new[] { this.techTreeNodes[1] },
-            //                                             (node => Debug.Log("3 is developing!")),
-            //                                             (node => Debug.Log("3 is done!!")),
-            //                                             (node => Debug.Log("3 is developed!!"))
-            //                                            )
-            //                            {
-            //                            });
-            // this.techTreeNodes.AddNode(new TechTreeNode(
-            //                                             this,
-            //                                             new Technology(),
-            //                                             new[] { this.techTreeNodes[1] },
-            //                                             (node => Debug.Log("4 is developing!")),
-            //                                             (node => Debug.Log("4 is done!!")),
-            //                                             (node => Debug.Log("4 is developed!!"))
-            //                                            )
-            //                            {
-            //                            });
-            // this.techTreeNodes.AddNode(new TechTreeNode(
-            //                                             this,
-            //                                             new Technology(),
-            //                                             new[] { this.techTreeNodes[1], this.techTreeNodes[2] },
-            //                                             (node => Debug.Log("5 is developing!")),
-            //                                             (node => Debug.Log("5 is done!!")),
-            //                                             (node => Debug.Log("5 is developed!!"))
-            //                                            )
-            //                            {
-            //
-            //                            });
-            this.techTreeNodes = TechTreeGenerator.GenerateTechTreeNodeList(0, this);
+            if(BattleGameManager.BattleGameManagerInstance.userPlayer == this.player) {
+                _techTreePanelUI = BattleGameManager.BattleGameManagerInstance.techTreePanelUI;
+                techTreeInitializedEvent.AddListener((tech => _techTreePanelUI.GenerateLayout(tech)));
+            }
+
+            this.techTreeNodes = TechTreeGenerator.GenerateTechTreeNodeList(this.player.civilization.techTreeId, this);
+            techTreeInitializedEvent.Invoke(this);
         }
 
         private void FixedUpdate()

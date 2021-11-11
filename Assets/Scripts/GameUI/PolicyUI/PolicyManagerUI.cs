@@ -33,13 +33,16 @@ namespace GameUI.PolicyUI
         private RectTransform _rectTrans;
         private float         height;
 
-        private void Start()
-        {
-            policyManager        = BattleGameManager.BattleGameManagerInstance.userPlayer.playerPolicyManager;
+        public void Init () {
+            policyManager        = BattleGameManager.BattleGameManagerInstance.userPlayer.policyManager;
             _selectedPolicyRect  = selectedPolicyScrollContent.GetComponent<RectTransform>();
             _availablePolicyRect = availablePolicyScrollContent.GetComponent<RectTransform>();
             _rectTrans           = this.transform.GetComponent<RectTransform>();
             height               = policyLineUI.GetComponent<RectTransform>().sizeDelta.y;
+
+        }
+        private void Start() {
+            Init();
         }
 
         private PolicyData GetPolicyData(int policyIdx)

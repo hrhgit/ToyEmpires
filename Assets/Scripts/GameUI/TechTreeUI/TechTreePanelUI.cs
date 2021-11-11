@@ -21,7 +21,7 @@ namespace GameUI.TechTreeUI
         private void Start()
         {
             techTree = BattleGameManager.BattleGameManagerInstance.userPlayer.techTree;
-            techTree.techTreeInitializedEvent.AddListener(GenerateLayout);
+            // techTree.techTreeInitializedEvent.AddListener(GenerateLayout);
             
         }
         

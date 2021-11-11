@@ -1,6 +1,9 @@
 using System;
+using Gameplay.Civilization;
 using Gameplay.Player;
 using GameUI.PolicyUI;
+using GameUI.TechTreeUI;
+using Global;
 using PathFindingPlus;
 using UnityEngine;
 
@@ -22,6 +25,7 @@ namespace Gameplay
 
         public Camera          uiCamera;
         public PolicyManagerUI policyManagerUI;
+        public TechTreePanelUI techTreePanelUI;
 
 
         private void Awake()
@@ -30,6 +34,8 @@ namespace Gameplay
 
             userPlayer      = userSide is Team.Blue ? bluePlayer : userSide is Team.Red ? redPlayer  : throw new ArgumentOutOfRangeException();
             userEnemyPlayer = userSide is Team.Blue ? redPlayer  : userSide is Team.Red ? bluePlayer : throw new ArgumentOutOfRangeException();
+            userPlayer.civilization = CivilizationGenerator.GenerateCivilization(GlobalGameManager.GlobalGameManagerInstance.playerCivilizationIdx);
+            userEnemyPlayer.civilization = CivilizationGenerator.GenerateCivilization(GlobalGameManager.GlobalGameManagerInstance.enemyCivilizationIdx);
         }
 
         private void FixedUpdate()
