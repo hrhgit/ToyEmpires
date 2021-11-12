@@ -41,12 +41,13 @@ namespace Gameplay.GameUnit
             BeAttackedEvent?.Invoke(attacker, this);
         }
 
-        public UnityEvent<IDefenable> DeathEvent { get; }
+        public UnityEvent<IDefenable> DeathEvent { get; } = new UnityEvent<IDefenable>();
 
         protected override void Start()
         {
             base.Start();
             this.CurHp   = this.MaxHp;
+            this.DeathEvent.AddListener((player => this.playerBase.playerDieEvent.Invoke(this.playerBase)));
         }
     }
 }

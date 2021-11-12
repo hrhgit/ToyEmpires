@@ -34,6 +34,12 @@ namespace Gameplay.Player
         public Transform      botPos;
 
         #endregion
+
+        #region 结算
+
+        public UnityEvent<PlayerBase> playerDieEvent = new UnityEvent<PlayerBase>();
+
+        #endregion
         
         #region 经济
         [Header("经济")]

@@ -16,12 +16,47 @@ namespace Gameplay.Civilization {
 					                                                                                                              2000,
 						                                                                                                          2001
 				                                                                                                              }
-			                                                                                       })}
+			                                                                                       })},
+			                                                                             
+			                                                                             //充数的
+			                                                                             {1,(() => new CivilizationBase(1, 0)
+			                                                                                       {
+			                                                                                       })},
+			                                                                             {2,(() => new CivilizationBase(2, 0)
+			                                                                                       {
+			                                                                                       })},
+			                                                                             {3,(() => new CivilizationBase(3, 0)
+			                                                                                       {
+			                                                                                       })},
+			                                                                             {4,(() => new CivilizationBase(4, 0)
+			                                                                                       {
+			                                                                                       })},
+			                                                                             {5,(() => new CivilizationBase(5, 0)
+			                                                                                       {
+			                                                                                       })},
+			                                                                             {6,(() => new CivilizationBase(6, 0)
+			                                                                                       {
+			                                                                                       })},
+			                                                                             {7,(() => new CivilizationBase(7, 0)
+			                                                                                       {
+			                                                                                       })},
+			                                                                             {8,(() => new CivilizationBase(8, 0)
+			                                                                                       {
+			                                                                                       })},
+			                                                                             {9,(() => new CivilizationBase(9, 0)
+			                                                                                       {
+			                                                                                       })},
+			                                                                             {10,(() => new CivilizationBase(10, 0)
+			                                                                                       {
+			                                                                                       })},
+
 		                                                                             };
 		
+		public static Dictionary<int, GenerateCivilizationFunc> CivDict => _civDict;
+
 		public static CivilizationBase GenerateCivilization(int civID)
 		{
-			return _civDict[civID]();
+			return CivDict[civID]();
 		}
 	}
 }
