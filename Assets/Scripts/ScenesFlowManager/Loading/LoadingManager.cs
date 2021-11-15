@@ -32,6 +32,12 @@ namespace ScenesFlowManager.Loading {
 
 
                 if (progressValue >= 0.9) {
+                    GlobalGameManager.GlobalGameManagerInstance.audioManager.BgmId = (nextSceneName switch
+                                                                                      {
+                                                                                          "BattleScene0" => 1,
+                                                                                          _              => 0
+                                                                                      });
+
                     async.allowSceneActivation = true;
                 }
 

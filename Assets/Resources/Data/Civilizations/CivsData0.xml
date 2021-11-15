@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE root [
+        <!ELEMENT root ANY>
+        <!ELEMENT Civilization (Name+,Content+)>
+            <!ATTLIST Civilization 
+                    CID ID #REQUIRED
+            >
+        <!ELEMENT Name (#PCDATA) >
+        <!ELEMENT Content (#PCDATA)>
+]>
+<!---->
+<!-- ID [000]-->
+<!---->
+
+<root>
+    <Civilization  CID="c000"  >
+        <Name>
+            中国
+        </Name>
+        <Content>
+            测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本。
+        </Content>
+    </Civilization >
+    <Civilization  CID="c001"  >
+        <Name>
+            蒙古
+        </Name>
+        <Content>
+            测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本。
+        </Content>
+    </Civilization >
+    <Civilization  CID="c002"  >
+        <Name>
+            拜占庭
+        </Name>
+        <Content>
+            测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本。
+        </Content>
+    </Civilization >
+    <Civilization  CID="c003"  >
+        <Name>
+            英格兰
+        </Name>
+        <Content>
+            测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本。
+        </Content>
+    </Civilization >
+    <Civilization  CID="c004"  >
+        <Name>
+            法兰西
+        </Name>
+        <Content>
+            测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本。
+        </Content>
+    </Civilization >
+    <Civilization  CID="c005"  >
+        <Name>
+            神圣罗马帝国
+        </Name>
+        <Content>
+            测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本。
+        </Content>
+    </Civilization >
+    <Civilization  CID="c006"  >
+        <Name>
+            奥斯曼帝国
+        </Name>
+        <Content>
+            测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本。
+        </Content>
+    </Civilization >
+    <Civilization  CID="c007"  >
+        <Name>
+            帖木儿帝国
+        </Name>
+        <Content>
+            测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本。
+        </Content>
+    </Civilization >
+    <Civilization  CID="c008"  >
+        <Name>
+            莫斯科大公国
+        </Name>
+        <Content>
+            测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本。
+        </Content>
+    </Civilization >
+    <Civilization  CID="c009"  >
+        <Name>
+            德里苏丹国
+        </Name>
+        <Content>
+            测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本。
+        </Content>
+    </Civilization >
+    <Civilization  CID="c010"  >
+        <Name>
+            阿兹特克
+        </Name>
+        <Content>
+            测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本测试文本。
+        </Content>
+    </Civilization >
+</root>

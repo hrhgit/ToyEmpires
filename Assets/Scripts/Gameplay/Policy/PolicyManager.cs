@@ -88,15 +88,22 @@ namespace Gameplay.Policy
         
         private void Start()
         {
+
+
+        }
+
+        public void InitPolicies (){
+            
             if(BattleGameManager.BattleGameManagerInstance.userPlayer == this.targetPlayer)
             {
                 _policyManagerUI = BattleGameManager.BattleGameManagerInstance.policyManagerUI;
+                _policyManagerUI.Init();
                 policyUpdateEvent.AddListener((manager => _policyManagerUI.UpdatePolicies()));
             }
-            /********测试***************/
-            this.AddPolicy(PolicyGenerator.GeneratePolicy(2000));
-            this.AddPolicy(PolicyGenerator.GeneratePolicy(2001));
-            /********测试***************/
+            
+            foreach (int policyId in targetPlayer.civilization.availablePoliciesIds) {
+                this.AddPolicy(PolicyGenerator.GeneratePolicy(policyId));
+            }
         }
     }
 }
