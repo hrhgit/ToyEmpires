@@ -12,6 +12,7 @@ namespace Tools.TechTreeNodeEditor.Nodes {
 		public override string GetID => ID;
 		public override string Title => "Tech Node";
 		
+
 		// 布局
 		public override Vector2 MinSize    { get { return new Vector2(350, 60); } }
 		public override bool    AutoLayout { get { return true; } }
@@ -92,6 +93,8 @@ namespace Tools.TechTreeNodeEditor.Nodes {
 			this.formerTechs.Add("");
 			return true;
 		}
+		
+		
 		
 
 	}

@@ -6,6 +6,9 @@ namespace Tools.TechTreeNodeEditor.Nodes {
 		public override string Identifier => "TechConnection";
 		public override Color  Color      => Color.cyan;
 		public override Type   Type       => typeof(string);
+		
+		
+		
 
 	}
 }

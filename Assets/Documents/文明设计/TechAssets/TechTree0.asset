@@ -1,6 +1,27 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-9110875607163529297
+--- !u!114 &-9214361610327955089
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -281.00003, y: 830.20013}
+  dynamicConnectionPorts:
+  - {fileID: -3722733795266157724}
+  - {fileID: -5654326327029932180}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  output: {fileID: 6847711780956599138}
+  techName: "\u6570\u5B66"
+  techDetail: "+\u751F\u4EA7\u529B\n+\u89E3\u9501\u5EFA\u7B51\u3010\u3011\n+\u89E3\u9501\u653F\u7B56\u3010\u3011\n"
+--- !u!114 &-8757477506222727078
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -12,7 +33,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
   m_Name: Input
   m_EditorClassIdentifier: 
-  body: {fileID: -534251249481513522}
+  body: {fileID: -822069503416830837}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: -590647351158143220}
+  side: 4
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &-8219012204276635615
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -6053898729661551533}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections:
+  - {fileID: -5935519914732848308}
+  - {fileID: -7475089838639242427}
+  side: 2
+  sidePosition: 66.5
+  sideOffset: 0
+--- !u!114 &-7981310686311025372
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: 4460004805427695792}
   direction: 1
   maxConnectionCount: 0
   styleID: TechConnection
@@ -20,7 +84,176 @@ MonoBehaviour:
   side: 4
   sidePosition: 28.5
   sideOffset: 0
---- !u!114 &-3896723470634638446
+--- !u!114 &-7733211735424869544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: 5252467204115554010}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: 8873160126819701383}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &-7475089838639242427
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -7144391331885283440}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: -8219012204276635615}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &-7180378969563401078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -6666612828303471922}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: 8873160126819701383}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &-7144391331885283440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 140, y: -380}
+  dynamicConnectionPorts:
+  - {fileID: -7475089838639242427}
+  - {fileID: 5642842775457672647}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  output: {fileID: 6154007704386140702}
+  techName: "\u519C\u5B66"
+  techDetail: "+\u5DE5\u4EBA\u751F\u4EA7\u529B\n+\u5DE5\u4EBA\u98DF\u7269\u8FD0\u8F7D\u91CF\n-\u5DE5\u4EBA\u98DF\u7269\u5DE5\u4F5C\u65F6\u95F4\n+\u5DE5\u4EBA\u98DF\u7269\u8FD0\u8F7D\u91CF\n+\u89E3\u9501\u5EFA\u7B51\u3010\u3011"
+--- !u!114 &-7102944561882075563
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: 6185945580604926051}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections:
+  - {fileID: -1678125588411299427}
+  - {fileID: 8693806778313330817}
+  side: 2
+  sidePosition: 66.5
+  sideOffset: 0
+--- !u!114 &-6666612828303471922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 1000, y: 480}
+  dynamicConnectionPorts:
+  - {fileID: -7180378969563401078}
+  - {fileID: 7048256077971054996}
+  - {fileID: -3472737853955397270}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  output: {fileID: -6659033158149077680}
+  techName: "\u9A91\u5C04"
+  techDetail: "+\u89E3\u9501\u5355\u4F4D\u3010\u5F13\u9A91\u5175\u3011"
+--- !u!114 &-6659033158149077680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -6666612828303471922}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections: []
+  side: 2
+  sidePosition: 85.5
+  sideOffset: 0
+--- !u!114 &-6594589100465654226
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 119, y: 406.2}
+  dynamicConnectionPorts:
+  - {fileID: 8693806778313330817}
+  - {fileID: 8011198957532247710}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  output: {fileID: 2194810558707154548}
+  techName: "\u6273\u6307"
+  techDetail: "+\u89E3\u9501\u5355\u4F4D\u3010\u5F13\u624B\u3011\n"
+--- !u!114 &-6350928654351326907
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -35,10 +268,10 @@ MonoBehaviour:
   myCustomStateVariable: 0
   canvas: {fileID: 0}
   parentEditor: {fileID: 0}
-  selectedNode: {fileID: -534251249481513522}
-  panOffset: {x: -249.31999, y: 117.70001}
-  zoom: 1.4
---- !u!114 &-3638559546113997524
+  selectedNode: {fileID: 0}
+  panOffset: {x: -254.99994, y: -294.99994}
+  zoom: 1.2
+--- !u!114 &-6118632313457935550
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,37 +283,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
   m_Name: Output
   m_EditorClassIdentifier: 
-  body: {fileID: -534251249481513522}
+  body: {fileID: 5252467204115554010}
   direction: 2
   maxConnectionCount: 1
   styleID: TechConnection
-  _connections:
-  - {fileID: -1453688984480173492}
+  _connections: []
   side: 2
-  sidePosition: 47
+  sidePosition: 66.5
   sideOffset: 0
---- !u!114 &-1453688984480173492
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
-  m_Name: Input
-  m_EditorClassIdentifier: 
-  body: {fileID: 9139406147724750149}
-  direction: 1
-  maxConnectionCount: 0
-  styleID: TechConnection
-  _connections:
-  - {fileID: -3638559546113997524}
-  side: 4
-  sidePosition: 28
-  sideOffset: 0
---- !u!114 &-534251249481513522
+--- !u!114 &-6053898729661551533
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -92,14 +303,434 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
   m_Name: Tech Node
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  position: {x: -227.68002, y: -279.70004}
+  canvas: {fileID: 11400000}
+  position: {x: -280, y: -140}
   dynamicConnectionPorts:
-  - {fileID: -9110875607163529297}
+  - {fileID: -3662212211677825840}
+  - {fileID: 1836577081247544398}
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  output: {fileID: -3638559546113997524}
-  techName: "\u624B\u63A8\u8F66"
+  output: {fileID: -8219012204276635615}
+  techName: "\u755C\u529B"
+  techDetail: "+\u5DE5\u4EBA\u6570\u91CF\u4E0A\u9650\n+\u5DE5\u4EBA\u751F\u4EA7\u901F\u5EA6\n-\u5DE5\u4EBA\u5DE5\u4F5C\u65F6\u95F4\n+\u89E3\u9501\u5355\u4F4D\u3010\u9A91\u624B\u3011"
+--- !u!114 &-5935519914732848308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -822069503416830837}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: -8219012204276635615}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &-5654326327029932180
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -9214361610327955089}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &-4954991616712313930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -2837908735966924022}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections:
+  - {fileID: -3662212211677825840}
+  side: 2
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &-4237914410623046775
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: 8957793402818894894}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: -590647351158143220}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &-3722733795266157724
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -9214361610327955089}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: 5673467035923290890}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &-3662212211677825840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -6053898729661551533}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: -4954991616712313930}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &-3472737853955397270
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -6666612828303471922}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 66.5
+  sideOffset: 0
+--- !u!114 &-3068852110054501308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 129.00012, y: 830.6}
+  dynamicConnectionPorts:
+  - {fileID: 6546533563186968616}
+  - {fileID: 5820430791589177898}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  output: {fileID: 7958967962700050217}
+  techName: "\u5316\u5B66"
   techDetail: 
+--- !u!114 &-2979013580688394350
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -822069503416830837}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections:
+  - {fileID: 4168043409812249825}
+  side: 2
+  sidePosition: 85.5
+  sideOffset: 0
+--- !u!114 &-2837908735966924022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -730, y: -150}
+  dynamicConnectionPorts:
+  - {fileID: 3384389603321459853}
+  backgroundColor: {r: 0.3401331, g: 1, b: 0.02352941, a: 1}
+  output: {fileID: -4954991616712313930}
+  techName: "\u624B\u63A8\u8F66"
+  techDetail: "+\u5DE5\u4EBA\u8FD0\u8F7D\u91CF\n+\u5DE5\u4EBA\u901F\u5EA6\n+\u5DE5\u4EBA\u751F\u4EA7\u529B"
+--- !u!114 &-2211231514818368581
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 1000, y: -50}
+  dynamicConnectionPorts:
+  - {fileID: 4168043409812249825}
+  - {fileID: 4635373005423358380}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  output: {fileID: -1735989798874345527}
+  techName: "\u9501\u5B50\u7532"
+  techDetail: "+\u89E3\u9501\u653F\u7B56\u3010\u91CD\u88C5\u5316\u3011\n                 
+    \uFF08\u91CD\u88C5\u5251\u58EB\u66FF\u6362\u5251\u58EB\u3001\n                     
+    \u91CD\u88C5\u76FE\u724C\u624B\u66FF\u6362\u76FE\u724C\u624B\u3001\n                     
+    \u5177\u88C5\u9A91\u5175\u66FF\u6362\u91CD\u9A91\u5175\u3001\n                     
+    \u91CD\u88C5\u5F13\u9A91\u5175\u66FF\u6362\u5F13\u9A91\u5175\uFF09\n+\u9632\u5FA1\n+HP"
+--- !u!114 &-1735989798874345527
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -2211231514818368581}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections: []
+  side: 2
+  sidePosition: 66.5
+  sideOffset: 0
+--- !u!114 &-1678125588411299427
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: 4395447098570592610}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: -7102944561882075563}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &-1609093707169989594
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -711.4, y: 628.8}
+  dynamicConnectionPorts:
+  - {fileID: -104809108096449600}
+  backgroundColor: {r: 0.3254717, g: 0.7612764, b: 1, a: 1}
+  output: {fileID: 5673467035923290890}
+  techName: "\u6559\u80B2"
+  techDetail: "+\u751F\u4EA7\u529B\n+\u89E3\u9501\u5EFA\u7B51\u3010\u3011\n+\u89E3\u9501\u653F\u7B56\u3010\u3011\u3010\u3011"
+--- !u!114 &-1135309426971812743
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: 6185945580604926051}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &-822069503416830837
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 550, y: -60}
+  dynamicConnectionPorts:
+  - {fileID: -5935519914732848308}
+  - {fileID: -8757477506222727078}
+  - {fileID: 3257470165290637005}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  output: {fileID: -2979013580688394350}
+  techName: "\u5DE5\u5320\u4EA7\u4E1A"
+  techDetail: "+\u751F\u4EA7\u529B\n+\u653B\u51FB\n+\u9632\u5FA1\n+\u5355\u4F4D\u751F\u4EA7\u901F\u5EA6\n+\u89E3\u9501\u5355\u4F4D\u3010\u957F\u67AA\u5175\u3011\n-\u5931\u53BB\u5355\u4F4D\u3010\u957F\u77DB\u5175\u3011"
+--- !u!114 &-590647351158143220
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: 4395447098570592610}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections:
+  - {fileID: -8757477506222727078}
+  - {fileID: -4237914410623046775}
+  side: 2
+  sidePosition: 66.5
+  sideOffset: 0
+--- !u!114 &-460121869668243767
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: 6185945580604926051}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: -412443629679501056}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &-412443629679501056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: 4460004805427695792}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections:
+  - {fileID: -460121869668243767}
+  side: 2
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &-104809108096449600
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -1609093707169989594}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,35 +744,29 @@ MonoBehaviour:
   m_Name: TechTree0
   m_EditorClassIdentifier: 
   editorStates:
-  - {fileID: -3896723470634638446}
+  - {fileID: -6350928654351326907}
   saveName: TechTree0
   savePath: "Assets\\Documents\\\u6587\u660E\u8BBE\u8BA1\\TechAssets\\TechTree0.asset"
   livesInScene: 0
   nodes:
-  - {fileID: -534251249481513522}
-  - {fileID: 9139406147724750149}
+  - {fileID: -2837908735966924022}
+  - {fileID: -6053898729661551533}
+  - {fileID: 6185945580604926051}
+  - {fileID: -1609093707169989594}
+  - {fileID: -9214361610327955089}
+  - {fileID: 4395447098570592610}
+  - {fileID: -6594589100465654226}
+  - {fileID: 1763228266989267956}
+  - {fileID: -822069503416830837}
+  - {fileID: 4460004805427695792}
+  - {fileID: -7144391331885283440}
+  - {fileID: 8957793402818894894}
+  - {fileID: -3068852110054501308}
+  - {fileID: -6666612828303471922}
+  - {fileID: -2211231514818368581}
+  - {fileID: 5252467204115554010}
   groups: []
---- !u!114 &5078315116958251225
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
-  m_Name: Output
-  m_EditorClassIdentifier: 
-  body: {fileID: 9139406147724750149}
-  direction: 2
-  maxConnectionCount: 1
-  styleID: TechConnection
-  _connections: []
-  side: 2
-  sidePosition: 65
-  sideOffset: 0
---- !u!114 &7965870225086473786
+--- !u!114 &360619635527241417
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -153,15 +778,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
   m_Name: Input
   m_EditorClassIdentifier: 
-  body: {fileID: 9139406147724750149}
+  body: {fileID: 1763228266989267956}
   direction: 1
   maxConnectionCount: 0
   styleID: TechConnection
   _connections: []
   side: 4
-  sidePosition: 46.5
+  sidePosition: 66.5
   sideOffset: 0
---- !u!114 &9139406147724750149
+--- !u!114 &1763228266989267956
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,12 +798,590 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
   m_Name: Tech Node
   m_EditorClassIdentifier: 
-  canvas: {fileID: 0}
-  position: {x: 178.51999, y: -101.500015}
+  canvas: {fileID: 11400000}
+  position: {x: 551.6, y: 602.19995}
   dynamicConnectionPorts:
-  - {fileID: -1453688984480173492}
-  - {fileID: 7965870225086473786}
+  - {fileID: 4285125734867252928}
+  - {fileID: 7788775533273490290}
+  - {fileID: 360619635527241417}
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
-  output: {fileID: 5078315116958251225}
-  techName: 
-  techDetail: 
+  output: {fileID: 7190748915085615960}
+  techName: "\u590D\u5408\u5F13"
+  techDetail: "+\u8FDC\u7A0B\u5C04\u7A0B\n+\u8FDC\u7A0B\u653B\u51FB\u529B\n"
+--- !u!114 &1836577081247544398
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -6053898729661551533}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &2194810558707154548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -6594589100465654226}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections:
+  - {fileID: 4285125734867252928}
+  - {fileID: 7048256077971054996}
+  side: 2
+  sidePosition: 66.5
+  sideOffset: 0
+--- !u!114 &3257470165290637005
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -822069503416830837}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 66.5
+  sideOffset: 0
+--- !u!114 &3384389603321459853
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -2837908735966924022}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &4168043409812249825
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -2211231514818368581}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: -2979013580688394350}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &4285125734867252928
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: 1763228266989267956}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: 2194810558707154548}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &4395447098570592610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 145.2, y: 137.2}
+  dynamicConnectionPorts:
+  - {fileID: -1678125588411299427}
+  - {fileID: 8225971153299900193}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  output: {fileID: -590647351158143220}
+  techName: "\u70BC\u94A2"
+  techDetail: "+\u653B\u51FB\n+\u9632\u5FA1"
+--- !u!114 &4460004805427695792
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -730, y: 240}
+  dynamicConnectionPorts:
+  - {fileID: -7981310686311025372}
+  backgroundColor: {r: 1, g: 0.3483723, b: 0, a: 1}
+  output: {fileID: -412443629679501056}
+  techName: "\u6218\u672F"
+  techDetail: "+\u89E3\u9501\u5355\u4F4D\u3010\u5251\u58EB\u3011\u3010\u957F\u77DB\u624B\u3011\n-\u5931\u53BB\u5355\u4F4D\u3010\u6C11\u5175\u3011"
+--- !u!114 &4635373005423358380
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -2211231514818368581}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &5252467204115554010
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 1000.7999, y: 223.39993}
+  dynamicConnectionPorts:
+  - {fileID: -7733211735424869544}
+  - {fileID: 7631934446874051477}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  output: {fileID: -6118632313457935550}
+  techName: "\u9A91\u67AA"
+  techDetail: "+\u89E3\u9501\u5355\u4F4D\u3010\u67AA\u9A91\u5175\u3011"
+--- !u!114 &5642842775457672647
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -7144391331885283440}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &5673467035923290890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -1609093707169989594}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections:
+  - {fileID: -3722733795266157724}
+  - {fileID: 7788775533273490290}
+  side: 2
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &5820430791589177898
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -3068852110054501308}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &6154007704386140702
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -7144391331885283440}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections: []
+  side: 2
+  sidePosition: 66.5
+  sideOffset: 0
+--- !u!114 &6185945580604926051
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: -270, y: 240}
+  dynamicConnectionPorts:
+  - {fileID: -460121869668243767}
+  - {fileID: -1135309426971812743}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  output: {fileID: -7102944561882075563}
+  techName: "\u953B\u9020"
+  techDetail: "+\u9632\u5FA1\n+\u89E3\u9501\u3010\u76FE\u724C\u624B\u3011\n+HP\n"
+--- !u!114 &6339093482722686957
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: 8957793402818894894}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &6546533563186968616
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -3068852110054501308}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: 6847711780956599138}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &6847711780956599138
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -9214361610327955089}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections:
+  - {fileID: 6546533563186968616}
+  side: 2
+  sidePosition: 66.5
+  sideOffset: 0
+--- !u!114 &7048256077971054996
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -6666612828303471922}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: 2194810558707154548}
+  side: 4
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &7190748915085615960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: 1763228266989267956}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections: []
+  side: 2
+  sidePosition: 85.5
+  sideOffset: 0
+--- !u!114 &7631934446874051477
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: 5252467204115554010}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &7788775533273490290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: 1763228266989267956}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: 5673467035923290890}
+  side: 4
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &7958967962700050217
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -3068852110054501308}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections: []
+  side: 2
+  sidePosition: 66.5
+  sideOffset: 0
+--- !u!114 &8011198957532247710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -6594589100465654226}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &8225971153299900193
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: 4395447098570592610}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 47.5
+  sideOffset: 0
+--- !u!114 &8693806778313330817
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -6594589100465654226}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: -7102944561882075563}
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &8873160126819701383
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: 8957793402818894894}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections:
+  - {fileID: -7180378969563401078}
+  - {fileID: -7733211735424869544}
+  side: 2
+  sidePosition: 66.5
+  sideOffset: 0
+--- !u!114 &8957793402818894894
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 540, y: 250}
+  dynamicConnectionPorts:
+  - {fileID: -4237914410623046775}
+  - {fileID: 6339093482722686957}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  output: {fileID: 8873160126819701383}
+  techName: "\u9A6C\u956B"
+  techDetail: "+\u89E3\u9501\u5355\u4F4D\u3010\u8F7B\u9A91\u5175\u3011\u3010\u91CD\u9A91\u5175\u3011\n-\u5931\u53BB\u5355\u4F4D\u3010\u9A91\u624B\u3011"

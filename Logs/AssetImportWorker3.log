@@ -1,0 +1,857 @@
+Using pre-set license
+Built from '2020.3/china_unity/release' branch; Version is '2020.3.14f1c1 (ed787cdc2846) revision 15562876'; Using compiler version '192528614'; Build Type 'Release'
+OS: 'Windows 10 Home China; OS build 19042.1348; Version 2009; 64bit' Language: 'zh' Physical Memory: 16263 MB
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+
+ COMMAND LINE ARGUMENTS:
+C:\Program Files\Unity\Hub\Editor\2020.3.14f1c1\Editor\Unity.exe
+-adb2
+-batchMode
+-noUpm
+-name
+AssetImportWorker3
+-projectPath
+G:/ToyEmpires/ToyEmpires/ToyEmpires
+-logFile
+Logs/AssetImportWorker3.log
+-srvPort
+59030
+Successfully changed project path to: G:/ToyEmpires/ToyEmpires/ToyEmpires
+G:/ToyEmpires/ToyEmpires/ToyEmpires
+Using Asset Import Pipeline V2.
+Refreshing native plugins compatible for Editor in 82.27 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Initialize engine version: 2020.3.14f1c1 (ed787cdc2846)
+[Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.14f1c1/Editor/Data/Resources/UnitySubsystems
+[Subsystems] Discovering subsystems at path G:/ToyEmpires/ToyEmpires/ToyEmpires/Assets
+GfxDevice: creating device client; threaded=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: NVIDIA GeForce GTX 1060 (ID=0x1c60)
+    Vendor:   
+    VRAM:     6052 MB
+    Driver:   27.21.14.6280
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Initialize mono
+Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.14f1c1/Editor/Data/Managed'
+Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.14f1c1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
+Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.14f1c1/Editor/Data/MonoBleedingEdge/etc'
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56676
+Begin MonoManager ReloadAssembly
+Registering precompiled unity dll's ...
+Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.14f1c1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Registered in 0.002105 seconds.
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 55.71 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  2.665 seconds
+Domain Reload Profiling:
+	ReloadAssembly (2665ms)
+		BeginReloadAssembly (57ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (0ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (1ms)
+		EndReloadAssembly (464ms)
+			LoadAssemblies (54ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (167ms)
+			ReleaseScriptCaches (0ms)
+			RebuildScriptCaches (35ms)
+			SetupLoadedEditorAssemblies (186ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (4ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (56ms)
+				BeforeProcessingInitializeOnLoad (10ms)
+				ProcessInitializeOnLoadAttributes (79ms)
+				ProcessInitializeOnLoadMethodAttributes (37ms)
+				AfterProcessingInitializeOnLoad (0ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (0ms)
+Platform modules already initialized, skipping
+Registering precompiled user dll's ...
+Registered in 0.004031 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 59.28 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Mono: successfully reloaded assembly
+- Completed reload, in  1.192 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1192ms)
+		BeginReloadAssembly (149ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (17ms)
+		EndReloadAssembly (979ms)
+			LoadAssemblies (91ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (320ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (62ms)
+			SetupLoadedEditorAssemblies (382ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (4ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (59ms)
+				BeforeProcessingInitializeOnLoad (97ms)
+				ProcessInitializeOnLoadAttributes (208ms)
+				ProcessInitializeOnLoadMethodAttributes (5ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (6ms)
+Platform modules already initialized, skipping
+========================================================================
+Worker process is ready to serve import requests
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.07 seconds
+Refreshing native plugins compatible for Editor in 0.57 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3177 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 158.9 MB.
+System memory in use after: 159.1 MB.
+
+Unloading 23 unused Assets to reduce memory usage. Loaded Objects now: 3626.
+Total: 2.783700 ms (FindLiveObjects: 0.289900 ms CreateObjectMapping: 0.122400 ms MarkObjects: 2.293600 ms  DeleteObjects: 0.076800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9392d957cdc207cd77690fb8c9f07526') in 0.037115 seconds 
+  Import took 0.086742 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 17.116909 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ce70373f047d0844ec36e27f9b0fbd93') in 0.003484 seconds 
+  Import took 0.021658 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.003813 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.68 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+ForwardRenderer is missing RendererFeatures
+This could be due to missing scripts or compile error.
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object,UnityEngine.Object)
+UnityEngine.Debug:LogError (object,UnityEngine.Object)
+UnityEngine.Rendering.Universal.ScriptableRendererData:ValidateRendererFeatures () (at Library/PackageCache/com.unity.render-pipelines.universal@10.5.0/Runtime/ScriptableRendererData.cs:135)
+UnityEngine.Rendering.Universal.ScriptableRendererData:OnValidate () (at Library/PackageCache/com.unity.render-pipelines.universal@10.5.0/Runtime/ScriptableRendererData.cs:59)
+
+(Filename: Library/PackageCache/com.unity.render-pipelines.universal@10.5.0/Runtime/ScriptableRendererData.cs Line: 135)
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.377 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1378ms)
+		BeginReloadAssembly (126ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (6ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (38ms)
+		EndReloadAssembly (1182ms)
+			LoadAssemblies (98ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (377ms)
+			ReleaseScriptCaches (2ms)
+			RebuildScriptCaches (56ms)
+			SetupLoadedEditorAssemblies (456ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (152ms)
+				ProcessInitializeOnLoadAttributes (283ms)
+				ProcessInitializeOnLoadMethodAttributes (4ms)
+				AfterProcessingInitializeOnLoad (11ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (22ms)
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.66 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3045 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 150.1 MB.
+System memory in use after: 150.3 MB.
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 3629.
+Total: 3.421700 ms (FindLiveObjects: 0.366800 ms CreateObjectMapping: 0.189300 ms MarkObjects: 2.828300 ms  DeleteObjects: 0.035700 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004029 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.65 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+ForwardRenderer is missing RendererFeatures
+This could be due to missing scripts or compile error.
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object,UnityEngine.Object)
+UnityEngine.Debug:LogError (object,UnityEngine.Object)
+UnityEngine.Rendering.Universal.ScriptableRendererData:ValidateRendererFeatures () (at Library/PackageCache/com.unity.render-pipelines.universal@10.5.0/Runtime/ScriptableRendererData.cs:135)
+UnityEngine.Rendering.Universal.ScriptableRendererData:OnValidate () (at Library/PackageCache/com.unity.render-pipelines.universal@10.5.0/Runtime/ScriptableRendererData.cs:59)
+
+(Filename: Library/PackageCache/com.unity.render-pipelines.universal@10.5.0/Runtime/ScriptableRendererData.cs Line: 135)
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.169 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1170ms)
+		BeginReloadAssembly (118ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (34ms)
+		EndReloadAssembly (980ms)
+			LoadAssemblies (100ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (349ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (46ms)
+			SetupLoadedEditorAssemblies (340ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (123ms)
+				ProcessInitializeOnLoadAttributes (200ms)
+				ProcessInitializeOnLoadMethodAttributes (4ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (19ms)
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.61 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3045 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 150.2 MB.
+System memory in use after: 150.4 MB.
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 3633.
+Total: 3.104000 ms (FindLiveObjects: 0.252400 ms CreateObjectMapping: 0.129600 ms MarkObjects: 2.692100 ms  DeleteObjects: 0.028800 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 153.329014 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a7f85868ebea2819e8297eeaaa2f0adf') in 0.180259 seconds 
+  Import took 0.185539 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 16.455360 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c582d9b927fb7b9880d419366cb486ea') in 0.002242 seconds 
+  Import took 0.015844 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.004601 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.65 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+ForwardRenderer is missing RendererFeatures
+This could be due to missing scripts or compile error.
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object,UnityEngine.Object)
+UnityEngine.Debug:LogError (object,UnityEngine.Object)
+UnityEngine.Rendering.Universal.ScriptableRendererData:ValidateRendererFeatures () (at Library/PackageCache/com.unity.render-pipelines.universal@10.5.0/Runtime/ScriptableRendererData.cs:135)
+UnityEngine.Rendering.Universal.ScriptableRendererData:OnValidate () (at Library/PackageCache/com.unity.render-pipelines.universal@10.5.0/Runtime/ScriptableRendererData.cs:59)
+
+(Filename: Library/PackageCache/com.unity.render-pipelines.universal@10.5.0/Runtime/ScriptableRendererData.cs Line: 135)
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.272 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1272ms)
+		BeginReloadAssembly (124ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (4ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (37ms)
+		EndReloadAssembly (1081ms)
+			LoadAssemblies (102ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (382ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (53ms)
+			SetupLoadedEditorAssemblies (389ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (1ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (138ms)
+				ProcessInitializeOnLoadAttributes (231ms)
+				ProcessInitializeOnLoadMethodAttributes (5ms)
+				AfterProcessingInitializeOnLoad (8ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (20ms)
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 1.06 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3045 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 150.2 MB.
+System memory in use after: 150.5 MB.
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 3637.
+Total: 3.298400 ms (FindLiveObjects: 0.290300 ms CreateObjectMapping: 0.158100 ms MarkObjects: 2.812000 ms  DeleteObjects: 0.036500 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 129.009645 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1b1f98f39bcdd95a491e7094cc180c93') in 0.102712 seconds 
+  Import took 0.137559 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.821812 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '36867c6e9c617c09c049d194a1a3e068') in 0.002711 seconds 
+  Import took 0.025058 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 45.633677 seconds.
+  path: Assets/Documents/兵种设计/兵种设计表.xlsx
+  artifactKey: Guid(9f9e0b0ccee55c74abd5f41c0e05c844) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Documents/兵种设计/兵种设计表.xlsx using Guid(9f9e0b0ccee55c74abd5f41c0e05c844) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'afbaf9153d0ac362d00866b36b430bf9') in 0.009512 seconds 
+  Import took 0.104816 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 156.723923 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b2885a477e43f3730ec488c65133554c') in 0.007071 seconds 
+  Import took 0.023361 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 65.863053 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57f6761de3e8ebb109d745b9b486416c') in 0.002865 seconds 
+  Import took 0.020080 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 60.027864 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '189a1922a9cf70d78d12835f0376acfe') in 0.002870 seconds 
+  Import took 0.038503 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.976031 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2bf3aed3c20838f2a12f2f6df1962524') in 0.003211 seconds 
+  Import took 0.151098 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 110.019048 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'db67fb21c1a750de463b7b1b28a263d0') in 0.003316 seconds 
+  Import took 0.026058 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 31.077562 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '71f3ce6159089b3d4ed7cafe903e51d2') in 0.002871 seconds 
+  Import took 0.016551 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 32.484651 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b88c2ef8452851acd8ced84bd18acf5a') in 0.004244 seconds 
+  Import took 0.025921 seconds .
+
+========================================================================
+Received Prepare
+Registering precompiled user dll's ...
+Registered in 0.005300 seconds.
+Begin MonoManager ReloadAssembly
+Native extension for WindowsStandalone target not found
+Refreshing native plugins compatible for Editor in 0.69 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+ForwardRenderer is missing RendererFeatures
+This could be due to missing scripts or compile error.
+UnityEngine.StackTraceUtility:ExtractStackTrace ()
+UnityEngine.DebugLogHandler:LogFormat (UnityEngine.LogType,UnityEngine.Object,string,object[])
+UnityEngine.Logger:Log (UnityEngine.LogType,object,UnityEngine.Object)
+UnityEngine.Debug:LogError (object,UnityEngine.Object)
+UnityEngine.Rendering.Universal.ScriptableRendererData:ValidateRendererFeatures () (at Library/PackageCache/com.unity.render-pipelines.universal@10.5.0/Runtime/ScriptableRendererData.cs:135)
+UnityEngine.Rendering.Universal.ScriptableRendererData:OnValidate () (at Library/PackageCache/com.unity.render-pipelines.universal@10.5.0/Runtime/ScriptableRendererData.cs:59)
+
+(Filename: Library/PackageCache/com.unity.render-pipelines.universal@10.5.0/Runtime/ScriptableRendererData.cs Line: 135)
+
+Mono: successfully reloaded assembly
+- Completed reload, in  1.243 seconds
+Domain Reload Profiling:
+	ReloadAssembly (1243ms)
+		BeginReloadAssembly (145ms)
+			ExecutionOrderSort (0ms)
+			DisableScriptedObjects (5ms)
+			BackupInstance (0ms)
+			ReleaseScriptingObjects (0ms)
+			CreateAndSetChildDomain (43ms)
+		EndReloadAssembly (1025ms)
+			LoadAssemblies (117ms)
+			RebuildTransferFunctionScriptingTraits (0ms)
+			SetupTypeCache (375ms)
+			ReleaseScriptCaches (1ms)
+			RebuildScriptCaches (46ms)
+			SetupLoadedEditorAssemblies (349ms)
+				LogAssemblyErrors (0ms)
+				InitializePlatformSupportModulesInManaged (5ms)
+				SetLoadedEditorAssemblies (0ms)
+				RefreshPlugins (1ms)
+				BeforeProcessingInitializeOnLoad (127ms)
+				ProcessInitializeOnLoadAttributes (205ms)
+				ProcessInitializeOnLoadMethodAttributes (4ms)
+				AfterProcessingInitializeOnLoad (7ms)
+				EditorAssembliesLoaded (0ms)
+			ExecutionOrderSort2 (0ms)
+			AwakeInstancesAfterBackupRestoration (19ms)
+Platform modules already initialized, skipping
+Shader 'Universal Render Pipeline/Particles/Lit': fallback shader 'Universal Render Pipeline/Particles/SimpleLit' not found
+Refreshing native plugins compatible for Editor in 0.70 ms, found 2 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 3045 Unused Serialized files (Serialized files now loaded: 0)
+System memory in use before: 150.3 MB.
+System memory in use after: 150.5 MB.
+
+Unloading 19 unused Assets to reduce memory usage. Loaded Objects now: 3641.
+Total: 3.194500 ms (FindLiveObjects: 0.330600 ms CreateObjectMapping: 0.163200 ms MarkObjects: 2.666800 ms  DeleteObjects: 0.031700 ms)
+
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:video-codec-MediaFoundation-h265: 746d11721c4dcdbdad8f713fa42b33f4 -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+========================================================================
+Received Import Request.
+  Time since last request: 84.085959 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0120b9bdf3e47ecd05b5e486c937da7c') in 0.111376 seconds 
+  Import took 0.123357 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 95.901637 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3a832bb08ccdbfdb71edd71711357500') in 0.003856 seconds 
+  Import took 0.031645 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 53.757753 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '86e87b99714f063bcae71be7740a527b') in 0.005588 seconds 
+  Import took 0.026532 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.976449 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '347b485572d2a4deac9f5e8d18319a54') in 0.003495 seconds 
+  Import took 0.019233 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 65.241465 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f18e44c94f6b0379cc8fe45431e15b3e') in 0.003487 seconds 
+  Import took 0.035152 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 53.705491 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4b90347cd225c4a12cd5fd13184579de') in 0.009892 seconds 
+  Import took 0.038426 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.954955 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9245527fa49afb2cde907a13b50426db') in 0.003476 seconds 
+  Import took 0.022563 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 61.985959 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68132837304b8bdca1730447a2133e5b') in 0.003323 seconds 
+  Import took 0.017122 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.922166 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '38c958b41e53b705d572af539f3c8e90') in 0.003482 seconds 
+  Import took 0.021699 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 91.562369 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bea7ce0a50289d5214a4fc2b0de10df7') in 0.003391 seconds 
+  Import took 0.019984 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.982154 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f1abb2b6fddf1555e5e2a573c660c941') in 0.003507 seconds 
+  Import took 0.011753 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.985348 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b26ece2a95695e73451a0a0f80b2de24') in 0.003361 seconds 
+  Import took 0.008835 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 141.545853 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '09537ade1f3ba2446bc7a25881c57096') in 0.003937 seconds 
+  Import took 0.009761 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.740052 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2690dc1bc723cfa460183f8553b75b99') in 0.003830 seconds 
+  Import took 0.025660 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 68.079311 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '541d72000b87bc4d9c3d976056c9e9f8') in 0.005035 seconds 
+  Import took 0.015135 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 149.788909 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '02aad821e03d0a14b642cedac0a22843') in 0.003699 seconds 
+  Import took 0.009703 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 121.957419 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '09be535ee08ecbbb31199f57f65bd1ca') in 0.004060 seconds 
+  Import took 0.023359 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 60.040398 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1720827bea9609cd58eba3be8d3e114f') in 0.003933 seconds 
+  Import took 0.013810 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 144.092899 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '89ccc9007d7c1b52a6ceeaf30033d78d') in 0.003662 seconds 
+  Import took 0.018512 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 60.223018 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5a9972edf2ebee45374fa4e3a227dbd6') in 0.003505 seconds 
+  Import took 0.033720 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 38.910177 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f76419fb889ae51680a67227d3bf2a78') in 0.005063 seconds 
+  Import took 0.031993 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 91.435392 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '848b3bf0c7e3fafd77bfd9623c0bf408') in 0.004356 seconds 
+  Import took 0.020819 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.961030 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '24eca535b3a979658e857de162bced68') in 0.003851 seconds 
+  Import took 0.009734 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 105.829137 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f332bb65beb28a2c24c1dcc6c7f33886') in 0.006841 seconds 
+  Import took 0.021772 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 45.582688 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0c1fcfde869ee01713c363d4984374f3') in 0.005263 seconds 
+  Import took 0.032719 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 33.188865 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3bb46cacd07d1a69d55022bc8da09517') in 0.004160 seconds 
+  Import took 0.010454 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 80.193280 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '66d3de8ef2272377ee83fd0cc97b1649') in 0.004051 seconds 
+  Import took 0.031120 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.901204 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9461ca537a6200eb6b3fc5adf688a447') in 0.004508 seconds 
+  Import took 0.030503 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 44.378646 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '51b396a8e7d2a05cef15ed0ba1506ea7') in 0.004291 seconds 
+  Import took 0.009571 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 53.469766 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dbb636af389b7598aad366b3181bbaf4') in 0.005872 seconds 
+  Import took 0.022605 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 154.835386 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '597579ef701a55b49d5305554b8b56ed') in 0.006138 seconds 
+  Import took 0.022053 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.962900 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'adf167231045fe27deb0c7d3aff77821') in 0.004244 seconds 
+  Import took 0.009640 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.988209 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b6690f19a03b2d3eafbc5e24b4e3fe3f') in 0.004440 seconds 
+  Import took 0.015197 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 34.588519 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '672bcb030e5f015966e67a5ced4cc31d') in 0.004130 seconds 
+  Import took 0.020927 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 60.126875 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b91825dec40c85e0bf99864a7444d4ee') in 0.004482 seconds 
+  Import took 0.016048 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 39.490245 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a8d205391228cf32b3ec3bdb052d84dc') in 0.005329 seconds 
+  Import took 0.016656 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 59.954466 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe5ba5e255ae97bfff5c6a2365d34bf7') in 0.005318 seconds 
+  Import took 0.010791 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 40.376177 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'de7caf5257f1dd2b29a55a56ad46fc93') in 0.004203 seconds 
+  Import took 0.016958 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 75.910186 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset
+  artifactKey: Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/CurSession.asset using Guid(8ba3949c894ade447addaa5798ad7b5c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0583ad7ea58214079b1e994387343f31') in 0.005933 seconds 
+  Import took 0.017551 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 7.470899 seconds.
+  path: Assets/DefaultEditorResources/Node_Editor_Framework/LastSession.asset
+  artifactKey: Guid(af94c02a8083ea94a8e9856a990d918d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/DefaultEditorResources/Node_Editor_Framework/LastSession.asset using Guid(af94c02a8083ea94a8e9856a990d918d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bf14face7c8f3ac79e3da8f677a80e2d') in 0.004320 seconds 
+  Import took 0.071293 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 2.428374 seconds.
+  path: Assets/Documents/文明设计/TechAssets/TechTree0.asset
+  artifactKey: Guid(5420d1c60ea02f841903fb70181ee04a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Documents/文明设计/TechAssets/TechTree0.asset using Guid(5420d1c60ea02f841903fb70181ee04a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '0e5c7daa2d734e14c11bcd1ade9111e7') in 0.004551 seconds 
+  Import took 0.040495 seconds .
+
+========================================================================
+Received Import Request.
+  Time since last request: 13.129088 seconds.
+  path: Assets/Documents/文明设计/TechAssets/TechTree0.asset
+  artifactKey: Guid(5420d1c60ea02f841903fb70181ee04a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Documents/文明设计/TechAssets/TechTree0.asset using Guid(5420d1c60ea02f841903fb70181ee04a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '21784a24ff4fd734c2b80aa93d7125c3') in 0.004481 seconds 
+  Import took 0.023025 seconds .
+
