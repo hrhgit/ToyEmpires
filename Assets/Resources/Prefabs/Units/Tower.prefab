@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  uniqueID: 6502400193808323894
+  uniqueID: 296620416349951039
   points:
   - {x: -0.056595787, y: 0, z: 0.06342418}
   - {x: -0.06672344, y: 0, z: 0.002582283}
@@ -314,6 +314,14 @@ PrefabInstance:
     - target: {fileID: 4121117100874780649, guid: 3ca08c3cc6606c24b9bcf61f9cbe9833, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4121117100874780649, guid: 3ca08c3cc6606c24b9bcf61f9cbe9833, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.60662
+      objectReference: {fileID: 0}
+    - target: {fileID: 4121117100874780649, guid: 3ca08c3cc6606c24b9bcf61f9cbe9833, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.6178611
       objectReference: {fileID: 0}
     - target: {fileID: 4121117100874780649, guid: 3ca08c3cc6606c24b9bcf61f9cbe9833, type: 3}
       propertyPath: m_LocalPosition.x

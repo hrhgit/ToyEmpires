@@ -1,0 +1,184 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9110875607163529297
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -534251249481513522}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 28.5
+  sideOffset: 0
+--- !u!114 &-3896723470634638446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ab6487237ff124ea4c2aa5de9ce3fb, type: 3}
+  m_Name: MainEditorState
+  m_EditorClassIdentifier: 
+  myCustomStateVariable: 0
+  canvas: {fileID: 0}
+  parentEditor: {fileID: 0}
+  selectedNode: {fileID: -534251249481513522}
+  panOffset: {x: -249.31999, y: 117.70001}
+  zoom: 1.4
+--- !u!114 &-3638559546113997524
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -534251249481513522}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections:
+  - {fileID: -1453688984480173492}
+  side: 2
+  sidePosition: 47
+  sideOffset: 0
+--- !u!114 &-1453688984480173492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: 9139406147724750149}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: -3638559546113997524}
+  side: 4
+  sidePosition: 28
+  sideOffset: 0
+--- !u!114 &-534251249481513522
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  position: {x: -227.68002, y: -279.70004}
+  dynamicConnectionPorts:
+  - {fileID: -9110875607163529297}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  output: {fileID: -3638559546113997524}
+  techName: "\u624B\u63A8\u8F66"
+  techDetail: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26a89c36c30b2e940804d7efcccaf0bd, type: 3}
+  m_Name: TechTree0
+  m_EditorClassIdentifier: 
+  editorStates:
+  - {fileID: -3896723470634638446}
+  saveName: TechTree0
+  savePath: "Assets\\Documents\\\u6587\u660E\u8BBE\u8BA1\\TechAssets\\TechTree0.asset"
+  livesInScene: 0
+  nodes:
+  - {fileID: -534251249481513522}
+  - {fileID: 9139406147724750149}
+  groups: []
+--- !u!114 &5078315116958251225
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: 9139406147724750149}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections: []
+  side: 2
+  sidePosition: 65
+  sideOffset: 0
+--- !u!114 &7965870225086473786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: 9139406147724750149}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 46.5
+  sideOffset: 0
+--- !u!114 &9139406147724750149
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 0}
+  position: {x: 178.51999, y: -101.500015}
+  dynamicConnectionPorts:
+  - {fileID: -1453688984480173492}
+  - {fileID: 7965870225086473786}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  output: {fileID: 5078315116958251225}
+  techName: 
+  techDetail: 
