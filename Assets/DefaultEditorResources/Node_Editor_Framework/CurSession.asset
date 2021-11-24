@@ -40,7 +40,7 @@ MonoBehaviour:
   - {fileID: 6624573219014890527}
   - {fileID: -6925745844796574687}
   side: 2
-  sidePosition: 66.5
+  sidePosition: 65
   sideOffset: 0
 --- !u!114 &-6925745844796574687
 MonoBehaviour:
@@ -61,7 +61,7 @@ MonoBehaviour:
   _connections:
   - {fileID: -7944744943246990887}
   side: 4
-  sidePosition: 28.5
+  sidePosition: 28
   sideOffset: 0
 --- !u!114 &-6826816160116347050
 MonoBehaviour:
@@ -81,7 +81,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 4
-  sidePosition: 47.5
+  sidePosition: 46.5
   sideOffset: 0
 --- !u!114 &-6735190015710415198
 MonoBehaviour:
@@ -101,7 +101,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 4
-  sidePosition: 47.5
+  sidePosition: 46.5
   sideOffset: 0
 --- !u!114 &-6721822570628917253
 MonoBehaviour:
@@ -123,8 +123,30 @@ MonoBehaviour:
   - {fileID: 3659629983566022654}
   - {fileID: -1934485328068601287}
   side: 2
-  sidePosition: 66.5
+  sidePosition: 65
   sideOffset: 0
+--- !u!114 &-6327918574552104243
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc58233aef974027bd9de134b0a64327, type: 3}
+  m_Name: Tech Node
+  m_EditorClassIdentifier: 
+  canvas: {fileID: 11400000}
+  position: {x: 1416.3999, y: 754.6}
+  dynamicConnectionPorts:
+  - {fileID: -1530509533390651823}
+  - {fileID: 7502768702035179315}
+  - {fileID: -4356997329485292517}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  output: {fileID: 2904502108672085001}
+  techName: "\u706B\u836F"
+  techDetail: "+\u89E3\u9501\u5355\u4F4D\u3010\u706B\u95E8\u67AA\u624B\u3011"
 --- !u!114 &-6081854524240636054
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -201,8 +223,8 @@ MonoBehaviour:
   canvas: {fileID: 11400000}
   parentEditor: {fileID: 0}
   selectedNode: {fileID: 0}
-  panOffset: {x: -254.99994, y: -294.99994}
-  zoom: 1.2
+  panOffset: {x: -328.39993, y: -396.00003}
+  zoom: 1.4
 --- !u!114 &-5036386826895651854
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -242,7 +264,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 4
-  sidePosition: 47.5
+  sidePosition: 46.5
   sideOffset: 0
 --- !u!114 &-4654771157724198993
 MonoBehaviour:
@@ -303,7 +325,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 4
-  sidePosition: 47.5
+  sidePosition: 46.5
   sideOffset: 0
 --- !u!114 &-4445172841845840494
 MonoBehaviour:
@@ -323,7 +345,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 4
-  sidePosition: 47.5
+  sidePosition: 46.5
   sideOffset: 0
 --- !u!114 &-4368616138944748795
 MonoBehaviour:
@@ -345,6 +367,26 @@ MonoBehaviour:
   side: 4
   sidePosition: 28.5
   sideOffset: 0
+--- !u!114 &-4356997329485292517
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -6327918574552104243}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections: []
+  side: 4
+  sidePosition: 64.5
+  sideOffset: 0
 --- !u!114 &-4315361026129322911
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -358,14 +400,14 @@ MonoBehaviour:
   m_Name: Tech Node
   m_EditorClassIdentifier: 
   canvas: {fileID: 11400000}
-  position: {x: 129.00012, y: 830.6}
+  position: {x: 561, y: 1136}
   dynamicConnectionPorts:
   - {fileID: -4166049251928431294}
   - {fileID: 4203337573821696651}
   backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   output: {fileID: -329771655206362924}
-  techName: "\u5316\u5B66"
-  techDetail: 
+  techName: "\u7ECF\u9A8C\u79D1\u5B66"
+  techDetail: "+\u751F\u4EA7\u901F\u5EA6\n+\u4EBA\u53E3\n+\u89E3\u9501\u653F\u7B56\u3010\u3011\n+\u89E3\u9501\u5EFA\u7B51\u3010\u3011"
 --- !u!114 &-4176320533469844080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -385,7 +427,7 @@ MonoBehaviour:
   _connections:
   - {fileID: -4166049251928431294}
   side: 2
-  sidePosition: 66.5
+  sidePosition: 65
   sideOffset: 0
 --- !u!114 &-4166049251928431294
 MonoBehaviour:
@@ -406,7 +448,7 @@ MonoBehaviour:
   _connections:
   - {fileID: -4176320533469844080}
   side: 4
-  sidePosition: 28.5
+  sidePosition: 28
   sideOffset: 0
 --- !u!114 &-4105586001741498357
 MonoBehaviour:
@@ -421,7 +463,7 @@ MonoBehaviour:
   m_Name: Tech Node
   m_EditorClassIdentifier: 
   canvas: {fileID: 11400000}
-  position: {x: -711.4, y: 628.8}
+  position: {x: -744.4, y: 633.2}
   dynamicConnectionPorts:
   - {fileID: 6488122666713197469}
   backgroundColor: {r: 0.3254717, g: 0.7612764, b: 1, a: 1}
@@ -509,7 +551,7 @@ MonoBehaviour:
   _connections:
   - {fileID: 1485501435300626834}
   side: 4
-  sidePosition: 28.5
+  sidePosition: 28
   sideOffset: 0
 --- !u!114 &-3843469408793219480
 MonoBehaviour:
@@ -527,9 +569,10 @@ MonoBehaviour:
   direction: 2
   maxConnectionCount: 1
   styleID: TechConnection
-  _connections: []
+  _connections:
+  - {fileID: -1530509533390651823}
   side: 2
-  sidePosition: 85.5
+  sidePosition: 83
   sideOffset: 0
 --- !u!114 &-3802576628491828388
 MonoBehaviour:
@@ -571,7 +614,7 @@ MonoBehaviour:
   - {fileID: 3468227605229669540}
   - {fileID: 7221468948916508320}
   side: 2
-  sidePosition: 47.5
+  sidePosition: 47
   sideOffset: 0
 --- !u!114 &-3393326263913483102
 MonoBehaviour:
@@ -695,7 +738,7 @@ MonoBehaviour:
   _connections:
   - {fileID: 4266342821211657909}
   side: 2
-  sidePosition: 85.5
+  sidePosition: 83
   sideOffset: 0
 --- !u!114 &-2167195601413484827
 MonoBehaviour:
@@ -736,7 +779,7 @@ MonoBehaviour:
   _connections:
   - {fileID: -6721822570628917253}
   side: 4
-  sidePosition: 47.5
+  sidePosition: 46
   sideOffset: 0
 --- !u!114 &-1824595565289530932
 MonoBehaviour:
@@ -756,7 +799,28 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 4
-  sidePosition: 47.5
+  sidePosition: 46.5
+  sideOffset: 0
+--- !u!114 &-1530509533390651823
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -6327918574552104243}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: -3843469408793219480}
+  side: 4
+  sidePosition: 28
   sideOffset: 0
 --- !u!114 &-1354614696439059139
 MonoBehaviour:
@@ -776,7 +840,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 4
-  sidePosition: 66.5
+  sidePosition: 64.5
   sideOffset: 0
 --- !u!114 &-1130254141712856957
 MonoBehaviour:
@@ -818,7 +882,7 @@ MonoBehaviour:
   - {fileID: 8692466332618956092}
   - {fileID: -7717889960807071}
   side: 2
-  sidePosition: 66.5
+  sidePosition: 65
   sideOffset: 0
 --- !u!114 &-329771655206362924
 MonoBehaviour:
@@ -836,9 +900,10 @@ MonoBehaviour:
   direction: 2
   maxConnectionCount: 1
   styleID: TechConnection
-  _connections: []
+  _connections:
+  - {fileID: 7502768702035179315}
   side: 2
-  sidePosition: 66.5
+  sidePosition: 65
   sideOffset: 0
 --- !u!114 &-95684258287822081
 MonoBehaviour:
@@ -853,7 +918,7 @@ MonoBehaviour:
   m_Name: Tech Node
   m_EditorClassIdentifier: 
   canvas: {fileID: 11400000}
-  position: {x: 551.6, y: 602.19995}
+  position: {x: 539.39996, y: 749.39996}
   dynamicConnectionPorts:
   - {fileID: 3659629983566022654}
   - {fileID: 7221468948916508320}
@@ -881,7 +946,7 @@ MonoBehaviour:
   _connections:
   - {fileID: -721276329595232306}
   side: 4
-  sidePosition: 28.5
+  sidePosition: 28
   sideOffset: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -917,6 +982,7 @@ MonoBehaviour:
   - {fileID: -3065989039451048786}
   - {fileID: 662742781925919551}
   - {fileID: 1677277128756351392}
+  - {fileID: -6327918574552104243}
   groups: []
 --- !u!114 &590916666193660697
 MonoBehaviour:
@@ -1024,7 +1090,7 @@ MonoBehaviour:
   - {fileID: 1389755117808719758}
   - {fileID: 2219658297648706214}
   side: 2
-  sidePosition: 66.5
+  sidePosition: 65
   sideOffset: 0
 --- !u!114 &1389755117808719758
 MonoBehaviour:
@@ -1045,7 +1111,7 @@ MonoBehaviour:
   _connections:
   - {fileID: 1096625820835310267}
   side: 4
-  sidePosition: 28.5
+  sidePosition: 28
   sideOffset: 0
 --- !u!114 &1485501435300626834
 MonoBehaviour:
@@ -1067,7 +1133,7 @@ MonoBehaviour:
   - {fileID: -3914885719028935868}
   - {fileID: 4849117716139397830}
   side: 2
-  sidePosition: 66.5
+  sidePosition: 65
   sideOffset: 0
 --- !u!114 &1615035047959142547
 MonoBehaviour:
@@ -1107,7 +1173,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 2
-  sidePosition: 66.5
+  sidePosition: 65
   sideOffset: 0
 --- !u!114 &1677277128756351392
 MonoBehaviour:
@@ -1170,7 +1236,7 @@ MonoBehaviour:
   _connections:
   - {fileID: 1096625820835310267}
   side: 4
-  sidePosition: 28.5
+  sidePosition: 28
   sideOffset: 0
 --- !u!114 &2420265300424177526
 MonoBehaviour:
@@ -1232,6 +1298,26 @@ MonoBehaviour:
   side: 4
   sidePosition: 28.5
   sideOffset: 0
+--- !u!114 &2904502108672085001
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Output
+  m_EditorClassIdentifier: 
+  body: {fileID: -6327918574552104243}
+  direction: 2
+  maxConnectionCount: 1
+  styleID: TechConnection
+  _connections: []
+  side: 2
+  sidePosition: 83
+  sideOffset: 0
 --- !u!114 &3180018025264004094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1251,7 +1337,7 @@ MonoBehaviour:
   _connections:
   - {fileID: 5144888244496824967}
   side: 4
-  sidePosition: 28.5
+  sidePosition: 28
   sideOffset: 0
 --- !u!114 &3231855556117073168
 MonoBehaviour:
@@ -1272,7 +1358,7 @@ MonoBehaviour:
   _connections:
   - {fileID: 8985525327291360348}
   side: 2
-  sidePosition: 47.5
+  sidePosition: 47
   sideOffset: 0
 --- !u!114 &3458347325801284275
 MonoBehaviour:
@@ -1292,7 +1378,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 4
-  sidePosition: 66.5
+  sidePosition: 64.5
   sideOffset: 0
 --- !u!114 &3468227605229669540
 MonoBehaviour:
@@ -1313,7 +1399,7 @@ MonoBehaviour:
   _connections:
   - {fileID: -3512932159943424450}
   side: 4
-  sidePosition: 28.5
+  sidePosition: 28
   sideOffset: 0
 --- !u!114 &3495499790962605537
 MonoBehaviour:
@@ -1354,7 +1440,7 @@ MonoBehaviour:
   _connections:
   - {fileID: -6721822570628917253}
   side: 4
-  sidePosition: 28.5
+  sidePosition: 28
   sideOffset: 0
 --- !u!114 &3667261795289737239
 MonoBehaviour:
@@ -1394,7 +1480,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 2
-  sidePosition: 85.5
+  sidePosition: 83
   sideOffset: 0
 --- !u!114 &4203337573821696651
 MonoBehaviour:
@@ -1414,7 +1500,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 4
-  sidePosition: 47.5
+  sidePosition: 46.5
   sideOffset: 0
 --- !u!114 &4266342821211657909
 MonoBehaviour:
@@ -1435,7 +1521,7 @@ MonoBehaviour:
   _connections:
   - {fileID: -2179274772686736515}
   side: 4
-  sidePosition: 28.5
+  sidePosition: 28
   sideOffset: 0
 --- !u!114 &4802830273441506875
 MonoBehaviour:
@@ -1477,7 +1563,7 @@ MonoBehaviour:
   _connections:
   - {fileID: 1485501435300626834}
   side: 4
-  sidePosition: 28.5
+  sidePosition: 28
   sideOffset: 0
 --- !u!114 &5095172772903313351
 MonoBehaviour:
@@ -1497,7 +1583,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 4
-  sidePosition: 47.5
+  sidePosition: 46.5
   sideOffset: 0
 --- !u!114 &5103299413464269077
 MonoBehaviour:
@@ -1538,7 +1624,7 @@ MonoBehaviour:
   _connections:
   - {fileID: 3180018025264004094}
   side: 2
-  sidePosition: 47.5
+  sidePosition: 47
   sideOffset: 0
 --- !u!114 &5198794756851462978
 MonoBehaviour:
@@ -1558,7 +1644,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 2
-  sidePosition: 66.5
+  sidePosition: 65
   sideOffset: 0
 --- !u!114 &5889490713780504629
 MonoBehaviour:
@@ -1698,7 +1784,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 4
-  sidePosition: 47.5
+  sidePosition: 46.5
   sideOffset: 0
 --- !u!114 &6623748904622928895
 MonoBehaviour:
@@ -1718,7 +1804,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 4
-  sidePosition: 47.5
+  sidePosition: 46.5
   sideOffset: 0
 --- !u!114 &6624573219014890527
 MonoBehaviour:
@@ -1739,7 +1825,7 @@ MonoBehaviour:
   _connections:
   - {fileID: -7944744943246990887}
   side: 4
-  sidePosition: 28.5
+  sidePosition: 28
   sideOffset: 0
 --- !u!114 &6796058474597542127
 MonoBehaviour:
@@ -1759,7 +1845,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 2
-  sidePosition: 66.5
+  sidePosition: 65
   sideOffset: 0
 --- !u!114 &6826195595375915142
 MonoBehaviour:
@@ -1801,7 +1887,28 @@ MonoBehaviour:
   _connections:
   - {fileID: -3512932159943424450}
   side: 4
-  sidePosition: 47.5
+  sidePosition: 46
+  sideOffset: 0
+--- !u!114 &7502768702035179315
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 017e2c7fd038ecb46b317c1e003f31dc, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  body: {fileID: -6327918574552104243}
+  direction: 1
+  maxConnectionCount: 0
+  styleID: TechConnection
+  _connections:
+  - {fileID: -329771655206362924}
+  side: 4
+  sidePosition: 46
   sideOffset: 0
 --- !u!114 &7704320006434020997
 MonoBehaviour:
@@ -1836,7 +1943,7 @@ MonoBehaviour:
   m_Name: Tech Node
   m_EditorClassIdentifier: 
   canvas: {fileID: 11400000}
-  position: {x: -281.00003, y: 830.20013}
+  position: {x: -110, y: 1130}
   dynamicConnectionPorts:
   - {fileID: 3468227605229669540}
   - {fileID: 6623748904622928895}
@@ -1882,7 +1989,7 @@ MonoBehaviour:
   styleID: TechConnection
   _connections: []
   side: 4
-  sidePosition: 66.5
+  sidePosition: 64.5
   sideOffset: 0
 --- !u!114 &8692466332618956092
 MonoBehaviour:
@@ -1903,7 +2010,7 @@ MonoBehaviour:
   _connections:
   - {fileID: -721276329595232306}
   side: 4
-  sidePosition: 47.5
+  sidePosition: 46
   sideOffset: 0
 --- !u!114 &8985525327291360348
 MonoBehaviour:
@@ -1924,7 +2031,7 @@ MonoBehaviour:
   _connections:
   - {fileID: 3231855556117073168}
   side: 4
-  sidePosition: 28.5
+  sidePosition: 28
   sideOffset: 0
 --- !u!114 &9050201973908941312
 MonoBehaviour:

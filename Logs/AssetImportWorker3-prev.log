@@ -855,3 +855,4 @@ Received Import Request.
 Start importing Assets/Documents/文明设计/TechAssets/TechTree0.asset using Guid(5420d1c60ea02f841903fb70181ee04a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '21784a24ff4fd734c2b80aa93d7125c3') in 0.004481 seconds 
   Import took 0.023025 seconds .
 
+AssetImportWorkerClient::OnTransportError - code=2 error=End of file
